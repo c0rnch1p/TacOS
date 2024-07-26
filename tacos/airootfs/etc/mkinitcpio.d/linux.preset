@@ -1,0 +1,6 @@
+# Mkinitcpio preset file for the 'Linux' package on archiso
+PRESETS=('archiso')
+#ALL_config='/etc/mkinitcpio.conf'
+ALL_kver='/boot/vmlinuz-linux'
+archiso_config='/etc/mkinitcpio.conf'
+archiso_image='/boot/initramfs-linux.img'

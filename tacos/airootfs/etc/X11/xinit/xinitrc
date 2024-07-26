@@ -1,0 +1,66 @@
+#!/bin/bash
+#shellcheck disable=SC1090
+#90x
+#                       \ \  / _ _|   \ | _ _| __ __| _ \   __|
+#                        >  <    |   .  |   |     |     /  (
+#                        _/\_\ ___| _|\_| ___|   _|  _|_\ \___|
+#
+#=========================================================================================
+#
+# Files:
+# - Filepath: /etc/X11/xinit/xinitrc
+# - User Config (1): $HOME/.xinitrc
+# - User Config (2): $HOME/.config/x11/xinitrc
+#
+#=========================================================================================
+#
+# Resources:
+# - X wiki: $BROWSER https://wiki.x.org
+#
+#=========================================================================================
+#
+# References:
+# - Xinit Manpage: man -P 'less +/FILES' 'xinit(1)'
+#
+#=========================================================================================
+# - [1] Setup Environment
+#=========================================================================================
+
+export XAUTHORITY="$HOME/.Xauthority"
+! test -f "$XAUTHORITY" &&
+	touch "$XAUTHORITY" && xauth generate "$DISPLAY" . trusted &>'/dev/null'
+SOURCES=(
+	'/etc/X11/xinit/xinitrc.d/40-libcanberra-gtk-module.sh'
+	'/etc/X11/xinit/xinitrc.d/61-cadence-session-inject.sh'
+	'/etc/X11/xinit/xinitrc.d/80-xapp-gtk3-module.sh'
+)
+
+#=========================================================================================
+# - [2] Initialize Client
+#=========================================================================================
+
+for FL in "${SOURCES[@]}"; do
+	test -f "$FL" && . "$FL" &>'/dev/null'
+done
+
+if [ "$(command -v systemctl --user import-environment &>'/dev/null')" ]; then
+	systemctl --user import-environment DISPLAY XAUTHORITY
+fi
+
+if [ "$(which dbus-update-activation-environment &>'/dev/null')" ]; then
+	dbus-update-activation-environment --systemd DISPLAY XAUTHORITY
+fi
+
+if [ ! "$(pgrep -f gnome-keyring-daemon &>'/dev/null')" ]; then
+	eval "$(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)"
+else eval "$(gnome-keyring-daemon --replace --components=pkcs11,secrets,ssh,gpg)"
+fi
+
+#xset s noblank &
+#lxsession &
+#set_xwall &
+numlockx on &
+xset s off &
+xset -dpms &
+polkit-gnome-authentication-agent-1 &
+exec '/usr/bin/awesome'

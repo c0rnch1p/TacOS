@@ -1,0 +1,54 @@
+# THIS IS A PARSER CONFIG FILE WHICH MAY BE OVERWRITTEN
+# IF THE SOFTWARE IS REINSTALLED OR RECONFIGURED IN THE GUI
+#
+# Files:
+# - Filepath: $HOME/.config/mimeapps.list
+#
+# Resources:
+# - Arch Wiki: $BROWSER https://wiki.archlinux.org/title/XDG_MIME_Applications
+# - Freedesktop.org: $BROWSER https://specifications.freedesktop.org/shared-mime-info-spec/latest/index.html
+# - GNOME Wiki: $BROWSER https://help.gnome.org/admin/system-admin-guide/stable/mime-types-application-user.html.en
+#
+# References:
+# - Xdg-mime Manpage: man -P 'less +18 +/DESCRIPTION' 'xdg-mime(1)'
+#
+# User Mimetype Settings
+
+[Added Associations]
+application/octet-stream=firefox.desktop;
+application/xml=gimp.desktop;
+image/jpeg=qview.desktop;
+image/png=qview.desktop;
+image/webp=firefox.desktop;
+text/calendar=org.mozilla.Thunderbird.desktop;
+x-scheme-handler/http=firefox.desktop;
+x-scheme-handler/https=firefox.desktop;
+x-scheme-handler/mailto=org.mozilla.Thunderbird.desktop;
+x-scheme-handler/mid=org.mozilla.Thunderbird.desktop;
+x-scheme-handler/tg=org.telegram.desktop.desktop;
+
+[Default Applications]
+application/pdf=xreader.desktop
+audio/mp3=mpv.desktop
+audio/mpegapplication/octet-stream=mpv.desktop
+audio/x-wav=mpv.desktop
+image/gif=qview.desktop
+image/jpeg=qview.desktop
+image/png=qview.desktop
+image/svg+xml=org.inkscape.Inkscape.desktop
+image/vnd.microsoft.icon=qview.desktop
+message/rfc822=org.mozilla.Thunderbird.desktop
+text/calendar=org.mozilla.Thunderbird.desktop
+text/html=firefox.desktop
+video/m4v=mpv.desktop
+video/mov=mpv.desktop
+video/mp4=mpv.desktop
+video/quicktime=mpv.desktop
+x-scheme-handler/about=firefox.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/https=firefox.desktop
+x-scheme-handler/mailspring=org.mozilla.Thunderbird.desktop
+x-scheme-handler/mailto=firefox.desktop
+x-scheme-handler/mid=org.mozilla.Thunderbird.desktop
+x-scheme-handler/tg=org.telegram.desktop.desktop
+x-scheme-handler/unknown=firefox.desktop

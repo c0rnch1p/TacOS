@@ -1,0 +1,91 @@
+#!/bin/bash
+compInit() {
+	compMain() {
+		local COMPREPLY
+		COMPREPLY=$(compgen -W "$2" -- "${COMP_WORDS[COMP_CWORD]}")
+	}
+	complete -F compMain read
+}
+rflInit() {
+	local FL
+	compInit
+	while true; do
+		echo -e "#\n# enter filename\n#"
+		read -rep "# ▸ " FL
+		if [ -z "$FL" ]; then
+			echo -e "#\n# ⚐ no input provided ⚐"
+		elif [ ! -f "$FL" ]; then
+			echo -e "#\n# ⚠ arg must be a file ⚠"
+		else
+			break
+		fi
+	done
+}
+bustMain() {
+	mainErr1() {
+		echo -e "#\n# ⚠ fuck around find out ⚠\n#"
+		return 1
+	}
+	mainErr2() {
+		echo -e "#\n# ⚠ $ARG is unbustable ⚠\n#"
+		return 1
+	}
+	case "$ARG" in
+		*.7z) 7z -x "$ARG";;
+		*.ace) mainErr1;;
+		*.alz) mainErr1;;
+		*.arc) mainErr1;;
+		*.arj) mainErr1;;
+		*.tar.bz2) tar -xjf "$ARG";;
+		*.bz2) bunzip2 "$ARG";;
+		*.bz) mainErr1;;
+		*.cab) mainErr1;;
+		*.cpio) mainErr1;;
+		*.deb) debtap "$ARG";;
+		*.dz) mainErr1;;
+		*.ear) mainErr1;;
+		*.tar.gz) tar -zxvf "$ARG";;
+		*.gz) gunzip "$ARG";;
+		*.jar) mainErr1;;
+		*.lha) mainErr1;;
+		*.lrz) mainErr1;;
+		*.lz4) mainErr1;;
+		*.lzh) mainErr1;;
+		*.lz) mainErr1;;
+		*.lzma) mainErr1;;
+		*.lzo) mainErr1;;
+		*.rar) unrar e "$ARG";;
+		*.rpm) rpmextract.sh "$ARG";;
+		*.rz) mainErr1;;
+		*.sar) mainErr1;;
+		*.t7z) mainErr1;;
+		*.tar) tar -xvf "$ARG";;
+		*.tar.xz) tar -xvJf "$ARG";;
+		*.taz) mainErr1;;
+		*.tbz2) tar -xjf "$ARG";;
+		*.tbz) mainErr1;;
+		*.tgz) tar -xzf "$ARG";;
+		*.tlz) mainErr1;;
+		*.txz) mainErr1;;
+		*.tz) mainErr1;;
+		*.tzo) mainErr1;;
+		*.war) mainErr1;;
+		*.xz) mainErr1;;
+		*.Z) uncompress "$ARG";;
+		*.zip) unzip "$ARG";;
+		*.z) mainErr1;;
+		*.zoo) mainErr1;;
+		*.zst) unzstd "$ARG";;
+		*) mainErr2;;
+	esac
+}
+compInit
+if [[ $# -ge 1 && -f "$1" ]]; then
+	ARG="$1"
+	bustMain
+elif [[ $# -eq 0 && -z "$1" ]]; then
+	rflInit
+	ARG="$FL"
+	bustMain
+fi
+unset ARG

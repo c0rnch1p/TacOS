@@ -1,0 +1,136 @@
+#!/bin/bash
+#120x
+#                                      \  |   \ | __ __|  \  |   \ |   __|  _ \
+#                                     |\/ |  .  |    |   |\/ |  .  |  (_ |    /
+#                                    _|  _| _|\_|   _|  _|  _| _|\_| \___| _|_\
+#
+########################################################################################################################
+# - $BIN/mntmgr
+########################################################################################################################
+# - Luke Smith | https://github.com/LukeSmithxyz/voidrice/blob/master/.local/bin/mounter
+#	    	   | https://github.com/LukeSmithxyz/voidrice/blob/master/.local/bin/unmounter
+########################################################################################################################
+# - Mounter (1)
+########################################################################################################################
+mounter(){
+	IFS='
+	'
+	# Function for escaping cell-phone names
+	escape(){ echo "$@" | iconv -cf UTF-8 -t ASCII//TRANSLIT | \
+	tr -d '[:punct:]' | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed "s/-\+/-/g;s/\(^-\|-\$\)//g" ;}
+	# Check for phones
+	phones="$(simple-mtpfs -l 2>/dev/null | sed "s/^/📱/")"
+	mountedphones="$(grep "simple-mtpfs" /etc/mtab)"
+	# If there are already mounted phones, remove them from the list of mountables
+	[ -n "$mountedphones" ] && phones="$(for phone in $phones; do
+		for mounted in $mountedphones; do
+			escphone="$(escape "$phone")"
+			[[ "$mounted" =~ "$escphone" ]] && break 1
+		done && continue 1
+		echo "$phone"
+	done)"
+	# Check for drives
+	lsblkoutput="$(lsblk -rpo "uuid,name,type,size,label,mountpoint,fstype")"
+	# Get all luks drives
+	allluks="$(echo "$lsblkoutput" | grep 'part\|rom\|crypt')"
+	# Get a list of the luks drive uuids already decrypted
+	decrypted="$(find /dev/disk/by-id/dm-uuid-CRYPT-LUKS2-* | sed "s|.*LUKS2-||;s|-.*||")"
+	# Functioning for formatting drives correctly for dmenu
+	filter() { sed "s/ /:/g" | awk -F':' '$7==""{printf "%s%s (%s) %s\n",$1,$3,$5,$6}' ; }
+	# Get only luks drives that are not decrypted
+	unopenedluks="$(for drive in $allluks; do
+		uuid="${drive%% *}"
+		uuid="${uuid//-}" # This is a bashism
+		for open in $decrypted; do
+			[ "$uuid"="$open" ] && break 1
+		done && continue 1
+		echo "🔒 $drive"
+	done | filter)"
+	# Get all normal, non-encrypted or decrypted partitions that are not mounted
+	normalparts="$(echo "$lsblkoutput" | sed "s/^/💾 /" | filter )"
+	# Add all to one variable. if no mountable drives found, exit
+	alldrives="$(echo "$phones
+	$unopenedluks
+	$normalparts" | sed "/^$/d;s/ *$//")"
+	# Quit the script if a sequential command fails
+	set -e
+	test -n "$alldrives"
+	# Feed all found drives to dmenu and get user choice
+	chosen="$(echo "$alldrives" | \
+	dmenu -nb "#3e3e3e" -nf "#2f8e00" -sb "#969696" -sf "#55ff00" -p "mount which drive?" -i)"
+	# Function for prompting user for a mountpoint
+	getmount(){
+		mp="$(find /mnt /run/media /media /mount /home -maxdepth 1 -type d 2>/dev/null | \
+		dmenu -i -p "mount this drive where?")"
+		test -n "$mp"
+		if [ ! -d "$mp" ]; then
+			mkdiryn=$(printf "No\\nYes" | \
+			dmenu -nb "#3e3e3e" -nf "#2f8e00" -sb "#969696" -sf "#55ff00" -i -p "no $mp, create it?")
+			[ "$mkdiryn"="Yes" ] && (sudo -A mkdir -p "$mp")
+		fi
+	}
+	attemptmount(){
+			# Attempt to mount without a mountpoint, to see if drive is in fstab
+			sudo -A mount "$chosen" || return 1
+			notify-send "💾Drive Mounted." "$chosen mounted."
+			exit
+	}
+	case "$chosen" in
+		💾*)
+			chosen="${chosen%% *}"
+			chosen="${chosen:1}"
+			attemptmount || getmount
+			sudo -A mount "$chosen" "$mp" -o uid="$(id -u)",gid="$(id -g)"
+			notify-send "💾Drive Mounted." "$chosen mounted to $mp."
+			;;
+		🔒*)
+			chosen="${chosen%% *}"
+			chosen="${chosen:1}"
+			# Number the drive
+			while true; do
+				[ -f "/dev/mapper/usb$num" ] || break
+				num="$(printf "%02d" "$((num +1))")"
+			done
+			# Decrypt in a terminal window
+			sudo cryptsetup open "$chosen" "usb$num"
+			# Check if now decrypted
+			test -b "/dev/mapper/usb$num"
+			attemptmount || getmount
+			sudo -A mount "/dev/mapper/usb$num" "$mp" -o uid="$(id -u)",gid="$(id -g)"
+			notify-send "🔓decrypted drive mounted." "$chosen decrypted and mounted to $mp."
+			;;
+		📱*)
+			notify-send "❗note" "remember to allow file access on your phone now."
+			getmount
+			number="${chosen%%:*}"
+			number="${chosen:1}"
+			sudo -A simple-mtpfs -o allow_other \
+			-o fsname="simple-mtpfs-$(escape $chosen)" --device "$number" "$mp"
+			notify-send "🤖 android mounted." "android device mounted to $mp."
+			;;
+	esac
+}
+########################################################################################################################
+# - Unmounter (2)
+########################################################################################################################
+unmounter(){
+mounteddroids="$(grep simple-mtpfs /etc/mtab | awk '{print "📱" $2}')"
+	lsblkoutput="$(lsblk -nrpo "name,type,size,mountpoint")"
+	mounteddrives="$(echo "$lsblkoutput" | awk \
+	'($2=="part"||$2="crypt")&&$4!~/\/boot|\/home$|SWAP/&&length($4)>1{printf "💾%s (%s)\n",$4,$3}')"
+	allunmountable="$(echo "$mounteddroids
+	$mounteddrives" | sed "/^$/d;s/ *$//")"
+	test -n "$allunmountable"
+	chosen="$(echo "$allunmountable" | \
+	dmenu -nb "#3e3e3e" -nf "#2f8e00" -sb "#969696" -sf "#55ff00" -i -p "Unmount which drive?")"
+	chosen="${chosen%% *}"
+	test -n "$chosen"
+	sudo -A umount -l "/${chosen#*/}"
+	notify-send "Device unmounted." "$chosen has been unmounted."
+	# Close the chosen drive if decrypted
+	cryptid="$(echo "$lsblkoutput" | grep "/${chosen#*/}$")"
+	cryptid="${cryptid%% *}"
+	test -b /dev/mapper/"${cryptid##*/}"
+	sudo -A cryptsetup close "$cryptid"
+	notify-send "🔒Device dencryption closed." "Drive is now securely locked again."
+}

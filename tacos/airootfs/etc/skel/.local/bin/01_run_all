@@ -1,0 +1,24 @@
+#!/bin/bash
+#shellcheck disable=SC1091
+
+LOGFILE="$LOG/setup.log"
+[ ! -e "$LOGFILE" ] && echo -e '\nTacOS Setup Log\n' "$LOGFILE"
+"$BROWSER" 'https://youtu.be/tLaWmkq08IQ?si=35WxMAqA0CuNXMtY' &
+
+# If any of the scripts hang the process will
+# continue on user interrupt with 'Ctrl+c'
+SETUP_SCRIPTS=(
+	"$HOME/.local/bin/02_setup_alpm"
+	"$HOME/.local/bin/03_setup_general"
+	"$HOME/.local/bin/04_setup_system"
+	"$HOME/.local/bin/05_permissions"
+	"$HOME/.local/bin/06_setup_dconf"
+	"$HOME/.local/bin/07_setup_backend"
+	"$HOME/.local/bin/08_setup_extras"
+	"$HOME/.local/bin/09_fix_slowstart"
+)
+
+for FILE in "${SETUP_SCRIPTS[@]}"; do
+	[ -f "$FILE" ] && . "$FILE" #| tee -pia "$LOGFILE"
+done
+echo -e '\nTacOS setup somplete\n'

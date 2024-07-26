@@ -1,0 +1,52 @@
+#
+#       \ \   /  _ \   |     |  |   \  |  __| _ _|   __|   _ \    \ |
+#        \ \ /  (   |  |     |  |  |\/ |  _|    |   (     (   |  .  |
+#         \_/  \___/  ____| \__/  _|  _| ___| ___| \___| \___/  _|\_|
+#
+#===============================================================================
+#
+# Files:
+# - Filepath: $HOME/.config/volumeicon/volumeicon
+#
+#===============================================================================
+#
+# Resources:
+# - Git Repo: $BROWSER https://github.com/Maato/volumeicon/blob/master/doc
+#
+#===============================================================================
+# - [1] Device Settings
+#===============================================================================
+
+[Alsa]
+card=default
+channel=Master
+
+#===============================================================================
+# - [2] Display Control
+#===============================================================================
+
+[Notification]
+show_notification=true
+notification_type=1
+[StatusIcon]
+stepsize=2
+onclick=pavucontrol
+theme=Blue Bar
+use_panel_specific_icons=false
+lmb_slider=true
+mmb_mute=false
+use_horizontal_slider=false
+show_sound_level=true
+use_transparent_background=false
+
+#===============================================================================
+# - [3] Keymap Settings
+#===============================================================================
+
+[Hotkeys]
+up_enabled=true
+down_enabled=true
+mute_enabled=true
+up=AudioRaiseVolume
+down=AudioLowerVolume
+mute=AudioMute

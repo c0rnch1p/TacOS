@@ -1,0 +1,38 @@
+#!/bin/bash
+body() {
+	local AFFIRMATIVE NONCOMMITTAL NEGATORY ANSWERS LEN INDEX
+	AFFIRMATIVE=(
+		"it is certain"
+		"decidedly so"
+		"without a doubt"
+		"yes, definitely"
+		"you may rely on it"
+		"as it is seen, yes"
+		"most likely"
+		"outlook is good"
+		"yes"
+		"signs point to yes"
+	)
+	NONCOMMITTAL=(
+		"reply hazy, try again"
+		"ask again later"
+		"better not say"
+		"cannot predict that right now"
+		"concentrate, ask again"
+	)
+	NEGATORY=(
+		"dont count on it"
+		"no"
+		"sources say no"
+		"outlook not so good"
+		"doubtful"
+	)
+	ANSWERS=("${AFFIRMATIVE[@]}" "${NONCOMMITTAL[@]}" "${NEGATORY[@]}")
+	LEN=${#ANSWERS[@]}
+	INDEX=$((RANDOM % LEN))
+	echo -e " \n \"🎱\" \n "
+	sleep 2
+	echo " ${ANSWERS[$INDEX]} "
+	echo
+}
+[[ $# -ge 1 && -n "$1" ]] && body

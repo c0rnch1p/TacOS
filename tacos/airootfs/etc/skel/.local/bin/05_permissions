@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Temp lock to run once per user session
+LOCK='/tmp/exec.lock'
+
+# Make scripts executable
+chmod_scripts(){
+	[ -d "$HOME/.local/bin" ] &&
+		find "$HOME/.local/bin" -type f ! -executable -exec chmod 755 {} + &>'/dev/null'
+	[ -d "$AWESOME_HOME/scripts" ] &&
+		find "$AWESOME_HOME/scripts" -type f ! -executable -exec chmod 755 {} + &>'/dev/null'
+}
+
+# Give polkit special treatment
+special_treatment(){
+	sudo chown 'root:polkitd' '/etc/polkit-1/rules.d'
+	sudo find '/etc/polkit-1/rules.d' -type f -exec chmod 750 {} \;
+	sudo find '/etc/polkit-1/rules.d' -type f -exec chown root:polkitd {} \;
+}
+
+if [ -n "$1" ]; then "$1"
+elif [ ! -f "$LOCK" ]; then
+	chmod_scripts
+	special_treatment
+	echo '*click*' >"$LOCK"
+fi

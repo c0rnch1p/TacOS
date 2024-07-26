@@ -1,0 +1,9 @@
+/* Allow members of the wheel group to execute any actions without a password
+   https://wiki.archlinux.org/title/Polkit */
+
+polkit.addRule(function(action, subject) {
+    if (subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+    }
+});
+

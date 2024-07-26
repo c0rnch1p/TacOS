@@ -1,0 +1,10 @@
+/* Allow iptables to be executed without password authentication
+   https://wiki.archlinux.org/title/Polkit */
+
+polkit.addRule(function(action, subject) {
+    if (action.id === "org.freedesktop.policykit.exec" &&
+        action.lookup("program") == "/usr/bin/iptables" &&
+        subject.isInGroup("nopwiptables")) {
+            return polkit.Result.YES;
+    }
+});

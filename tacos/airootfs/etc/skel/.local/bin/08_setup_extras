@@ -1,0 +1,139 @@
+#!/bin/bash
+
+ALIENURL='https://sourceforge.net/projects/alien-pkg-convert/files/release/alien_8.95.tar.xz'
+DUMMYURL='https://github.com/c0rnch1p/dummy.git'
+FABLAURL='https://github.com/openAVproductions/openAV-Fabla2.git'
+GH0STYURL='https://github.com/c0rnch1p/gh0sty.git'
+SCUTTLEURL='https://github.com/c0rnch1p/scuttle.git'
+
+install_reqs(){
+	local NAUGHTYORNICE BTCHSIZE BATCH
+	NAUGHTYORNICE=(
+		'alhp-keyring'
+		'alhp-mirrorlist'
+		'hexyl'
+		'highlight'
+		'hydra'
+		'tor'
+		'torsocks'
+		'virtualbox-guest-utils'
+		'wget'
+		'wireshark-cli'
+	)
+	BTCHSIZE=9
+	echo -e '\nInstalling requirements\n'
+	for ((i = 0; i < ${#NAUGHTYORNICE[@]}; i += BTCHSIZE)); do
+		BATCH=("${NAUGHTYORNICE[@]:i:BTCHSIZE}")
+		sudo pacman -S --noconfirm --needed "${BATCH[@]}" || {
+			for PKG in "${BATCH[@]}"; do
+				echo -e "\nFailed to install $PKG\n"
+			done
+		}
+	done; sudo pacman -Syu
+}
+
+install_aur_pkgs(){
+	local AURPKGS PKG
+	AURPKGS=(
+		#'awesome-freedesktop-git'
+		#'lain-git'
+		'awesome-themes-git'
+		'cadence'
+		'deadbeef-plugin-statusnotifier-git'
+		'die-plugins'
+		'editorconfig-gedit-git'
+		'epson-inkjet-printer-escpr'
+		'epson-inkjet-printer-escpr2'
+		'gedit-open-uri-context-menu-git'
+		'material-black-colors-theme'
+		'metagedit-git'
+		'nemo-compare'
+		'rig'
+		'sl'
+		'steamcmd'
+		'unfatarians-studio'
+	)
+	echo -e "\nInstalling AUR packages\n"
+	for PKG in "${AURPKGS[@]}"; do
+		if ! yay -S --noconfirm --needed --mflags --skipinteg "$PKG"; then
+			echo -e "\nFailed to install $PKG\n"
+		else echo -e "\nSuccessfully installed $PKG\n"
+		fi
+	done; yay -Fy
+}
+
+build_alien(){
+	echo -e 'Building Alien Converter\n'
+	cd "$HOME/.local/share" || return 1
+	[ -d 'alien' ] && sudo rm -r alien
+	wget "$ALIENURL"
+	tar -xvJf alien*.tar.xz
+	rm alien*.tar.xz
+	ALIEN_DIR=$(find . -maxdepth 1 -type d -name 'alien*')
+	if [ -e "$ALIEN_DIR" ]; then
+		mv "$ALIEN_DIR" alien
+		cd alien || return 1
+		perl Makefile.PL
+		make
+		sudo make install
+		sudo cp '/bin/site_perl/alien' '/bin/alien'
+		cd || return 1
+	fi
+}
+
+build_dummy(){
+	echo -e '\nBuilding Dummy\n'
+	cd "$HOME/.local/share" || return 1
+	[ -d 'dummy' ] && sudo rm -r dummy
+	git clone "$DUMMYURL" dummy
+	cd dummy || return 1
+	make install
+	cd || return 1
+}
+
+build_fabla(){
+	echo -e '\nBuilding Fabla2\n'
+	cd "$HOME/.local/share" || return 1
+	[ -d 'openAV-Fabla2' ] && sudo rm -r openAV-Fabla2
+	git clone "$FABLAURL"
+	cd openAV-Fabla2 || return 1
+	mkdir build
+	cd build || return 1
+	cmake ..
+	make -j4
+	sudo make install
+	cd || return 1
+}
+
+build_gh0sty(){
+	echo -e '\nBuilding Gh0sty\n'
+	cd "$HOME/.local/share" || return 1
+	[ -d 'gh0sty' ] && sudo rm -r gh0sty
+	git clone "$GH0STYURL" gh0sty
+	cd gh0sty || return 1
+	chmod 764 install.sh
+	./install.sh
+	cd || return 1
+}
+
+build_scuttle(){
+	echo -e '\nBuilding Scuttle\n'
+	cd "$HOME/.local/share" || return 1
+	[ -d 'scuttle' ] && sudo rm -r scuttle
+	git clone "$SCUTTLEURL" scuttle
+	cd scuttle || return 1
+	chmod 764 install.sh
+	./install.sh
+	cd || return 1
+}
+
+if [ -n "$1" ]; then "$1"
+else sudo rm '/var/lib/pacman/db.lck' &>'/dev/null'
+	install_reqs
+	install_aur_pkgs
+	build_alien
+	build_dummy
+	build_fabla
+	build_gh0sty
+	build_scuttle
+fi

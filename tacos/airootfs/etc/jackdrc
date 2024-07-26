@@ -1,0 +1,1 @@
+/usr/bin/jackd -t 200 -p 2048 -R -T -d alsa -n 2 -r 48000 -p 1024 -d hw:S,0 -X raw

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+upd_fonts(){
+	local FONT_DIR="$FLAVOR/fonts"
+	echo -e '\nUpdating font database\n'
+	for FONT in "$FONT_DIR"/*.{ttf,otf}; do
+		[ -e "$FONT" ] || continue
+		font-manager -i "$FONT" &>'/dev/null'
+		font-manager -e "$FONT" &>'/dev/null'
+	done
+	sudo fc-cache -fv "$FONT_DIR" 2>&1
+	font-manager -u &>'/dev/null'
+	killall -9 font-manager &>'/dev/null'
+}
+
+upd_mandb(){
+	echo -e '\nUpdating manual database\n'
+	sudo mandb 2>&1
+}
+
+upd_secconf(){
+	echo -e '\nUpdating user security configs'
+	gpg &>'/dev/null' &
+	sudo cp '/etc/pacman.d/gnupg/gpg.conf' "$HOME/.gnupg/"
+	echo -e '\nCreated $HOME/.gnupg and updated $HOME/.gnupg/gpg.conf'
+	! test -f "$HOME/.ssh/id_rsa" &&
+		ssh-keygen -q -t rsa -b 4096 -N '' -f "$HOME/.ssh/id_rsa"
+	sudo cp '/etc/ssh/ssh_config' "$HOME/.ssh/"
+	touch "$HOME/.ssh/known_hosts"
+	echo -e '\nCreated $HOME/.ssh and updated $HOME/.ssh/ssh_config'
+	echo -e '\nGenerated default keypair in $HOME/.ssh'
+}
+
+if [ -n "$1" ]; then "$1"
+else upd_fonts; upd_mandb; upd_secconf
+fi

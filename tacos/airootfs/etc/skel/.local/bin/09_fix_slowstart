@@ -1,0 +1,44 @@
+#!/bin/bash
+#shellcheck disable=SC2143
+
+gkd_func(){
+	local GKDARGS='--daemonize --components=pkcs11,secrets,ssh'
+	if ! pgrep -f gnome-keyring-daemon; then
+		gnome-keyring-daemon --start "$GKDARGS"
+	else gnome-keyring-daemon --replace "$GKDARGS"
+	fi
+}
+
+check_daemons(){
+	if journalctl -xe | grep -q 'dbus.*failed'; then
+		if ! systemctl is-active --quiet dbus; then
+			sudo systemctl reload-or-restart dbus
+		else sudo systemctl start dbus
+		fi
+	fi
+	if journalctl -xe | grep -q 'bluez.*failed'; then
+		if ! systemctl is-active --quiet bluez; then
+			sudo systemctl reload-or-restart bluez
+		else sudo systemctl start bluez
+		fi
+	fi
+	if journalctl -xe | grep -q 'homed.*failed'; then
+		if ! systemctl is-active --quiet systemd-homed; then
+			sudo systemctl reload-or-restart systemd-homed
+		else sudo systemctl start systemd-homed
+		fi
+	fi
+}
+
+final_func(){
+	sudo systemctl reset-failed
+	sudo systemctl daemon-reload
+	echo -e '\nPlease reboot to finalize updates'
+}
+
+if [ -n "$1" ]; then "$1"
+else
+	check_daemons &>'/dev/null'
+	gkd_func &>'/dev/null'
+	final_func
+fi

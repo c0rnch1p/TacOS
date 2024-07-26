@@ -1,0 +1,92 @@
+#!/bin/bash
+#80x
+#                 _ \     \    __|   \  |   _ \    \ |   __|
+#                 |  |   _ \   _|   |\/ |  (   |     | \__ \
+#                ___/  _/  _\ ___| _|  _| \___/  _|\_| ____/
+#
+#===============================================================================
+#
+# Files:
+# - Filepath: $BIN/conf_daemons
+#
+#===============================================================================
+#
+# References:
+# - Daemon Manpage: man -P 'less +/DESCRIPTION' 'daemon(7)'
+#
+#===============================================================================
+# - [1] Variables
+#===============================================================================
+
+LOCK='/tmp/daemons.lock'
+DATE=$(date '+%d/%m/%y %H:%M:%S')
+GKDARGS='--daemonize --components=pkcs11,secrets,ssh'
+DAEMONS=(
+	#'mpd'
+	#'vboxservice'
+	'acpid'
+	'avahi-daemon'
+	'bluetooth'
+	'cups'
+	'dbus'
+	'fstrim'
+	'graphical.target'
+	'multi-user.target'
+	'NetworkManager'
+	'NetworkManager-wait-online'
+	'ntpd'
+	'sshd'
+	'systemd-homed'
+	'systemd-timesyncd'
+)
+
+#===============================================================================
+# - [2] Run Daemons
+#===============================================================================
+
+check_deps(){
+	for CMD in systemctl pgrep gnome-keyring-daemon sudo; do
+		if ! command -v "$CMD" &>'/dev/null'; then
+			echo "Err: $CMD is not installed."
+			exit 1
+		fi
+	done
+}
+
+# Handle gnome-keyring-daemon
+gkd_func(){
+	if ! pgrep -f gnome-keyring-daemon; then
+		if ! gnome-keyring-daemon --start "$GKDARGS"; then
+			gnome-keyring-daemon --start "$GKDARGS"
+		fi
+	else
+		if ! gnome-keyring-daemon --replace "$GKDARGS"; then
+			gnome-keyring-daemon --replace "$GKDARGS"
+		fi
+	fi
+}
+
+enable_daemon(){
+	if ! systemctl is-enabled --quiet "$1"; then
+		sudo systemctl enable "$1"
+	fi
+}
+
+start_daemon(){
+	if ! systemctl is-active --quiet "$1"; then
+		sudo systemctl start "$1"
+	fi
+}
+
+check_deps
+if [ ! -f "$LOCK" ]; then clear
+	for DAEMON in "${DAEMONS[@]}"; do
+		enable_daemon "$DAEMON"
+	done
+	for DAEMON in "${DAEMONS[@]}"; do
+		start_daemon "$DAEMON"
+	done
+	gkd_func &>'/dev/null'
+	echo '*click*' >"$LOCK"
+	sleep 1; clear
+fi

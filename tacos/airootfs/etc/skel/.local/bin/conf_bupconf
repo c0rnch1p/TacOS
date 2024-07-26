@@ -1,0 +1,94 @@
+#!/bin/bash
+# 80x
+#             _ )  |  |  _ \   __|   _ \    \ |  __| _ _|   __|
+#             _ \  |  |  __/  (     (   |  .  |  _|    |   (_ |
+#            ___/ \__/  _|   \___| \___/  _|\_| _|   ___| \___|
+#
+#===============================================================================
+#
+# Files:
+# - Filepath: $BIN/conf_bupconf
+#
+#===============================================================================
+# - [1] Variables
+#===============================================================================
+
+ANS="$1"
+LOGFL="$LOG/bupconf.log"
+CONFIG_DIR=
+DUMP_DIR=
+SCRIPT_DIR=
+
+#===============================================================================
+# - [2] Configs Array
+#===============================================================================
+
+CONFIG_FILES=(
+
+)
+
+#===============================================================================
+# - [3] Dump Files Array
+#===============================================================================
+
+DUMP_FILES=(
+
+)
+
+#===============================================================================
+# - [4] Scripts Array
+#===============================================================================
+
+SCRIPT_FILES=(
+
+)
+
+#===============================================================================
+# - [5] Copy Files
+#===============================================================================
+
+copy_file(){
+	local SRC="$1"
+	local DEST="$2"
+	if [[ -f "$SRC" ]]; then
+		if [[ "$SRC" == /* ]]; then
+			sudo cp --preserve=mode "$SRC" "$DEST"
+		else cp --preserve=mode "$SRC" "$DEST"
+		fi
+		echo -e "\nCopied $SRC to $(basename $DEST)"
+	else echo -e "\nWarning: $SRC not found, skipping"
+	fi
+}
+
+#===============================================================================
+# - [6] Main
+#===============================================================================
+
+[ ! -e "$LOGFL" ] && touch "$LOGFL"
+exec > >(tee -a "$LOGFL") 2>&1
+
+if test -z "$ANS"; then
+	echo -e '\nWarning: This script will overwrite files on the drive'
+	echo -e 'with the versions from the system\n'
+	echo -e 'Continue?\n'
+	read -rp '- ' ANS
+fi
+
+set -- "$ANS" "${@:2}"
+if [[ "$1" =~ ^(0|n|na|no|nu|al).* ]]; then
+	echo -e '\nOperation cancelled\n'
+	exit 1
+fi
+
+for FILE in "${CONFIG_FILES[@]}"; do
+	copy_file "$FILE" "$CONFIG_DIR"
+done
+
+for FILE in "${DUMP_FILES[@]}"; do
+	copy_file "$FILE" "$DUMP_DIR"
+done
+
+for FILE in "${SCRIPT_FILES[@]}"; do
+	copy_file "$FILE" "$SCRIPT_DIR"
+done
+echo -e '\nFiles copied successfully'

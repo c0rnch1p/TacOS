@@ -1,0 +1,238 @@
+#!/bin/bash
+# 80x
+#            \ \   /   \    _ \ _ _|    \    _ )  |     __|   __|
+#             \ \ /   _ \     /   |    _ \   _ \  |     _|  \__ \
+#              \_/  _/  _\ _|_\ ___| _/  _\ ___/ ____| ___| ____/
+#
+#===============================================================================
+#
+# Files:
+# - Filepath: $BIN/variables
+#
+#===============================================================================
+#
+# References:
+# - Bash Manpage (Shopt Options): man -P 'less +2960 +/shopt' 'bash(1)'
+#
+#===============================================================================
+# - [1] Path Directives
+#===============================================================================
+
+export PATH="\
+$HOME/.config/awesome/scripts:\
+$HOME/.local/bin:\
+$HOME/.local/lib/python3.10/site-packages:\
+$HOME/.local/lib/python3.11/site-packages:\
+$HOME/.local/lib/python3.12/site-packages:\
+$HOME/.local/share/gem/ruby/3.0.0/gems:\
+/bin:\
+/opt/cuda/bin:\
+/opt/cuda/nsight_compute:\
+/opt/cuda/nsight_systems/bin:\
+/opt/discord:\
+/opt/vivaldi:\
+/usr/bin:\
+/usr/bin/core_perl:\
+/usr/bin/site_perl:\
+/usr/bin/vendor_perl:\
+/usr/lib/jvm/default/bin:\
+/usr/lib/polkit-gnome:\
+/usr/lib/python3.10/site-packages:\
+/usr/lib/python3.11/site-packages:\
+/usr/lib/python3.12/site-packages:\
+/usr/local/bin:\
+/usr/local/sbin:\
+/usr/sbin:\
+/usr/share/drbl/bin"
+
+#===============================================================================
+# - [2] Shopt Options
+#===============================================================================
+
+shopt -s autocd
+shopt -s cdable_vars
+shopt -s cdspell
+shopt -s checkwinsize
+shopt -s cmdhist
+shopt -s complete_fullquote
+shopt -s dirspell
+shopt -s dotglob
+shopt -s expand_aliases
+shopt -s extglob
+shopt -s extquote
+shopt -s globstar
+shopt -s gnu_errfmt
+shopt -s histappend
+shopt -s hostcomplete
+shopt -s huponexit
+shopt -s interactive_comments
+shopt -s lithist
+shopt -s no_empty_cmd_completion
+shopt -s nocaseglob
+shopt -s progcomp
+shopt -s progcomp_alias
+shopt -s sourcepath
+
+#===============================================================================
+# - [3] Home Layout
+#===============================================================================
+
+#export XDG_RUNTIME_DIR="/run/user/1000"
+export ARDOUR="$HOME/.audio/ardour"
+export AUDIO="$HOME/.audio"
+export BIN="$LOCAL/bin"
+export BLENDER="$HOME/.visual/blender"
+export CACHE="$HOME/.cache"
+export CARGO_HOME="$DATA/cargo"
+export CCACHE_DIR="$CACHE/ccache"
+export CONFIG="$HOME/.config"
+export DATA="$LOCAL/share"
+export DESKTOP="$XDG_DESKTOP_DIR"
+export DOCUMENTS="$XDG_DOCUMENTS_DIR"
+export DOWNLOADS="$XDG_DOWNLOAD_DIR"
+export FLAVOR="$HOME/.flavor"
+export GIMP="$HOME/.visual/gimp"
+export HL_HOME="$CONFIG/highlight"
+export INKSCAPE="$HOME/.visual/inkscape"
+export KDENLIVE="$HOME/.visual/kdenlive"
+export LIB="$LOCAL/lib"
+export LOCAL="$HOME/.local"
+export LOG="$HOME/.log"
+export REAPER="$HOME/.audio/reaper"
+export RUNDIR="/run/media/$USER"
+export SYSLOG='/var/log'
+export VISUAL="$HOME/.visual"
+export XCURSOR_PATH="$FLAVOR/cursors"
+export XDG_CACHE_HOME="$CACHE"
+export XDG_CONFIG_HOME="$CONFIG"
+export XDG_DATA_HOME="$DATA"
+export XDG_DESKTOP_DIR="$HOME/Desktop"
+export XDG_DOCUMENTS_DIR="$HOME/Documents"
+export XDG_DOWNLOAD_DIR="$HOME/Downloads"
+export XDG_STATE_HOME="$LOCAL/state"
+
+#===============================================================================
+# - [4] Program Directories
+#===============================================================================
+
+export ALSA_HOME="$CONFIG/alsa"
+export ARDOUR_HOME="$CONFIG/ardour8"
+export AWESOME_HOME="$CONFIG/awesome"
+export BITMONERO_HOME="$HOME/.bitmonero"
+export CADENCE_HOME="$CONFIG/Cadence"
+export CONKY_HOME="$CONFIG/conky"
+export CURL_HOME="$CONFIG/curl"
+export DEADBEEF_HOME="$CONFIG/deadbeef"
+export EXODUS_DATA="$DATA/Exodus-linux-x64"
+export EXODUS_HOME="$CONFIG/Exodus"
+export FABLA_DATA="$DATA/openAV-Fabla2"
+export FLAMESHOT_HOME="$CONFIG/flameshot"
+export FONT_CACHE="$DATA/fonts"
+export GALC_HOME="$CONFIG/galculator"
+export GEANY_DATA="$DATA/geany"
+export GEANY_HOME="$CONFIG/geany"
+export GEDIT_DATA="$DATA/gedit"
+export GEDIT_HOME="$CONFIG/gedit"
+export GIMP_HOME="$CONFIG/GIMP/2.10"
+export GNUPGHOME="$HOME/.gnupg"
+export GTK2_RC_FILES="$CONFIG/gtk-2.0"
+export GTK3_HOME="$CONFIG/gtk-3.0"
+export HTOP_HOME="$CONFIG/htop"
+export INKSCAPE_HOME="$CONFIG/inkscape"
+export JACK_HOME="$CONFIG/jack"
+export KDENLIVE_DATA="$DATA/kdenlive"
+export LIBFM_HOME="$CONFIG/libfm"
+export MONERO_HOME="$CONFIG/monero-project"
+export MOZILLA_HOME="$HOME/.mozilla"
+export MPD_HOME="$CONFIG/mpd"
+export MPV_HOME="$CONFIG/mpv"
+export NANO_HOME="$CONFIG/nano"
+export NCMPCPP_HOME="$CONFIG/ncmpcpp"
+export NEMO_DATA="$DATA/nemo"
+export NEMO_HOME="$CONFIG/nemo"
+export NEOFETCH_HOME="$CONFIG/neofetch"
+export OBS_HOME="$CONFIG/obs-studio"
+export OBSIDIAN_HOME="$CONFIG/obsidian"
+export OPENAI_HOME="$PYTHON_LIB/openai"
+export PAVU_HOME="$CONFIG/pavucontrol-qt"
+export PICOM_HOME="$CONFIG/picom"
+export PIX_HOME="$CONFIG/pix"
+export PKI_DATA="$DATA/pki"
+export PULSE_HOME="$HOME/.pulse"
+export PYTHON_LIB="$LIB/python3.12/site-packages"
+export PYTHON_VENV="$DATA/python"
+export QJACKCTL_HOME="$CONFIG/rncbc.org"
+export QT5_HOME="$CONFIG/qt5ct"
+export QVIEW_HOME="$CONFIG/qView"
+export REAPER_HOME="$CONFIG/REAPER"
+export REPO_HOME="$HOME/.repos"
+export ROFI_HOME="$CONFIG/rofi"
+export RUBY_DATA="$DATA/gem/ruby/3.0.0"
+export SQL_HOME="$HOME/.sql"
+export SSH_HOME="$HOME/.ssh"
+export STEAM_DATA="$DATA/Steam"
+export STEAM_HOME="$HOME/.steam"
+export STICKY_HOME="$CONFIG/sticky"
+export TERMINATOR_HOME="$CONFIG/terminator"
+export THUNDERBIRD_HOME="$HOME/.thunderbird"
+export TORRENT_HOME="$DATA/torrents"
+export TRANSMISSION_HOME="$CONFIG/transmission"
+export VIVALDI_HOME="$CONFIG/vivaldi"
+export VOLUMEICON_HOME="$CONFIG/volumeicon"
+export W3M_DATA="$DATA/w3m"
+export WINEPREFIX="$DATA/wine"
+export X11_HOME="$CONFIG/x11"
+export XORG_DATA="$DATA/xorg"
+export YAY_DATA="$DATA/yay"
+export YAY_HOME="$CONFIG/yay"
+
+#===============================================================================
+# - [5] Input Vars
+#===============================================================================
+
+#export GNOME_KEYRING_CONTROL='/run/user/1000/keyring/control'
+#export GTK_IM_MODULE='/bin/fcitx'
+#export QT_IM_MODULE='/bin/fcitx'
+#export QT_STYLE_OVERRIDE='/bin/kvantum'
+#export SSH_AUTH_SOCK='/run/user/1000/keyring/ssh'
+#export XINITRC='/etc/X11/xinit/xinitrc'
+#export XMODIFIERS='@im=fcitx'
+#export XSERVERRC='/etc/X11/xinit/xserverrc'
+export BROWSER='/bin/firefox'
+export CALAMARES='/etc/calamares'
+export DATE_LONG=$(date +'%H%M-%d%m-%Y')
+export DATE_SHORT=$(date +'%d/%m/%y')
+export EDITOR="/bin/nano --backupdir=$NANO_HOME/backup"
+export FILEMANAGER='/bin/nemo'
+export GIT_CONFIG_GLOBAL="$HOME/.gitconfig"
+export GIT_CONFIG_SYSTEM='/etc/gitconfig'
+export GIT_SSH_COMMAND='/bin/ssh'
+export GRAPHICAL='/bin/geany'
+export GTK_IM_MODULE='/bin/ibus'
+export INPUTRC='/etc/inputrc'
+export LS_COLORS
+export MAILCLIENT='/bin/thunderbird'
+export PYGAME_DETECT_AVX2=1
+export QT_IM_MODULE='/bin/ibus'
+export QT_QPA_PLATFORMTHEME='/bin/qt5ct'
+export SCREENRC="$CONFIG/screenrc"
+export SECUREMSG='/bin/telegram-desktop'
+export SUDO_ASKPASS='/usr/lib/ssh/x11-ssh-askpass'
+export TERMINAL='/bin/terminator'
+export XMODIFIERS='@im=dbus'
+
+#===============================================================================
+# - [6] Shell Vars
+#===============================================================================
+
+export COLORTERM=truecolor
+export HISTCONTROL='ignoredups:erasedups'
+export HISTFILE="$XDG_STATE_HOME/bash/history"
+export HISTFILESIZE=10000
+export HISTSIZE=1000
+export LESSCHARSET=utf-8
+export MANPAGER="sh -c \"sed 's/'\''//g' | bat -l rb --theme ansi --wrap never \
+--terminal-width $(($TCOLS-2))\""
+export TCOLS=$(tput cols)
+export TERM=xterm-256color
+export USECOLOR=true

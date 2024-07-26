@@ -1,0 +1,107 @@
+#!/bin/bash
+#80x
+#                  _ )  |  |  _ \   __|   _ \   _ \ \ \  /
+#                  _ \  |  |  __/  (     (   |  __/  \  /
+#                 ___/ \__/  _|   \___| \___/  _|     _|
+#
+#===============================================================================
+#
+# Files:
+# - Filepath: $BIN/conf_bupcopy
+#
+#===============================================================================
+# - [1] Variables
+#===============================================================================
+
+ANS="$1"
+LOGFL="$LOG/bupcopy.log"
+BIGD=
+MINID=
+
+#===============================================================================
+# - [2] Backup Directories
+#===============================================================================
+
+# ["/source/path"]="/destination/path"
+declare -A DIRBUPS=(
+	[""]=""
+)
+
+# ["/source/path"]="/destination/path"
+declare -A SRCDIRS=(
+	[""]=""
+)
+
+#===============================================================================
+# - [3] Functions
+#===============================================================================
+
+rmdot(){
+	local DIR="$1"
+	basename "${DIR}" | sed 's/^\.//'
+}
+
+bupshit(){
+	local SRC="$1"
+	local DEST="$2"
+	if [[ "$SRC" == "$HOME/.audio" || "$SRC" == "$HOME/.visual" ]]; then
+		NEW_DEST="$DEST/$(rmdot "$(basename "$SRC")")"
+		rsync -avhP "$SRC/" "$NEW_DEST/"
+	else mkdir -p "$DEST"
+		local RCHVPTH="$DEST/$(rmdot "$(basename "$SRC")").tar"
+		sudo tar -cvf "$RCHVPTH" -C "$(dirname "$SRC")" "$(basename "$SRC")"
+		sudo find "$RCHVPTH" -exec chown "$USER":"$USER" {} \;
+	fi
+}
+
+copyshit(){
+	local SRC="$1"
+	local DEST="$2"
+	if [[ "$SRC" == "$BIGD/audio" || "$SRC" == "$BIGD/visual" ]]; then
+		rsync -avhP "$SRC/" "$DEST/"
+	else mkdir -p "$DEST"
+		sudo tar -xvf "$SRC" -C "$DEST" | sudo tee -a "$LOGFL"
+		sudo find "$DEST" -exec chown "$USER":"$USER" {} \;
+	fi
+}
+
+procbup(){
+	for SRC in "${!DIRBUPS[@]}"; do
+		bupshit "$SRC" "${DIRBUPS[$SRC]}"
+	done
+	rsync -avhP "$MINID/C0RNCH1P/" "$BIGD/C0RNCH1P/"
+}
+
+procrest(){
+	for SRC in "${!SRCDIRS[@]}"; do
+		copyshit "$SRC" "${SRCDIRS[$SRC]}"
+	done
+}
+
+#===============================================================================
+# - [4] Main
+#===============================================================================
+
+[ ! -e "$LOGFL" ] && touch "$LOGFL"
+exec > >(tee -a "$LOGFL") 2>&1
+
+if test -z "$ANS"; then
+	echo -e '\nChoose Operation'
+	echo -e '- [B] Bupshit\n- [C] Copyshit\n'
+	read -rp '- ' ANS
+fi
+
+if [[ "$ANS" =~ ^[bB]$ ]]; then
+	BUPSHIT=1
+	COPYSHIT=0
+	echo -e '\nBacking shit up\n'
+elif [[ "$ANS" =~ ^[cC]$ ]]; then
+	BUPSHIT=0
+	COPYSHIT=1
+	echo -e '\nCopying shit over\n'
+else echo -e '\nInvalid choice\n'
+	exit 1
+fi
+
+[ $BUPSHIT -eq 1 ] && sleep 2 && procbup
+[ $COPYSHIT -eq 1 ] && sleep 2 && procrest

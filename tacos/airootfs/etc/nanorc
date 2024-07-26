@@ -1,0 +1,81 @@
+#                          \ |    \     \ |   _ \
+#                         .  |   _ \   .  |  (   |
+#                        _|\_| _/  _\ _|\_| \___/
+#===============================================================================
+# - /etc/nanorc
+# - $XDG_CONFIG_DIR/nano/nanorc
+#===============================================================================
+# - man -P 'less +5 +/DESCRIPTION' 'nanorc(5)'
+#===============================================================================
+# - [1] General
+#===============================================================================
+set afterends
+set atblanks
+set autoindent
+#set backup
+set boldtext
+set brackets ")>]}"
+set breaklonglines
+set casesensitive
+set constantshow
+set cutfromcursor
+set fill -1
+set guidestripe 120
+set indicator
+set jumpyscrolling
+set linenumbers
+set magic
+set matchbrackets "(<[{)>]}"
+set mouse
+set nonewlines
+set punct "!.;:?"
+set quickblank
+set softwrap
+set speller "aspell"
+set tabsize 4
+set trimblanks
+set whitespace ">."
+set zap
+#===============================================================================
+# - [2] Aesthetics
+#===============================================================================
+include "/usr/share/nano-syntax-highlighting/*.nanorc"
+include "/usr/share/nano/*.nanorc"
+include "/usr/share/nano/extra/*.nanorc"
+set errorcolor bold,white,red
+set functioncolor magenta
+set keycolor lightmagenta
+set numbercolor magenta
+set promptcolor black,yellow
+set scrollercolor magenta
+set selectedcolor lightwhite,cyan
+set spotlightcolor black,orange
+set statuscolor bold,white,magenta
+set stripecolor yellow
+set titlecolor bold,white,magenta
+#===============================================================================
+# - [3] Keybindings
+#===============================================================================
+bind ^A mark main
+bind ^B wherewas all
+bind ^C copy main
+bind ^D findprevious all
+bind ^E execute main
+bind ^F whereis all
+bind ^G findnext all
+bind ^H chopwordleft main
+bind ^L "{nextword}{mark}{prevword}{execute}|sed 's/.*/\L&/'{enter}" main
+bind ^P location main
+bind ^Q exit all
+bind ^R replace main
+bind ^S savefile main
+bind ^U "{nextword}{mark}{prevword}{execute}|sed 's/.*/\U&/'{enter}" main
+bind ^V paste all
+bind ^W writeout main
+bind ^X cut main
+bind ^Y redo main
+bind ^Z undo main
+bind F1 exit help
+bind F1 help all
+bind M-M comment main
+bind M-Z suspend main

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+XWALLINC=1
+XWALLDIR="$FLAVOR/walls"
+
+change_wallpaper() {
+	CURXWALL="$(ls "$XWALLDIR" | sort -R | tail -1)"
+	CURRENT_EXT="${CURXWALL##*.}"
+	if [[ "$CURRENT_EXT" == 'gif' || "$CURRENT_EXT" == 'gfy' ]]; then
+		xgifwallpaper "$XWALLDIR/$CURXWALL" &>'/dev/null'
+	else xwallpaper --zoom "$XWALLDIR/$CURXWALL" &>'/dev/null'
+	fi
+}; change_wallpaper
+
+while true; do
+	sleep $(( XWALLINC * 550 ))
+	change_wallpaper
+done

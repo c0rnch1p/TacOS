@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Fix 01
+# Broken grub config during Calamares install, system inaccessible, run in live
+# environment to chroot into system
+
+# Step 1: Close any existing LUKS mapping if necessary
+if sudo cryptsetup status 'nvme0n1p2_crypt' | grep -q 'is active'; then
+  echo 'Closing existing LUKS mapping for nvme0n1p2_crypt'
+  sudo cryptsetup luksClose 'nvme0n1p2_crypt'
+fi
+
+# Step 2: Open the LUKS encrypted partition
+sudo cryptsetup luksOpen '/dev/nvme0n1p2' 'nvme0n1p2_crypt'
+
+# Step 3: Create a mount point for the root filesystem
+sudo mkdir -p '/mnt/rescue'
+
+# Step 4: Mount the decrypted root partition
+sudo mount '/dev/mapper/nvme0n1p2_crypt' '/mnt/rescue'
+
+# Check if the mount was successful
+if ! mountpoint -q '/mnt/rescue'; then
+  echo 'Failed to mount the decrypted root partition'
+  exit 1
+fi
+
+# Step 5: Bind mount the necessary filesystems to the chroot environment
+sudo mount --bind '/dev' '/mnt/rescue/dev'
+sudo mount --bind '/proc' '/mnt/rescue/proc'
+sudo mount --bind '/sys' '/mnt/rescue/sys'
+sudo mount --bind '/run' '/mnt/rescue/run'
+
+# Step 6: Change root into the new system environment and fix GRUB
+sudo chroot '/mnt/rescue' /bin/bash -c "
+grub-install /dev/nvme0n1
+update-grub
+exit
+"
+
+# Step 7: Unmount the bind mounts in reverse order
+sudo umount '/mnt/rescue/run'
+sudo umount '/mnt/rescue/sys'
+sudo umount '/mnt/rescue/proc'
+sudo umount '/mnt/rescue/dev'
+
+# Step 8: Unmount the root partition
+sudo umount '/mnt/rescue'
+
+# Step 9: Close the LUKS encrypted partition
+sudo cryptsetup luksClose 'nvme0n1p2_crypt'

@@ -1,0 +1,29 @@
+#
+#          __|  |  |  _ \    _ \   __|  _ \   __|
+#        \__ \  |  |  |  |  (   |  _|     / \__ \
+#        ____/ \__/  ___/  \___/  ___| _|_\ ____/
+#
+###########################################################
+# ~ /etc/sudoers
+###########################################################
+# ~ man 'sudoers(5)' | less +/DESCRIPTION
+###########################################################
+# 1 ~ PERMISSION SETTINGS
+###########################################################
+Defaults insults
+Defaults syslog=auth
+
+root ALL=(ALL:ALL) ALL
+liveuser ALL=(ALL:ALL) ALL
+#... ALL=(ALL:ALL) ALL
+
+%wheel ALL=(ALL:ALL) ALL
+%liveuser ALL=(ALL:ALL) ALL
+%sudo ALL=(ALL:ALL) ALL
+#%... ALL=(ALL:ALL) ALL
+
+#%wheel ALL=(ALL:ALL) NOPASSWD: ALL
+#%liveuser ALL=(ALL:ALL) NOPASSWD: ALL
+#%... ALL=(ALL:ALL) NOPASSWD: ALL
+
+@includedir /etc/sudoers.d

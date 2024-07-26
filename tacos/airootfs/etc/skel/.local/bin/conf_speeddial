@@ -1,0 +1,336 @@
+#!/bin/bash
+# 80x
+#               __|  _ \  __|  __|  _ \   _ \  _ _|    \    |
+#             \__ \  __/  _|   _|   |  |  |  |   |    _ \   |
+#             ____/ _|   ___| ___| ___/  ___/  ___| _/  _\ ____|
+#
+#===============================================================================
+#
+# Files:
+# - Filepath: $BIN/conf_speeddial
+#
+#===============================================================================
+# - [1] User Files Array
+#===============================================================================
+
+USER_FILES=(
+	"$ALSA_HOME/asoundrc"
+	"$ARDOUR_HOME/config"
+	"$ARDOUR_HOME/session.rc"
+	"$AWESOME_HOME/configs/compton.conf"
+	"$AWESOME_HOME/configs/conky.conf"
+	"$AWESOME_HOME/configs/openweather.conf"
+	"$AWESOME_HOME/configs/picom.conf"
+	"$AWESOME_HOME/configs/rofi.rasi"
+	"$AWESOME_HOME/rc.lua"
+	"$AWESOME_HOME/scripts/tog_picom.sh"
+	"$AWESOME_HOME/scripts/tog_pulse.sh"
+	"$AWESOME_HOME/scripts/upd_mpd_widget.sh"
+	"$AWESOME_HOME/themes/tacos.lua"
+	"$BIN/01_run_all"
+	"$BIN/02_setup_alpm"
+	"$BIN/03_setup_general"
+	"$BIN/04_setup_system"
+	"$BIN/05_permissions"
+	"$BIN/06_setup_dconf"
+	"$BIN/07_setup_backend"
+	"$BIN/08_setup_extras"
+	"$BIN/09_fix_slowstart"
+	"$BIN/conf_aliases"
+	"$BIN/conf_bupconf"
+	"$BIN/conf_bupcopy"
+	"$BIN/conf_cleanup"
+	"$BIN/conf_daemons"
+	"$BIN/conf_insulter"
+	"$BIN/conf_perso"
+	"$BIN/conf_speeddial"
+	"$BIN/conf_variables"
+	"$BIN/px_alpha"
+	"$BIN/px_arch"
+	"$BIN/px_arco"
+	"$BIN/px_bonsai"
+	"$BIN/px_colortest"
+	"$BIN/px_colortest_slim"
+	"$BIN/px_colorview"
+	"$BIN/px_colorwheel"
+	"$BIN/px_crunch"
+	"$BIN/px_darth_vader"
+	"$BIN/px_dna"
+	"$BIN/px_dog"
+	"$BIN/px_elfman"
+	"$BIN/px_ghosts"
+	"$BIN/px_guns"
+	"$BIN/px_illumina"
+	"$BIN/px_monster"
+	"$BIN/px_mouseface"
+	"$BIN/px_pacman_1"
+	"$BIN/px_pacman_2"
+	"$BIN/px_print256"
+	"$BIN/px_rally"
+	"$BIN/px_skullpuke"
+	"$BIN/px_space_invaders"
+	"$BIN/px_square"
+	"$BIN/px_starwars"
+	"$BIN/px_tanks"
+	"$BIN/px_thebat"
+	"$BIN/px_thebat_2"
+	"$BIN/px_tiefighter"
+	"$BIN/px_tiefighter_invert"
+	"$BIN/px_tiefighter_straight"
+	"$BIN/px_unix"
+	"$BIN/tc_8ball"
+	"$BIN/tc_achroot"
+	"$BIN/tc_bust"
+	"$BIN/tc_mntmgr"
+	"$BIN/tc_secrets"
+	"$BIN/tc_setxwall"
+	"$BIN/tc_sex"
+	"$BIN/tc_stoker"
+	"$BIN/tc_urch"
+	"$CADENCE_HOME/Cadence.conf"
+	"$CADENCE_HOME/Cadence-Logs.conf"
+	"$CADENCE_HOME/GlobalSettings.conf"
+	"$CADENCE_HOME/JackSettings.conf"
+	"$CONFIG/fonts.conf"
+	"$CONFIG/kdeglobals"
+	"$CONFIG/kdenlive-layoutsrc"
+	"$CONFIG/knotesrc"
+	"$CONFIG/mimeapps.list"
+	"$CONFIG/nemo-compare.conf"
+	"$CONFIG/pavucontrol.ini"
+	"$CONFIG/QtProject.conf"
+	"$CONFIG/screenrc"
+	"$CONFIG/Trolltech.conf"
+	"$CONFIG/user-dirs.dirs"
+	"$CONFIG/user-dirs.locale"
+	"$CONFIG/wezterm/wezterm.lua"
+	"$CONKY_HOME/conky.conf"
+	"$CURL_HOME/.curlrc"
+	"$DEADBEEF_HOME/config"
+	"$FLAMESHOT_HOME/flameshot.ini"
+	"$GALC_HOME/galculator.conf"
+	"$GIMP_HOME/dockrc"
+	"$GIMP_HOME/gimprc"
+	"$GIMP_HOME/menurc"
+	"$GIMP_HOME/themerc"
+	"$GNUPGHOME/gpg-agent.conf"
+	"$GNUPGHOME/gpg.conf"
+	"$GTK2_RC_FILES/gtkfilechooser.ini"
+	"$GTK2_RC_FILES/gtkrc"
+	"$GTK3_HOME/settings.ini"
+	"$HL_HOME/lang.lua"
+	"$HL_HOME/theme.lua"
+	"$HOME/.bashrc"
+	"$HOME/.dircolors"
+	"$HOME/.gitconfig"
+	"$INKSCAPE_HOME/preferences.xml"
+	"$JACK_HOME/conf.xml"
+	"$LIBFM_HOME/libfm.conf"
+	"$LOG/bupconf.log"
+	"$LOG/bupcopy.log"
+	"$LOG/ncmpcpp_err.log"
+	"$MONERO_HOME/monero-core.conf"
+	"$MPD_HOME/mpd.conf"
+	"$NCMPCPP_HOME/bindings"
+	"$NCMPCPP_HOME/config"
+	"$NEOFETCH_HOME/config.conf"
+	"$NEOFETCH_HOME/logo"
+	"$OBS_HOME/global.ini"
+	"$PAVU_HOME/pavucontrol-qt.conf"
+	"$PULSE_HOME/client.conf"
+	"$PULSE_HOME/daemon.conf"
+	"$QJACKCTL_HOME/QjackCtl.conf"
+	"$QT5_HOME/qt5ct.conf"
+	"$QVIEW_HOME/qView.conf"
+	"$ROFI_HOME/config.rasi"
+	"$SSH_HOME/config"
+	"$STICKY_HOME/notes.json"
+	"$TERMINATOR_HOME/config"
+	"$TRANSMISSION_HOME/settings.json"
+	"$VIVALDI_HOME/Default/AdBlockState"
+	"$VIVALDI_HOME/Default/Bookmarks"
+	"$VIVALDI_HOME/Default/Preferences"
+	"$VIVALDI_HOME/Default/Shortcuts"
+	"$VOLUMEICON_HOME/volumeicon"
+	"$YAY_HOME/config.json"
+)
+
+#===============================================================================
+# - [2] System Files Array
+#===============================================================================
+
+SYSTEM_FILES=(
+	'/etc/default/grub'
+	'/etc/DIR_COLORS'
+	'/etc/dirs.conf'
+	'/etc/dnsmasq.conf'
+	'/etc/group'
+	'/etc/grub.d/40_custom'
+	'/etc/gshadow'
+	'/etc/hostname'
+	'/etc/htoprc'
+	'/etc/inputrc'
+	'/etc/issue'
+	'/etc/jackdrc'
+	'/etc/locale.conf'
+	'/etc/locale.gen'
+	'/etc/lvm/lvm.conf'
+	'/etc/mime.types'
+	'/etc/mkinitcpio.conf'
+	'/etc/mkinitcpio.d/linux.preset'
+	'/etc/mkinitcpio.d/tacos'
+	'/etc/modprobe.d/broadcom-wl.conf'
+	'/etc/nanorc'
+	'/etc/NetworkManager/NetworkManager.conf'
+	'/etc/nsswitch.conf'
+	'/etc/openvpn/client/ovpncli2.ovpn'
+	'/etc/openvpn/client/ovpncli3.ovpn'
+	'/etc/openvpn/client/ovpncli1.ovpn'
+	'/etc/openvpn/client/ovpncli.ovpn'
+	'/etc/pacman.conf'
+	'/etc/pacman.d/gnupg/gpg-agent.conf'
+	'/etc/pacman.d/gnupg/gpg.conf'
+	'/etc/pacman.d/mirrorlist'
+	'/etc/pam.d/login'
+	'/etc/pam.d/system-auth'
+	'/etc/passwd'
+	'/etc/profile'
+	'/etc/profile.d/locale.sh'
+	'/etc/proxychains.conf'
+	'/etc/resolv.conf'
+	'/etc/security/limits.conf'
+	'/etc/shadow'
+	'/etc/ssh_banner'
+	'/etc/ssh_motd'
+	'/etc/ssh/ssh_config'
+	'/etc/ssh/sshd_config'
+	'/etc/sudoers'
+	'/etc/sysctl.conf'
+	'/etc/systemd/journald.conf'
+	'/etc/systemd/logind.conf'
+	'/etc/systemd/logind.conf.d/tacos-settings.conf'
+	'/etc/systemd/network/20-ethernet.network'
+	'/etc/systemd/network/20-wlan.network'
+	'/etc/systemd/network/20-wwan.network'
+	'/etc/systemd/network.conf.d/ipv6-privacy-extensions.conf'
+	'/etc/tor/torrc'
+	'/etc/tor/torsocks.conf'
+	'/etc/vconsole.conf'
+	'/etc/wgetrc'
+	'/etc/wireguard/wgcli2.conf'
+	'/etc/wireguard/wgcli3.conf'
+	'/etc/wireguard/wgcli1.conf'
+	'/etc/wireguard/wgcli.conf'
+	'/etc/X11/xinit/xinitrc'
+	'/etc/X11/xinit/xserverrc'
+	'/usr/share/doc/most/most.rc'
+	'/usr/share/icons/default/index.theme'
+	'/usr/share/X11/app-defaults/SshAskpass'
+)
+
+#===============================================================================
+# - [3] Select File
+#===============================================================================
+
+select_file() {
+	local PROMPT="$1"
+	local -n FILES=$2
+	local COL COLUMNS COLWIDTH INDEX REPLY ROW ROWS
+	echo -e "\033[0;32m\n$PROMPT\n\033[0m"
+	COLUMNS=$(tput cols)
+	MAX_LENGTH=0
+	for FILE in "${FILES[@]}"; do
+		[ ${#FILE} -gt $MAX_LENGTH ] && MAX_LENGTH=${#FILE}
+	done
+	COLWIDTH=$((MAX_LENGTH + 2))
+	if (( COLWIDTH * 3 > COLUMNS )); then NUMCOLS=$(( COLUMNS / COLWIDTH ))
+	else NUMCOLS=3
+	fi
+	ROWS=$(( (${#FILES[@]} + NUMCOLS - 1) / NUMCOLS ))
+	for ROW in $(seq 0 $((ROWS - 1))); do
+		for COL in $(seq 0 $((NUMCOLS - 1))); do
+			INDEX=$((ROW + COL * ROWS))
+			if [ $INDEX -lt ${#FILES[@]} ]; then
+				printf '\033[0;36m%3d -\033[0m \033[0;37m%-*s\033[0m' \
+				$((INDEX+1)) $COLWIDTH "${FILES[INDEX]}"
+			fi
+		done; echo
+	done
+	while true; do
+		echo -e '\033[0;32m\nEnter # or full path\n\033[0m'
+		read -rp '- ' REPLY
+		if [[ "$REPLY" =~ ^[0-9]+$ ]] && [ "$REPLY" -ge 1 ] &&
+		[ "$REPLY" -le "${#FILES[@]}" ]; then
+			SELECTED="${FILES[REPLY-1]}"
+			echo -e "\n\033[0;32mSelected:\033[0m \033[0;37m$SELECTED\033[0m\n"
+			FILE="$SELECTED"; return 0
+		elif [[ -f "$REPLY" ]]; then SELECTED="$REPLY"
+			echo -e "\n\033[0;32mSelected:\033[0m \033[0;37m$SELECTED\033[0m\n"
+			FILE="$SELECTED"; return 0
+		else echo -e "\033[0;31mInvalid selection"
+		fi
+	done
+}
+
+#===============================================================================
+# - [4] Read Files
+#===============================================================================
+
+read_perso_speeddial(){
+	local FILE=''
+	select_file 'Perso Files' PERSO_FILES FILE
+	if [[ -f "$FILE" ]]; then
+		but "$FILE" || echo "ERR: Failed to open $FILE with but"
+	else echo "ERR: No perso file selected or file path empty"
+	fi
+}
+
+read_user_speeddial(){
+	local FILE=''
+	select_file 'User Files' USER_FILES FILE
+	if [[ -f "$FILE" ]]; then
+		echo "ERR: Attempting to open user file with but: $FILE"
+		but "$FILE" || echo "ERR: Failed to open $FILE with but"
+	else echo "ERR: No user file selected or file path empty"
+	fi
+}
+
+read_system_speeddial(){
+	local FILE=''
+	select_file 'System Files' SYSTEM_FILES FILE
+	if [[ -f "$FILE" ]]; then
+		sbut "$FILE" || echo "ERR: Failed to open $FILE with sbut"
+	else echo "ERR: No system file selected or file path empty"
+	fi
+}
+
+#===============================================================================
+# - [5] Edit Files
+#===============================================================================
+
+edit_perso_speeddial(){
+	local FILE=''
+	select_file 'Perso Files' PERSO_FILES FILE
+	if [[ -f "$FILE" ]]; then
+		$EDITOR "$FILE" || echo "ERR: Failed to edit $FILE with editor $EDITOR"
+	else echo "ERR: No perso file selected or file path empty"
+	fi
+}
+
+edit_user_speeddial(){
+	local FILE=''
+	select_file 'User Files' USER_FILES FILE
+	if [[ -f "$FILE" ]]; then
+		$EDITOR "$FILE" || echo "ERR: Failed to edit $FILE with editor $EDITOR"
+	else echo "ERR: No user file selected or file path empty"
+	fi
+}
+
+edit_system_speeddial(){
+	local FILE=''
+	select_file 'System Files' SYSTEM_FILES FILE
+	if [[ -f "$FILE" ]]; then
+		sudo -A $EDITOR "$FILE" || echo "ERR: Failed to edit $FILE with $EDITOR"
+	else echo "ERR: No system file selected or file path empty"
+	fi
+}

@@ -1,0 +1,106 @@
+#!/bin/bash
+#shellcheck disable=SC2162,SC2143
+
+no_nouveau(){
+	sudo rm '/var/lib/pacman/db.lck' &>'/dev/null'
+	if pacman -Qs xorg-server &>'/dev/null'; then
+		if pacman -Qs xf86-video-nouveau &>'/dev/null'; then
+			echo -e '\nxf86-video-nouveau breaks xorg, removing it now'
+			pacman -Rns --noconfirm xf86-video-nouveau
+		fi
+	fi
+}
+
+setup_grub_func(){
+	local TARGETS TARGET GRUBARGS ANS
+	TARGETS=(
+		'arm-coreboot' 'arm-efi'
+		'arm-uboot' 'arm64-efi'
+		'i386-coreboot'	'i386-efi'
+		'i386-ieee1275'	'i386-multiboot'
+		'i386-pc' 'i386-qemu'
+		'i386-xen' 'i386-xen_pvh'
+		'ia64-efi' 'loongarch64-efi'
+		'mips-arc' 'mips-qemu_mips'
+		'mipsel-arc' 'mipsel-loongson'
+		'mipsel-qemu_mips' 'powerpc-ieee1275'
+		'riscv32-efi' 'riscv64-efi'
+		'sparc64-ieee1275' 'x86_64-efi (default)'
+		'x86_64-xen'
+	)
+	GRUBARGS=(--efi-directory='/boot/efi')
+	if ! sudo tree '/boot/efi' | grep -q grub; then
+		while true; do
+			echo -e '\nGrub isnt installed in /boot/efi'
+			echo -e '- [L] List targets\n- [E] Enter target'
+			echo -e '- [D] Use default\n- [C] Cancel\n'
+			read -p '- ' ANS
+			case $ANS in
+				l)
+					for TARGET in "${TARGETS[@]}"; do
+						echo " $TARGET"
+					done | less;;
+				e)
+					echo -e '\nEnter target\n'
+					read -rp '- ' ANS
+					for ARG in "${GRUBARGS[@]}"; do
+						echo; sudo grub-install --target="$ANS" "$ARG"
+					done; break;;
+				d)
+					for ARG in "${GRUBARGS[@]}"; do
+						echo; sudo grub-install --target='x86_64-efi' "$ARG"
+					done; break;;
+				c) break;;
+				*) echo '\nInvalid option';;
+			esac
+		done
+	fi
+	if [ ! -f '/boot/grub/grub.cfg' ]; then
+		echo -e '\nThis system doesnt have a grub config'
+		echo -e '\nGenerating a new one at /boot/grub/grub.cfg\n'
+		sudo grub-mkconfig -o '/boot/grub/grub.cfg'
+		sudo update-grub
+	else echo -e '\nGrub config is up to date'
+		echo -e '- [C] Cancel\n- [G] Generate anyway\n'
+		read -p '- ' ANS
+		if [ "$ANS" == 'c' ]; then return 0
+		else echo -e '\nThis will overwrite the existing bootloader, continue?\n'
+		if [[ "$ANS" =~ ^(1|y|ya|ye|ta|ok|pl|th).* ]]; then
+			sudo grub-mkconfig -o '/boot/grub/grub.cfg'
+			sudo update-grub
+		else return 0
+		fi
+	fi; echo
+}
+
+setup_mkinitcpio_func(){
+	local KERNELMTIME INITRAMFSMTIME ANS
+	KERNELMTIME=$(stat -c %Y '/boot/vmlinuz-linux')
+	INITRAMFSMTIME=$(stat -c %Y '/boot/initramfs-linux.img')
+	if [ "$INITRAMFSMTIME" -gt "$KERNELMTIME" ]; then
+		echo -e '\nRamdisk is up to date'
+		echo -e '- [C] Cancel\n- [G] Generate anyway\n'
+		read -p '- ' ANS
+		if [ "$ANS" == 'c' ]; then return 0
+		else echo -e '\nThis will overwrite the existing ramdisk, continue?\n'
+			read -p '- ' ANS; echo
+			if [[ "$ANS" =~ ^(1|y|ya|ye|ta|ok|pl|th).* ]]; then sudo mkinitcpio -P
+			else return 0
+			fi
+		fi
+	else echo -e '\nRamdisk older than kernel image'
+		echo -e '\nGenerating new initramfs image\n'
+		echo -e 'This will overwrite the existing ramdisk, continue?\n'
+		read -p '- ' ANS; echo
+		if [[ "$ANS" =~ ^(1|y|ya|ye|ta|ok|pl|th).* ]]; then sudo mkinitcpio -P
+		else return 0
+		fi
+	fi
+}
+
+if [ -n "$1" ]; then "$1"
+else
+	no_nouveau
+	setup_grub_func
+	setup_mkinitcpio_func
+fi

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+upd_alpm(){
+	chk_yay_install(){
+		if ! command -v yay &>'/dev/null'; then
+			echo -e 'Yay not installed, installing it now\n'
+			git clone 'https://aur.archlinux.org/yay.git'
+			cd yay || exit 1
+			sudo makepkg -si --noconfirm
+			cd .. || exit 1
+			sudo rm -rf yay
+		fi
+	}
+	# Initialize and configure Pacman
+	echo -e '\nSetting up Pacman keys\n'
+	sudo pacman-key --init
+	sudo pacman-key --populate archlinux
+	echo -e '\nSetting up Pacman mirrors\n'
+	sudo reflector --age 6 --latest 20 --sort score --protocol https --save '/etc/pacman.d/mirrorlist'
+	sudo pacman -Fy
+	# Generate Yay database and update
+	chk_yay_install
+	echo -e '\nGenerating Yay database and enabling development packages\n'
+	yay -Y --gendb
+	yay -Y --devel --save
+	echo -e '\nSetting Yay batchinstall and combined upgrade\n'
+	yay -Y --batchinstall --save
+	yay -Y --combinedupgrade --save
+	yay -Fy && sudo pacman -Syyu
+}
+
+upd_pipenv(){
+	# Configure Python environment
+	echo -e "\nCreating Python venv in $PYTHON_VENV"
+	python -m venv "$PYTHON_VENV" && . "$PYTHON_VENV/bin/activate"
+	echo -e '\nUpgrading Python package managers'
+	python -m pip install --upgrade pip
+	python -m pip install --upgrade pipx
+}
+
+if [ -n "$1" ]; then "$1"
+else upd_alpm; upd_pipenv
+fi

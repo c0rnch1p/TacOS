@@ -1,0 +1,103 @@
+#!/bin/bash
+#shellcheck disable=SC2002
+
+DATE=$(date +'%m-%d-%y-%H')
+LOGFL="$HOME/.config/dconf/settings/settings-dump-$DATE.ini"
+
+dconf_func(){
+	gsettings set ca.desrt.dconf-editor saved-pathbar-path 'hidden'
+	gsettings set ca.desrt.dconf-editor saved-view '/org/nemo/'
+	gsettings set ca.desrt.dconf-editor show-warning false
+	gsettings set ca.desrt.dconf-editor window-height 974
+	gsettings set ca.desrt.dconf-editor window-is-maximized false
+	gsettings set ca.desrt.dconf-editor window-width 939
+	gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+	gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
+	gsettings set org.gnome.desktop.screensaver lock-enabled false
+	gsettings set org.gnome.font-manager enable-animations true
+	gsettings set org.gnome.font-manager prefer-dark-theme true
+	gsettings set org.gnome.gedit.plugins.externaltools font 'Nimbus Mono PS Regular 10'
+	gsettings set org.gnome.gedit.plugins.externaltools use-system-font false
+	gsettings set org.gnome.gedit.plugins.filebrowser filter-mode "['hide-binary']"
+	gsettings set org.gnome.gedit.plugins.filebrowser open-at-first-doc false
+	gsettings set org.gnome.gedit.plugins.filebrowser root 'file:///'
+	gsettings set org.gnome.gedit.plugins.filebrowser tree-view true
+	gsettings set org.gnome.gedit.plugins.filebrowser virtual-root "file:///home/$USER"
+	gsettings set org.gnome.gedit.plugins.metagedit prefer-overlay-scrollbar true
+	gsettings set org.gnome.gedit.plugins.metagedit replace-session-on-load true
+	gsettings set org.gnome.gedit.plugins.metagedit resume-session true
+	gsettings set org.gnome.gedit.plugins.time custom-format '%m/%d/%y'
+	gsettings set org.gnome.gedit.preferences.editor display-right-margin true
+	gsettings set org.gnome.gedit.preferences.editor editor-font 'Nimbus Mono PS 12'
+	gsettings set org.gnome.gedit.preferences.editor ensure-trailing-newline false
+	gsettings set org.gnome.gedit.preferences.editor highlight-current-line false
+	gsettings set org.gnome.gedit.preferences.editor max-undo-actions -1
+	gsettings set org.gnome.gedit.preferences.editor scheme 'solarized-dark'
+	gsettings set org.gnome.gedit.preferences.editor tabs-size 4
+	gsettings set org.gnome.gedit.preferences.editor use-default-font false
+	gsettings set org.gnome.gedit.preferences.editor wrap-last-split-mode 'char'
+	gsettings set org.gnome.gedit.preferences.editor wrap-mode 'char'
+	gsettings set org.gnome.gedit.preferences.ui bottom-panel-visible true
+	gsettings set org.gnome.gedit.preferences.ui side-panel-visible true
+	gsettings set org.gnome.gedit.preferences.ui statusbar-visible true
+	gsettings set org.gnome.gedit.preferences.ui theme-variant 'light'
+	gsettings set org.gnome.gedit.state.window bottom-panel-active-page 'GeditTerminalPanel'
+	gsettings set org.gnome.gedit.state.window bottom-panel-size 331
+	gsettings set org.gnome.gedit.state.window side-panel-active-page 'GeditFileBrowserPanel'
+	gsettings set org.gnome.gedit.state.window side-panel-size 570
+	gsettings set org.gnome.gedit.state.window size '(1894, 974)'
+	gsettings set org.gnome.gedit.state.window state 128
+	gsettings set org.gnome.meld highlight-syntax true
+	gsettings set org.gnome.meld indent-width 4
+	gsettings set org.gnome.meld prefer-dark-theme true
+	gsettings set org.gnome.meld show-line-numbers true
+	gsettings set org.gtk.settings.color-chooser selected-color '(true, 1.0, 1.0, 1.0, 1.0)'
+	gsettings set org.nemo.extensions.nemo-terminal audible-bell false
+	gsettings set org.nemo.extensions.nemo-terminal default-follow-mode 'Nemo and Terminal Synchronized'
+	gsettings set org.nemo.extensions.nemo-terminal default-visible true
+	gsettings set org.nemo.extensions.nemo-terminal terminal-position 'bottom'
+	gsettings set org.nemo.icon-view default-zoom-level 'large'
+	gsettings set org.nemo.list-view default-zoom-level 'small'
+	gsettings set org.nemo.preferences bulk-rename-tool b'bulky'
+	gsettings set org.nemo.preferences close-device-view-on-device-eject true
+	gsettings set org.nemo.preferences date-format 'iso'
+	gsettings set org.nemo.preferences default-folder-viewer 'list-view'
+	gsettings set org.nemo.preferences inherit-show-thumbnails false
+	gsettings set org.nemo.preferences show-bookmarks-in-to-menus false
+	gsettings set org.nemo.preferences show-computer-icon-toolbar true
+	gsettings set org.nemo.preferences show-directory-item-counts 'always'
+	gsettings set org.nemo.preferences show-full-path-titles true
+	gsettings set org.nemo.preferences show-hidden-files true
+	gsettings set org.nemo.preferences show-home-icon-toolbar true
+	gsettings set org.nemo.preferences show-image-thumbnails 'always'
+	gsettings set org.nemo.preferences show-new-folder-icon-toolbar true
+	gsettings set org.nemo.preferences show-open-in-terminal-toolbar true
+	gsettings set org.nemo.preferences show-reload-icon-toolbar true
+	gsettings set org.nemo.preferences show-show-thumbnails-toolbar true
+	gsettings set org.nemo.preferences sort-favorites-first false
+	gsettings set org.nemo.preferences swap-trash-delete true
+	gsettings set org.nemo.preferences thumbnail-limit 2147483648
+	gsettings set org.nemo.preferences tooltips-in-icon-view true
+	gsettings set org.nemo.preferences tooltips-in-list-view true
+	gsettings set org.nemo.preferences tooltips-show-birth-date true
+	gsettings set org.nemo.preferences tooltips-show-file-type true
+	gsettings set org.nemo.preferences tooltips-show-path true
+	gsettings set org.nemo.preferences treat-root-as-normal true
+	gsettings set org.nemo.preferences.menu-config selection-menu-copy-to true
+	gsettings set org.nemo.preferences.menu-config selection-menu-duplicate true
+	gsettings set org.nemo.preferences.menu-config selection-menu-make-link true
+	gsettings set org.nemo.preferences.menu-config selection-menu-move-to true
+	gsettings set org.nemo.window-state geometry '1898x1018+10+30'
+	gsettings set org.nemo.window-state maximized false
+	gsettings set org.nemo.window-state sidebar-bookmark-breakpoint 0
+	gsettings set org.nemo.window-state start-with-sidebar true
+}
+
+mkdir -p "$(dirname "$LOGFL")"
+dconf reset -f / || rm -f "$HOME/.config/dconf/user"
+dconf_func &>'/dev/null'
+echo -e '\nDconf settings applied successfully'
+dconf dump / > "$LOGFL"
+echo -e "\nSettings dumped to $LOGFL"
+cat "$LOGFL" | dconf load /
+echo -e "\nDconf settings loaded successfully from $LOGFL"

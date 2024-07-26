@@ -1,0 +1,12 @@
+#!/bin/bash
+
+TOTAL=0
+while IFS= read -r -d $'\0' FL; do
+    if file "$FL" | grep -q 'text'; then
+        FLCNT=$(wc -l < "$FL")
+        printf "%5d ▸ %s\n" "$FLCNT" "$FL"
+        TOTAL=$((TOTAL + FLCNT))
+    fi
+done < <(find . -type f -print0)
+echo "Total lines: $TOTAL"
+

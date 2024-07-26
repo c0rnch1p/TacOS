@@ -1,0 +1,362 @@
+#
+#            _ \  _ _|  _ \     __|   _ \   |      _ \   _ \   __| 
+#            |  |   |     /    (     (   |  |     (   |    / \__ \ 
+#           ___/  ___| _|_\   \___| \___/  ____| \___/  _|_\ ____/
+#
+################################################################################
+# ~ $HOME/.dir_colors
+# ~ /etc/DIR_COLORS
+################################################################################
+# ~ man 'dir_colors(5)' | less +/DESCRIPTION
+################################################################################
+# 1 ~ TERMINAL LIST
+################################################################################
+TERM ansi
+TERM color-xterm
+TERM con132x25
+TERM con132x30
+TERM con132x43
+TERM con132x60
+TERM con80x25
+TERM con80x28
+TERM con80x30
+TERM con80x43
+TERM con80x50
+TERM con80x60
+TERM cons25
+TERM console
+TERM cygwin
+TERM dtterm
+TERM dvtm
+TERM dvtm-256color
+TERM Eterm
+TERM eterm-color
+TERM fbterm
+TERM gnome
+TERM gnome-256color
+TERM hurd
+TERM jfbterm
+TERM konsole
+TERM konsole-256color
+TERM kterm
+TERM linux
+TERM linux-c
+TERM mach-color
+TERM mach-gnu-color
+TERM mlterm
+TERM putty
+TERM putty-256color
+TERM rxvt
+TERM rxvt-256color
+TERM rxvt-cygwin
+TERM rxvt-cygwin-native
+TERM rxvt-unicode
+TERM rxvt-unicode256
+TERM rxvt-unicode-256color
+TERM screen
+TERM screen-16color
+TERM screen-16color-bce
+TERM screen-16color-bce-s
+TERM screen-16color-s
+TERM screen-256color
+TERM screen-256color-bce
+TERM screen-bce
+TERM screen.Eterm
+TERM screen.linux
+TERM screen.rxvt
+TERM screen-w
+TERM st
+TERM st-256color
+TERM st-meta
+TERM st-meta-256color
+TERM terminator
+TERM vt100
+TERM xterm
+TERM xterm-16color
+TERM xterm-256color
+TERM xterm-88color
+TERM xterm-color
+TERM xterm-debian
+TERM xterm-termite
+################################################################################
+# 2 ~ SYSTEM FILE COLORS (RGB FORMAT)
+################################################################################
+#
+# background (system)
+#
+NORMAL 00
+#
+# LS_COLORS="rs=0:"
+# (system)
+#
+RESET 0
+#
+# LS_COLORS="mh=00:"
+# (system)
+#
+MULTIHARDLINK 00	
+#
+# LS_COLORS="fi;00:"fi=38;2;179;255;63;2:"
+# (yellowy green)
+# 
+FILE 38;2;179;255;63;2 
+#
+# LS_COLORS="di=38;2;255;255;101;1:"
+# (bold light yellow)
+#
+DIR 38;2;255;255;101;1
+#
+# LS_COLORS="ex=38;2;255;88;88;2:"
+# (light red)
+#
+EXEC 38;2;255;88;88;2
+#
+# LS_COLORS="ln=38;2;129;255;197;2:"
+# (turqoise)
+#
+LINK 38;2;129;255;197;2
+#
+# LS_COLORS="mi=38;2;129;255;197;2:" 
+# (turqoise)
+#
+MISSING 38;2;129;255;197;2
+#
+# LS_COLORS="or=38;2;129;255;197;2:" 
+# orphaned links (turqoise)
+#
+ORPHAN 38;2;129;255;197;2  
+#
+# LS_COLORS="do=38;2;255;88;88;1:"
+# (bold light red)
+#
+DOOR 38;2;255;88;88;1
+#
+# LS_COLORS="so=38;2;255;88;88;1:" 
+# sockets (bold light red)
+#
+SOCK 38;2;255;88;88;1 
+#
+# LS_COLORS="pi=38;2;255;129;159;1:" 
+# pipes (bold magenta)
+#
+FIFO 38;2;255;129;159;1	 
+#
+# LS_COLORS="bd=38;2;176;129;255;1:" 
+# block device driver (bold purple)
+#
+BLK 38;2;176;129;255;1
+#
+# LS_COLORS="cd=38;2;129;151;255;1:" 
+# character device driver (bold blue)
+#
+CHR 38;2;129;151;255;1
+#
+# LS_COLORS="ca=38;2;129;193;255;2:" 
+# file with capability (light blue)
+#
+CAPABILITY 38;2;129;193;255;2
+#
+# LS_COLORS="su=38;5;121;2:" 
+# file that is setuid (reddish grey)
+#
+SETUID 38;2;183;172;172;2
+#
+# LS_COLORS="sg=38;5;121;2:" 
+# file that is setgid (pinkish grey)
+# 
+SETGID 38;2;183;172;183;2 
+#
+# LS_COLORS="tw=38;5;196;2:" 
+# other writable sticky dir (blueish grey)
+#
+STICKY_OTHER_WRITABLE 38;2;152;161;183;2 
+#
+# LS_COLORS="ow=38;5;196;2:" 
+# non sticky other writable dir (greenish grey)
+#
+OTHER_WRITABLE 38;2;152;183;153;2
+#
+# LS_COLORS="st=38;5;196;2:" 
+# non other writable sticky dir (yellowish grey)
+# 
+STICKY 38;2;183;182;152;2
+################################################################################
+# 3 ~ FILETYPE COLORS 
+################################################################################
+#
+# eg. LS_COLORS="*.axv=38;5;166;2:"
+#
+# web media files aka mime types (bold yellowy green)
+#
+.axv 38;2;179;255;63;1
+.anx 38;2;179;255;63;1
+.ogv 38;2;179;255;63;1
+.ogx 38;2;179;255;63;1
+#
+# code files (purple)
+#
+.cnf 38;2;173;125;255;2
+.conf 38;2;173;125;255;2
+.c 38;2;173;125;255;2
+.cgi 38;2;173;125;255;2
+.go 38;2;173;125;255;2
+.h 38;2;173;125;255;2
+.htm 38;2;173;125;255;2
+.html 38;2;173;125;255;2
+.js 38;2;173;125;255;2
+.lua 38;2;173;125;255;2
+.pl 38;2;173;125;255;2
+.pm 38;2;173;125;255;2
+.pod 38;2;173;125;255;2
+.py 38;2;173;125;255;2
+.rasi 38;2;173;125;255;2
+.rb 38;2;173;125;255;2
+.rby 38;2;173;125;255;2
+.sh 38;2;173;125;255;2
+.so 38;2;173;125;255;2
+.t 38;2;173;125;255;2
+#
+# doc files (light blue)
+#
+.diff 38;2;122;255;212;2
+.doc 38;2;122;255;212;2
+.log 38;2;122;255;212;2
+.patch 38;2;122;255;212;2
+.pdf 38;2;122;255;212;2
+.ps 38;2;122;255;212;2
+.tex 38;2;122;255;212;2
+.txt 38;2;122;255;212;2
+.txt 38;2;122;255;212;2
+#
+# audio files (light green)
+#
+.aac 38;2;100;255;240;2
+.au 38;2;100;255;240;2
+.axa 38;2;100;255;240;2
+.flac 38;2;100;255;240;2
+.m4a 38;2;100;255;240;2
+.mid 38;2;100;255;240;2
+.midi 38;2;100;255;240;2
+.mka 38;2;100;255;240;2
+.mp3 38;2;100;255;240;2
+.mpc 38;2;100;255;240;2
+.oga 38;2;100;255;240;2
+.ogg 38;2;100;255;240;2
+.ra 38;2;100;255;240;2
+.spx 38;2;100;255;240;2
+.wav 38;2;100;255;240;2
+.xspf 38;2;100;255;240;2
+#
+# image files (deep blue)
+#
+.bmp 38;2;112;141;255;2
+.gif 38;2;112;141;255;2
+.jpeg 38;2;112;141;255;2
+.jpg 38;2;112;141;255;2
+.mng 38;2;112;141;255;2
+.pbm 38;2;112;141;255;2
+.pcx 38;2;112;141;255;2
+.pgm 38;2;112;141;255;2
+.png 38;2;112;141;255;2
+.ppm 38;2;112;141;255;2
+.svg 38;2;112;141;255;2
+.svgz 38;2;112;141;255;2
+.tga 38;2;112;141;255;2
+.tif 38;2;112;141;255;2
+.tiff 38;2;112;141;255;2
+.xbm 38;2;112;141;255;2
+.xpm 38;2;112;141;255;2
+.gfy 38;2;112;141;255;2
+.xcf 38;2;112;141;255;2
+#
+# video files (purple)
+#
+.asf 38;2;188;129;255;2
+.avi 38;2;188;129;255;2
+.cgm 38;2;188;129;255;2
+.dl 38;2;188;129;255;2
+.emf 38;2;188;129;255;2
+.flc 38;2;188;129;255;2
+.fli 38;2;188;129;255;2
+.flv 38;2;188;129;255;2
+.gl 38;2;188;129;255;2
+.m2v 38;2;188;129;255;2
+.m4v 38;2;188;129;255;2
+.mkv 38;2;188;129;255;2
+.mov 38;2;188;129;255;2
+.mp4 38;2;188;129;255;2
+.mp4v 38;2;188;129;255;2
+.mpeg 38;2;188;129;255;2
+.mpg 38;2;188;129;255;2
+.nuv 38;2;188;129;255;2
+.ogm 38;2;188;129;255;2
+.qt 38;2;188;129;255;2
+.rm 38;2;188;129;255;2
+.rmvb 38;2;188;129;255;2
+.vob 38;2;188;129;255;2
+.webm 38;2;188;129;255;2
+.wmv 38;2;188;129;255;2
+.xwd 38;2;188;129;255;2
+.yuv 38;2;188;129;255;2
+#
+# archive files (bold light orange)
+#
+.7z 38;2;255;146;50;1
+.ace 38;2;255;146;50;1
+.alz 38;2;255;146;50;1
+.arc 38;2;255;146;50;1
+.arj 38;2;255;146;50;1
+.bz2 38;2;255;146;50;1
+.bz 38;2;255;146;50;1
+.cab 38;2;255;146;50;1
+.cpio 38;2;255;146;50;1
+.deb 38;2;255;146;50;1
+.dz 38;2;255;146;50;1
+.ear 38;2;255;146;50;1
+.gz 38;2;255;146;50;1
+.jar 38;2;255;146;50;1
+.lha 38;2;255;146;50;1
+.lrz 38;2;255;146;50;1
+.lz 38;2;255;146;50;1
+.lz4 38;2;255;146;50;1
+.lzh 38;2;255;146;50;1
+.lzma 38;2;255;146;50;1
+.lzo 38;2;255;146;50;1
+.rar 38;2;255;146;50;1
+.rpm 38;2;255;146;50;1
+.rz 38;2;255;146;50;1
+.sar 38;2;255;146;50;1
+.t7z 38;2;255;146;50;1
+.tar 38;2;255;146;50;1
+.taz 38;2;255;146;50;1
+.tbz2 38;2;255;146;50;1
+.tbz 38;2;255;146;50;1
+.tgz 38;2;255;146;50;1
+.tlz 38;2;255;146;50;1
+.txz 38;2;255;146;50;1
+.tz 38;2;255;146;50;1
+.tzo 38;2;255;146;50;1
+.war 38;2;255;146;50;1
+.xz 38;2;255;146;50;1
+.z 38;2;255;146;50;1
+.Z 38;2;255;146;50;1
+.zip 38;2;255;146;50;1
+.zoo 38;2;255;146;50;1
+#
+# backup files (browny orange)
+#
+.bak 38;2;255;177;82;2
+.dpkg-dist 38;2;255;177;82;2
+.dpkg-old 38;2;255;177;82;2
+.old 38;2;255;177;82;2
+.orig 38;2;255;177;82;2
+.part 38;2;255;177;82;2
+.rej 38;2;255;177;82;2
+.rpmnew 38;2;255;177;82;2
+.rpmorig 38;2;255;177;82;2
+.rpmsave 38;2;255;177;82;2
+.swp 38;2;255;177;82;2
+.tmp 38;2;255;177;82;2
+.ucf-dist 38;2;255;177;82;2
+.ucf-new 38;2;255;177;82;2
+.ucf-old 38;2;255;177;82;2

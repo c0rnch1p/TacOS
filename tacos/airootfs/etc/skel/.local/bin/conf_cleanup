@@ -1,0 +1,162 @@
+#!/bin/bash
+#shellcheck disable=SC1091
+# 120x
+#                                       __|  |     __|    \     \ |  |  |  _ \
+#                                      (     |     _|    _ \   .  |  |  |  __/
+#                                     \___| ____| ___| _/  _\ _|\_| \__/  _|
+#
+#=======================================================================================================================
+#
+# Files:
+# - Filepath: $BIN/conf_cleanup
+#
+#=======================================================================================================================
+# - [1] File Removals
+#=======================================================================================================================
+
+[ -f "$HOME/.aspell.en.prepl" ] && rm "$HOME/.aspell.en.prepl"
+[ -f "$HOME/.aspell.en.pws" ] && rm "$HOME/.aspell.en.pws"
+[ -f "$HOME/.bash_logout" ] && rm "$HOME/.bash_logout"
+[ -f "$HOME/.bash_profile" ] && rm "$HOME/.bash_profile"
+[ -f "$HOME/.fehbg" ] && rm "$HOME/.fehbg"
+[ -f "$HOME/.git-credentials" ] && rm "$HOME/.git-credentials"
+[ -f "$HOME/.ICEauthority" ] && rm "$HOME/.ICEauthority"
+[ -f "$HOME/.lesshst" ] && rm "$HOME/.lesshst"
+[ -f "$HOME/.nanorc" ] && rm "$HOME/.nanorc"
+[ -f "$HOME/.profile" ] && rm "$HOME/.profile"
+[ -f "$HOME/.pulse-cookie" ] && rm "$HOME/.pulse-cookie"
+[ -f "$HOME/.python_history" ] && rm "$HOME/.python_history"
+[ -f "$HOME/.sqlite_history" ] && rm "$HOME/.sqlite_history"
+[ -f "$HOME/.wget-hsts" ] && rm "$HOME/.wget-hsts"
+[ -f "$HOME/.Xresources" ] && rm "$HOME/.Xresources"
+[ -f "$HOME/.xsession" ] && rm "$HOME/.xsession"
+[ -f "$HOME/.xsession-errors" ] && rm "$HOME/.xsession-errors"
+[ -f "$HOME/.xsession-errors.old" ] && rm "$HOME/.xsession-errors.old"
+[ -f "$HOME/.xsessionrc" ] && rm "$HOME/.xsessionrc"
+[ -f "$HOME/.yarnrc" ] && rm "$HOME/.yarnrc"
+[ -f "$HOME/.zshrc" ] && rm "$HOME/.zshrc"
+[ -f "$HOME/.zynaddsubfx-bank-cache.xml" ] && rm "$HOME/.zynaddsubfx-bank-cache.xml"
+[ -f '/etc/profile.d/debuginfod.csh' ] && srm '/etc/profile.d/debuginfod.csh'
+[ -f '/etc/profile.d/gawk.csh' ] && srm '/etc/profile.d/gawk.csh'
+[ -f '/etc/profile.d/gawk.sh' ] && srm '/etc/profile.d/gawk.sh'
+[ -f '/etc/profile.d/jre.csh' ] && srm '/etc/profile.d/jre.csh'
+[ -f '/etc/profile.d/libreoffice-fresh.csh' ] && srm '/etc/profile.d/libreoffice-fresh.csh'
+[ -f '/etc/profile.d/perlbin.csh' ] && srm '/etc/profile.d/perlbin.csh'
+[ -f '/etc/profile.d/perlbin.sh' ] && srm '/etc/profile.d/perlbin.sh'
+[ -f '/etc/profile.d/vte.csh' ] && srm '/etc/profile.d/vte.csh'
+[ -f '/etc/X11/xinit/xinitrc.d/50-systemd-user.sh' ] && srm '/etc/X11/xinit/xinitrc.d/50-systemd-user.sh'
+[ -f '/etc/X11/xinit/xinitrc.d/80xapp-gtk3-module.sh' ] && srm '/etc/X11/xinit/xinitrc.d/80xapp-gtk3-module.sh'
+[ -f '/etc/xdg/autostart/gnome-keyring-pkcs11.desktop' ] && srm '/etc/xdg/autostart/gnome-keyring-pkcs11.desktop'
+[ -f '/etc/xdg/autostart/gnome-keyring-secrets.desktop' ] && srm '/etc/xdg/autostart/gnome-keyring-secrets.desktop'
+[ -f '/etc/xdg/autostart/gnome-keyring-ssh.desktop' ] && srm '/etc/xdg/autostart/gnome-keyring-ssh.desktop'
+[ -f '/etc/xdg/user-dirs.defaults' ] && srm '/etc/xdg/user-dirs.defaults'
+[ -f '/usr/share/nano-syntax-highlighting/nanorc.nanorc' ] && srm '/usr/share/nano-syntax-highlighting/nanorc.nanorc'
+
+#=======================================================================================================================
+# - [2] Dir Removals
+#=======================================================================================================================
+
+[ -d "$CONFIG/auostart" ] && rmr "$CONFIG/autostart"
+[ -d "$HOME/.shared-ringdb" ] && rmr "$HOME/.shared-ringdb"
+[ -d "$HOME/.tor" ] && rmr "$HOME/.tor"
+[ -d "$HOME/.vital" ] && rmr "$HOME/.vital"
+[ -d "$HOME/go" ] && rmr "$HOME/go"
+[ -d "$HOME/Music" ] && rmr "$HOME/Music"
+[ -d "$HOME/Pictures" ] && rmr "$HOME/Pictures"
+[ -d "$HOME/Public" ] && rmr "$HOME/Public"
+[ -d "$HOME/Templates" ] && rmr "$HOME/Templates"
+[ -d "$HOME/Videos" ] && rmr "$HOME/Videos"
+[ -d "$MONERO_HOME/.bitmonero/lmdb" ] && rmr "$MONERO_HOME/.bitmonero/lmdb"
+
+#=======================================================================================================================
+# - [3] Dir Mods
+#=======================================================================================================================
+
+[ ! -d "$ALSA_HOME" ] && mvp "$ALSA_HOME" &>'/dev/null'
+[ ! -d "$AUDIO" ] && mvp "$AUDIO" &>'/dev/null'
+[ ! -d "$DEADBEEF_HOME" ] && mvp "$DEADBEEF_HOME" &>'/dev/null'
+[ ! -d "$GIMP_HOME" ] && mvp "$GIMP_HOME" &>'/dev/null'
+[ ! -d "$GTK2_RC_FILES" ] && mvp "$GTK2_RC_FILES" &>'/dev/null'
+[ ! -d "$LIB" ] && mvp "$LIB" &>'/dev/null'
+[ ! -d "$LOCAL" ] && mvp "$LOCAL" &>'/dev/null'
+[ ! -d "$LOCAL/share/xorg" ] && mvp "$LOCAL/share/xorg" &>'/dev/null'
+[ ! -d "$LOCAL/templates" ] && mvp "$LOCAL/templates" &>'/dev/null'
+[ ! -d "$LOG" ] && mvp "$LOG" &>'/dev/null'
+[ ! -d "$MONERO_HOME" ] && mvp "$MONERO_HOME" &>'/dev/null'
+[ ! -d "$MPD_HOME" ] && mvp "$MPD_HOME" &>'/dev/null'
+[ ! -d "$MPD_HOME/playlists" ] && mvp "$MPD_HOME/playlists" &>'/dev/null'
+[ ! -d "$NANO_HOME/backup" ] && mvp "$NANO_HOME/backup" &>'/dev/null'
+[ ! -d "$NANO_HOME" ] && mvp "$NANO_HOME" &>'/dev/null'
+[ ! -d "$NCMPCPP_HOME/lyrics" ] && mvp "$NCMPCPP_HOME/lyrics" &>'/dev/null'
+[ ! -d "$PYTHON_VENV" ] && mvp "$PYTHON_VENV" &>'/dev/null'
+[ ! -d "$REPO_HOME" ] && mvp "$REPO_HOME" &>'/dev/null'
+[ ! -d "$SQL_HOME" ] && mvp "$SQL_HOME" &>'/dev/null'
+[ ! -d "$SSH_HOME" ] && mvp "$SSH_HOME" &>'/dev/null'
+[ ! -d "$VISUAL" ] && mvp "$VISUAL" &>'/dev/null'
+[ ! -d "$XDG_DESKTOP_DIR" ] && mvp "$XDG_DESKTOP_DIR" &>'/dev/null'
+[ ! -d "$XDG_DOCUMENTS_DIR" ] && mvp "$XDG_DOCUMENTS_DIR" &>'/dev/null'
+[ ! -d "$XDG_DOWNLOAD_DIR" ] && mvp "$XDG_DOWNLOAD_DIR" &>'/dev/null'
+[ ! -d "$XDG_STATE_HOME" ] && mvp "$XDG_STATE_HOME" &>'/dev/null'
+[ ! -d "$XDG_DATA_HOME" ] && mvp "$XDG_STATE_HOME" &>'/dev/null'
+[ -d "$HOME/.bin" ] && mv "$HOME/.bin" "$LOCAL/bin" &>'/dev/null'
+[ -d "$HOME/.cargo" ] && mv "$HOME/.cargo" "$CARGO_HOME" &>'/dev/null'
+[ -d "$HOME/.ccache" ] && mv "$HOME/.ccache" "$CCACHE_DIR" &>'/dev/null'
+[ -d "$HOME/Monero" ] && mv "$HOME/Monero" "$CONFIG/monero-project" &>'/dev/null'
+[ -d "$HOME/.pki" ] && mv "$HOME/.pki" "$PKI_HOME" &>'/dev/null'
+[ -d "$HOME/.wine" ] && mv "$HOME/.wine" "$WINEPREFIX" &>'/dev/null'
+
+#=======================================================================================================================
+# - [4] Dir Mods (Pos last)
+#=======================================================================================================================
+
+[ ! -d "$ARDOUR" ] && mvp "$ARDOUR" &>'/dev/null'
+[ ! -d "$ARDOUR/plugins" ] && mvp "$ARDOUR/plugins" &>'/dev/null'
+[ ! -d "$ARDOUR/projects" ] && mvp "$ARDOUR/projects" &>'/dev/null'
+[ ! -d "$ARDOUR/templates" ] && mvp "$ARDOUR/templates" &>'/dev/null'
+[ ! -d "$AUDIO/files" ] && mvp "$AUDIO/files" &>'/dev/null'
+[ ! -d "$BLENDER" ] && mvp "$BLENDER" &>'/dev/null'
+[ ! -d "$BLENDER/plugins" ] && mvp "$BLENDER/plugins" &>'/dev/null'
+[ ! -d "$BLENDER/projects" ] && mvp "$BLENDER/projects" &>'/dev/null'
+[ ! -d "$BLENDER/templates" ] && mvp "$BLENDER/templates" &>'/dev/null'
+[ ! -d "$DATA/torrents" ] && mvp "$DATA/torrents" &>'/dev/null'
+[ ! -d "$DATA/torrents" ] && mvp "$DATA/torrents" &>'/dev/null'
+[ ! -d "$FLAVOR/cursors" ] && mvp "$FLAVOR/cursors" &>'/dev/null'
+[ ! -d "$FLAVOR/fonts" ] && mvp "$FLAVOR/fonts" &>'/dev/null'
+[ ! -d "$FLAVOR/icons" ] && mvp "$FLAVOR/icons" &>'/dev/null'
+[ ! -d "$FLAVOR/themes" ] && mvp "$FLAVOR/themes" &>'/dev/null'
+[ ! -d "$FLAVOR/walls" ] && mvp "$FLAVOR/walls" &>'/dev/null'
+[ ! -d "$GIMP" ] && mvp "$GIMP" &>'/dev/null'
+[ ! -d "$GIMP/plugins" ] && mvp "$GIMP/plugins" &>'/dev/null'
+[ ! -d "$GIMP/projects" ] && mvp "$GIMP/projects" &>'/dev/null'
+[ ! -d "$GIMP/templates" ] && mvp "$GIMP/templates" &>'/dev/null'
+[ ! -d "$INKSCAPE" ] && mvp "$INKSCAPE" &>'/dev/null'
+[ ! -d "$INKSCAPE/plugins" ] && mvp "$INKSCAPE/plugins" &>'/dev/null'
+[ ! -d "$INKSCAPE/projects" ] && mvp "$INKSCAPE/projects" &>'/dev/null'
+[ ! -d "$INKSCAPE/templates" ] && mvp "$INKSCAPE/templates" &>'/dev/null'
+[ ! -d "$KDENLIVE" ] && mvp "$KDENLIVE" &>'/dev/null'
+[ ! -d "$KDENLIVE/plugins" ] && mvp "$KDENLIVE/plugins" &>'/dev/null'
+[ ! -d "$KDENLIVE/projects" ] && mvp "$KDENLIVE/projects" &>'/dev/null'
+[ ! -d "$KDENLIVE/templates" ] && mvp "$KDENLIVE/templates" &>'/dev/null'
+[ ! -d "$REAPER" ] && mvp "$REAPER" &>'/dev/null'
+[ ! -d "$REAPER/plugins" ] && mvp "$REAPER/plugins" &>'/dev/null'
+[ ! -d "$REAPER/projects" ] && mvp "$REAPER/projects" &>'/dev/null'
+[ ! -d "$REAPER/templates" ] && mvp "$REAPER/templates" &>'/dev/null'
+[ ! -d "$VISUAL/files/image_dump" ] && mvp "$VISUAL/files/image_dump" &>'/dev/null'
+[ ! -d "$VISUAL/files" ] && mvp "$VISUAL/files" &>'/dev/null'
+[ ! -d "$VISUAL/files/video_dump" ] && mvp "$VISUAL/files/video_dump" &>'/dev/null'
+[ ! -d "$XDG_STATE_HOME/mpd" ] && mvp "$XDG_STATE_HOME/mpd" &>'/dev/null'
+
+#=======================================================================================================================
+# - [5] File Mods (Pos Last)
+#=======================================================================================================================
+
+[ ! -f "$LOCAL/share/xorg/Xorg.0.log" ] && touch "$LOCAL/share/xorg/Xorg.0.log" &>'/dev/null'
+[ ! -f "$XDG_STATE_HOME/mpd/mpd.state" ] && touch "$XDG_STATE_HOME/mpd/mpd.state" &>'/dev/null'
+[ ! -f "$MPD_HOME/mpd.db" ] && touch "$MPD_HOME/mpd.db" &>'/dev/null'
+[ ! -f "$MPD_HOME/mpd.pid" ] && touch "$MPD_HOME/mpd.pid" &>'/dev/null'
+[ -f "$HOME/.asoundrc" ] && mv "$HOME/.asoundrc" "$ALSA_HOME/asoundrc" &>'/dev/null'
+[ -f "$HOME/.bash_history" ] && mv "$HOME/.bash_history" "$XDG_STATE_HOME/bash/history" &>'/dev/null'
+[ -f "$HOME/.gtkrc-2.0" ] && mv "$HOME/.gtkrc-2.0" "$GTK2_RC_FILES/gtkrc" &>'/dev/null'
+[ -f "$HOME/.screenrc" ] && mv "$HOME/.screenrc" "$SCREENRC" &>'/dev/null'
+[ -f "$NCMPCPP_HOME/error.log" ] && mv "$NCMPCPP_HOME/error.log" "$LOG/ncmpcpp_err.log" &>'/dev/null'
+[ -f '/etc/tacos-rel' ] && smv '/etc/tacos-rel' '/etc/lsb-release' &>'/dev/null'

@@ -1,0 +1,236 @@
+#!/bin/bash
+#shellcheck disable=SC2002
+#shellcheck disable=SC2034
+#shellcheck disable=SC2027
+#shellcheck disable=SC2086
+
+declare -A CLR=(
+    ['WHITE']=$(tput setaf 255)
+    ['MAGENTA']=$(tput setaf 126)
+    ['RED']=$(tput setaf 9)
+    ['YELLOW']=$(tput setaf 143)
+    ['GREEN']=$(tput setaf 112)
+    ['CYAN']=$(tput setaf 87)
+    ['BLUE']=$(tput setaf 6)
+    ['PURPLE']=$(tput setaf 133)
+    ['GREY']=$(tput setaf 0)
+    ['BOLD']=$(tput bold)
+    ['RESET']=$(tput sgr0)
+)
+
+C1="${CLR[WHITE]}"
+C2="${CLR[MAGENTA]}"
+C3="${CLR[RED]}"
+C4="${CLR[YELLOW]}"
+C5="${CLR[GREEN]}"
+C6="${CLR[CYAN]}"
+C7="${CLR[BLUE]}"
+C8="${CLR[PURPLE]}"
+C9="${CLR[GREY]}"
+CB="${CLR[BOLD]}"
+CR="${CLR[RESET]}"
+
+showHelp(){
+	echo 'Usage: urch --flags /path <str>'
+	echo ''
+	echo 'Options:'
+	echo '  urch [b|-b|--binary] <str>           Match for a binary.'
+	echo '  urch [d|-d|--directory] /path <str>	 Match for a folder at the location.'
+	echo '  urch [f|-f|--file] /path <str>       Match for a file at the location.'
+	echo '  urch [h|-h|--help]                 	 Show help and exit.'
+	echo ''
+	echo 'Note:'
+	echo 'The script doesnt support quoted path and string arguments because theyre'
+	echo 'being quoted in the file already. The binary option doesnt take a path'
+	echo 'it will search in /bin, /usr/local/bin and ~/.local/bin.'
+}
+
+cmpInit(){
+	cmpMain(){
+		local CMPREPLY
+		CMPREPLY=$(compgen -W "$2" -- "${cmpWords[cmpCword]}")
+	}
+complete -F cmpMain read
+}
+
+readPath(){
+	cmpInit
+	while true; do
+		echo -e '\nEnter path\n'
+		read -rep '▸ ' PTH
+		if [ -z "$PTH" ]; then echo -e '\n⚐ No input provided ⚐'
+		elif [ ! -d "$PTH" ]; then echo -e '\n⚠ Arg must be a path ⚠'
+		else break
+		fi
+	done
+}
+
+readString(){
+	cmpInit
+	while true; do
+		[ -n "$SUB" ] && echo -e "\nEnter $SUB\n"
+		read -rep '▸ ' STR
+		if [ -z "$STR" ]; then echo -e '\n⚐ No input provided ⚐'
+		else break
+		fi
+	done
+}
+
+showResults(){
+	local LNRESULT SRCHTERM
+	SRCHTERM="$1"
+	while IFS= read -r LNRESULT; do
+		echo " ▸ $(HLMATCH "$LNRESULT" "$SRCHTERM")"
+	done
+}
+
+header(){
+	local PATH
+	if [ "$ARG1" == 'f' ] || [ "$ARG1" == 'd' ]; then PATH="$ARG2"
+	else PATH='/bin, ~/.local/bin, /usr/bin & /usr/local/bin'
+	fi
+	echo "${C5} ${TYPE}s in: $PATH ${CR}"
+}
+
+footer(){
+	if [ -z $TOTAL ]; then TOTAL=$CNT
+		echo -e "${C5} ${TYPE} names containing $ARG3: $TOTAL ${CR}"
+	else echo -e "${C5} ${TYPE} names containing $ARG3: $TOTAL ${CR}"
+	fi
+}
+
+drawBorder(){
+	local TCOLS SCOLS MCOLS BORDERCHAR
+	BORDERCHAR="$1"
+	"$OUTCMD" &>'/tmp/dump'
+	TCOLS=$(cat '/tmp/dump' | wc -L)
+	SCOLS=$(tput cols)
+	MCOLS=$(( SCOLS / 2 ))
+	while true; do
+		for i in $(seq 1 "$MCOLS"); do
+			echo -n "${CB}${C9}$BORDERCHAR${CR}"
+		done; echo
+		break
+	done
+}
+
+HLMATCH(){
+	local HLTEXT TEXT SRCHTERM
+	TEXT="$1"
+	SRCHTERM="$2"
+	HLTEXT=$(echo "$TEXT" | sed -E "s/$SRCHTERM/${COLORS[$HL]}&${CR}/ig")
+	echo -n "$HLTEXT"
+}
+
+urchMain(){
+	local CNT TYPE TOTAL
+	if [ "$ARG1" == 'f' ]; then TYPE='File'
+	elif [ "$ARG1" == 'b' ]; then TYPE='Executable'
+	elif [ "$ARG1" == 'd' ]; then TYPE='Folder'
+	fi
+	rootFileOut(){
+		CNT=$(sudo find / -xdev -type f -iname "*$ARG3*" | wc -l)
+		if [ $CNT -ge 1 ]; then
+			drawBorder '⩝⩜'; header; drawBorder '⩜⩝'
+			sudo find / -xdev -type f -iname "*$ARG3*" -printf '/%P\n' | grep -i "$ARG3" | showResults "$ARG3"
+			drawBorder '⩝⩜'; footer; drawBorder '⩜⩝'
+		else echo -e '\nNo matches\n'
+		fi
+	}
+	rootDirOut(){
+		CNT=$(sudo find / -xdev -type d -iname "*$ARG3*" | wc -l)
+		if [ $CNT -ge 1 ]; then
+			drawBorder '⩝⩜'; header; drawBorder '⩜⩝'
+			sudo find / -xdev -type d -iname "*$ARG3*" -printf '/%P\n' | grep -i "$ARG3" | showResults "$ARG3"
+			drawBorder '⩝⩜'; footer; drawBorder '⩜⩝'
+		else echo -e '\nNo matches\n'
+		fi
+	}
+	fileOut(){
+		CNT=$(sudo find "$ARG2" -xdev -type f -iname "*$ARG3*" | wc -l)
+		if [ $CNT -ge 1 ]; then
+			drawBorder '⩝⩜'; header; drawBorder '⩜⩝'
+			sudo find "$ARG2" -xdev -type f -iname "*$ARG3*" -printf '%h/%f\n' | grep -i "$ARG3" | showResults "$ARG3"
+			drawBorder '⩝⩜'; footer; drawBorder '⩜⩝'
+		else echo -e '\nNo matches\n'
+		fi
+	}
+	dirOut(){
+		CNT=$(sudo find "$ARG2" -xdev -type d -iname "*$ARG3*" | wc -l)
+		if [ $CNT -ge 1 ]; then
+			drawBorder '⩝⩜'; header; drawBorder '⩜⩝'
+			sudo find "$ARG2" -xdev -type d -iname "*$ARG3*" -printf '%h/%f\n' | grep -i "$ARG3" | showResults "$ARG3"
+			drawBorder '⩝⩜'; footer; drawBorder '⩜⩝'
+		else echo -e '\nNo matches\n'
+		fi
+	}
+	binOut(){
+		local CNT1=$(sudo find /bin/ -type f -iname "*$ARG3*" | wc -l)
+		local CNT2=$(sudo find /usr/local/bin/ -type f -iname "*$ARG3*" | wc -l)
+		local CNT3=$(sudo find $HOME/.local/bin/ -type f -iname "*$ARG3*" | wc -l)
+		TOTAL=$(( CNT1 + CNT2 + CNT3))
+		if [ $TOTAL -ge 1 ]; then
+			drawBorder '⩝⩜'; header; drawBorder '⩜⩝'
+			sudo find '/bin/' -xdev -type f -iname "*$ARG3*" -printf '%p\n'\
+			| grep -i "$ARG3" | showResults "$ARG3"
+			sudo find '/usr/local/bin/' -xdev -type f -iname "*$ARG3*" -printf '%p\n'\
+			| grep -i "$ARG3" | showResults "$ARG3"
+			sudo find "$HOME/.local/bin/" -xdev -type f -iname "*$ARG3*" -printf '%p\n'\
+			| grep -i "$ARG3" | showResults "$ARG3"
+			drawBorder '⩝⩜'; footer; drawBorder '⩜⩝'
+		else echo -e '\nNo matches\n'
+		fi
+	}
+	if [ "$ARG1" == 'f' ]; then
+		if [ "$ARG2" == '/' ]; then rootFileOut
+		else fileOut
+		fi
+	elif [ "$ARG1" == 'b' ]; then binOut
+	elif [ "$ARG1" == 'd' ]; then
+		if [ "$ARG2" == '/' ]; then rootDirOut
+		else dirOut
+		fi
+	fi
+}
+
+if [ $# -ge 1 ]; then
+	SUB='search'
+	if [[ -n "$1" && -d "$2" && -n "$3" ]]; then
+		if [[ "$1" =~ ^(f|-f|--file)$ ]]; then
+			ARG1='f'; ARG2=$2; ARG3=$3; urchMain
+		elif [[ "$1" =~ ^(d|-d|--directory)$ ]]; then
+			ARG1='d'; ARG2=$2; ARG3=$3; urchMain
+		fi
+	elif [[ -n "$1" && -n "$2" && -z "$3" ]]; then
+		if [[ "$1" =~ ^(f|-f|--file)$ && -d "$2" ]]; then
+			ARG1='f'; ARG2=$2; readString; ARG3="$STR"; urchMain
+		elif [[ "$1" =~ ^(b|-b|--binary)$ && -n "$2" ]]; then
+			ARG1='b'; ARG3=$2; urchMain
+		elif [[ "$1" =~ ^(d|-d|--directory)$ && -d "$2" ]]; then
+			ARG1='d'; ARG2=$2; readString; ARG3="$STR"; urchMain
+		fi
+	elif [[ -n "$1" && -z "$2" ]]; then
+		if [[ "$1" =~ ^(f|-f|--file)$ ]]; then
+			ARG1='f'; readPath; ARG2="$PTH"; readString; ARG3="$STR"; urchMain
+		elif [[ "$1" =~ ^(b|-b|--binary)$ ]]; then
+			ARG1='b'; readString; ARG3="$STR"; urchMain
+		elif [[ "$1" =~ ^(d|-d|--directory)$ ]]; then
+			ARG1='d'; readPath; ARG2="$PTH"; readString; ARG3="$STR"; urchMain
+		elif [[ "$1" =~ ^(h|-h|--help)$ ]]; then showHelp; exit 0
+		fi
+	fi
+	elif [[ $# -eq 0 && -z "$1" ]]; then
+	echo -e '[F] File\n[B] Binary\n[D] Directory\n'
+	SUB='Search'
+	readString
+	if [ "$STR" == 'f' ]; then
+		ARG1='f'; readPath; ARG2="$PTH"; readString; ARG3="$STR"; urchMain
+	elif [ "$STR" == 'b' ]; then
+		ARG1='b'; readString; ARG3="$STR"; urchMain
+	elif [ "$STR" == 'd' ]; then
+		ARG1='d'; readPath; ARG2="$PTH"; readString; ARG3="$STR"; urchMain
+	fi
+fi
+
+unset ARG1 ARG2 ARG3 CHOICE COLORS OUTCMD SUB TOTAL CNT C1 C2 C3 C4 C5 C6 C7 C8 C9 CB CR
+

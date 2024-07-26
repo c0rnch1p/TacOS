@@ -1,0 +1,320 @@
+#!/bin/bash
+#shellcheck disable=SC2126
+#shellcheck disable=SC2016
+#shellcheck disable=SC2162
+
+mainNtc() {
+	if [[ (! "$ARG1" =~ \.txt$ && "$ARG2" == "t")\
+	|| (! "$ARG1" =~ \.(c|cpp|java|py|js|html|css|rb|sh|lua)$ && "$ARG2" == "c") ]]; then
+		echo -e "\n⚐ using the text file flag"
+		echo -e "for code or vice versa may"
+		echo -e "may cause permanent damage ⚐"
+	else
+		echo -e "\n⚐ dont forget to backup and"
+		echo -e "spellcheck before cleanup ⚐"
+	fi
+}
+
+showHelp(){
+	echo ""
+	echo "Usage: sex [-c|-w|-l] <file>"
+	echo ""
+	echo "Options:"
+	echo "    sex [h|-h|--help]                          Show help and exit."
+	echo "    sex [c|-c|--code] <file>                   Sexify the script."
+	echo "    sex [t|-t|--text] <file>                   Sexify the text file."
+	echo "    sex [-c|-t] [w|-w|--check-words] <file>    Enable check words."
+	echo "    sex [-c|-t] [l|-l|--lint-code] <file>      Enable lint code."
+	echo ""
+	echo "Sequences in use for text cleanup:"
+	echo "    sed -i 's/ *$//' <file>     Remove spaces at the end of each line."
+	echo "    sed -i 's/\t*$//' <file>    Remove tabs at the end of each line."
+	echo "    sed -i 's/\t/ /g' <file>    Replace all tabs with spaces."
+	echo ""	
+	echo "Sequences in use for code cleanup:"
+	echo "    sed -i 's/ *$//' <file>        Remove spaces at the end of each line."
+	echo "    sed -i 's/\t*$//' <file>       Remove tabs at the end of each line."
+	echo "    sed -i 's/\$SPC/\\t/g' <file>    Replace n sets of spaces with a single tab."
+	echo "    sed -i 's/ = /=/g' <file>      Truncate loose equalto operators."
+	echo "    sed -i 's/ + /+/g' <file>      Truncate loose addition operators."
+	echo "    sed -i 's/ - /-/g' <file>      Truncate loose subtraction operators."
+	echo "    sed -i 's/ \* /*/g' <file>     Truncate loose multiplication operators."
+	echo "    sed -i 's| / |/|g' <file>      Truncate loose division operators."
+	echo "    sed -i 's/ % /%/g' <file>      Truncate loose modulo operators."
+	echo ""
+	echo "Dont run sex on itself, the last four strings above as well as in the file"
+	echo "are the only instance where having spaces on either side of the arithmetic"
+	echo "operators is necessary, to specify to remove them."
+	echo ""
+}
+
+compInit() {
+	compMain() {
+		local COMPREPLY
+		COMPREPLY=$(compgen -W "$2" -- "${COMP_WORDS[COMP_CWORD]}")
+	}
+	complete -F compMain read
+}
+
+readString() {
+	compInit
+	while true; do
+		read -rep "▸ " STR
+		if [ -z "$STR" ]; then
+			echo -e "\n⚐ no input provided ⚐"
+		else break
+		fi
+	done
+}
+
+readFile() {
+	compInit
+	while true; do
+		echo -e "\nenter file\n"
+		read -rep "▸ " FL
+		if [ -z "$FL" ]; then
+			echo -e "\n⚐ no input provided ⚐"
+		elif [ ! -f "$FL" ]; then
+			echo -e "\n⚠ arg must be a file ⚠"
+		else break
+		fi
+	done
+}
+
+checkWords(){
+	echo -e "check words?\n"
+	read -p "▸ " ANS
+	if [[ "$ANS" =~ ^(1|y|ya|ye|ta|ok|pl|th).* ]]; then ARG3="w"; sexMain
+	elif [[ "$ANS" =~ ^(0|n|na|no|nu|al).* ]]; then sexMain
+	fi
+}
+
+cleanTextfile(){
+	mainNtc
+	echo -e "\ncontinue?\n"
+	read -p "▸ " ANS
+	if [[ "$ANS" =~ ^(1|y|ya|ye|ta|ok|pl|th).* ]]; then
+		sed -i 's/ *$//' "$ARG1"
+		sed -i 's/\t*$//' "$ARG1"
+		sed -i 's/\t/ /g' "$ARG1"
+	elif [[ "$ANS" =~ ^(0|n|na|no|nu|al).* ]]; then exit 0
+	else echo -e "\n⚠ invalid input ⚠"
+	fi
+}
+
+cleanScript(){
+	local TABSPCS SPC
+	mainNtc
+	while true; do
+		echo -e "\ncontinue?\n"
+		read -p "▸ " ANS
+		if [[ "$ANS" =~ ^(1|y|ya|ye|ta|ok|pl|th).* ]]; then
+			sed -i 's/ *$//' "$ARG1"
+			sed -i 's/\t*$//' "$ARG1"
+			echo -e "\nspaces per tab?\n"
+			read -p "▸ " TABSPCS
+			SPC=$(printf "%${TABSPCS}s")
+			sed -i "s/$SPC/\\t/g" "$ARG1"
+			sed -i 's/ = /=/g' "$ARG1"
+			sed -i 's/ + /+/g' "$ARG1"
+			sed -i 's/ - /-/g' "$ARG1"
+			sed -i 's/ \* /*/g' "$ARG1"
+			sed -i 's| / |/|g' "$ARG1"
+			sed -i 's/ % /%/g' "$ARG1"; break
+		elif [[ "$ANS" =~ ^(0|n|na|no|nu|al).* ]]; then exit 0
+		else echo -e "\n⚠ invalid input ⚠"
+		fi
+	done
+	if [[ "$ARG3" == "l" || "$ARG4" == "l" ]]; then
+		case "${ARG1##*.}" in
+			js) eslint "$ARG1";;
+			c) clang-format "$ARG1";;
+			py) pylint "$ARG1";;
+			sh) shfmt -w "$ARG1";;
+			*) echo -e "\n⚠ unknown extension ⚠\n\ncompatible languages"
+				echo -e "\n▸ js \n▸ c \n▸ py \n▸ sh\n\nenter language to use\n"
+				SUB="lang"
+				readString
+				LANG="$STR"
+				case "$LANG" in
+					js) eslint "$ARG1";;
+					c) clang-format "$ARG1";;
+					py) pylint "$ARG1";;
+					sh) shfmt -w "$ARG1";;
+					*) echo -e "\nlanguage not supported";;
+				esac;;
+		esac
+	fi
+}
+
+sexMain(){
+	local YOUSE EYES SUDOS UNAMES CURSELIST CURSES YOINKLIST YOINKS ANS MATCHES
+	local TSINGLES DSINGLES STRAYSINGLES TQUOTES DQUOTES STRAYQUOTES TTICKS DTICKS STRAYTICKS
+	YOINKLIST="hash key pass id code sum user login $USER"
+	CURSELIST="fuck shit cunt ass tits pussy bitch hoe slut dick cock nigga nigger chink gook coon
+	fag faggot retard spastic spaz sped inbred" #butthurt?
+	YOUSE=$(grep -o -i "\syou" "$ARG1" | wc -l)
+	EYES=$(grep -o "\sI" "$ARG1" | wc -l)
+	SUDOS=$(grep -o -i "sudo" "$ARG1" | wc -l)
+	UNAMES=$(grep "$USER" "$ARG1" | wc -l)
+	TSINGLES=$(grep "'" "$ARG1" | wc -l)
+	DSINGLES=$(
+		grep -P "('[^']*'){1}" "$ARG1" >"/tmp/dump1"
+		grep "'" "/tmp/dump1" | wc -l
+	)
+	STRAYSINGLES=$(echo "$TSINGLES-$DSINGLES" | bc) #'
+	TQUOTES=$(grep '"' "$ARG1" | wc -l)
+	DQUOTES=$(
+		grep -P '("[^"]*"){1}' "$ARG1" >"/tmp/dump2"
+		grep '"' "/tmp/dump2" | wc -l
+	)
+	STRAYQUOTES=$(echo "$TQUOTES-$DQUOTES" | bc) #"
+	TTICKS=$(grep '`' "$ARG1" | wc -l)
+	DTICKS=$(
+		grep -P '(`[^`]*`){1}' "$ARG1" >"/tmp/dump3"
+		grep '`' "/tmp/dump3" | wc -l | bc
+	)
+	STRAYTICKS=$(echo "$TTICKS-$DTICKS" | bc) #`
+	if [[ "$ARG3" == "w" && ("$ARG2" == "t" || "$ARG2" == "c") ]]; then
+		if [ "$STRAYSINGLES" -ge 1 ]; then
+			echo -e "\n$STRAYSINGLES stray single quotes\n\nshow possible locations?\n"
+			read -p "▸ " ANS
+			[[ "$ANS" =~ ^(1|y|ya|ye|ta|ok|pl|th).* ]] && echo &&
+				grep --color=always -nPh "('[^']*){1}" "$ARG1"
+		elif [ "$STRAYSINGLES" -eq 0 ]; then
+			echo -e "\nno stray single quotes"
+		fi
+		if [ "$STRAYQUOTES" -ge 1 ]; then
+			echo -e "\n$STRAYQUOTES stray double quotes\n\nshow possible locations?\n"
+			read -p "▸ " ANS
+			[[ "$ANS" =~ ^(1|y|ya|ye|ta|ok|pl|th).* ]] && echo &&
+				grep --color=always -n -P -h '("[^"]*){1}' "$ARG1"
+		elif [ "$STRAYQUOTES" -eq 0 ]; then
+			echo -e "\nno stray double quotes"
+		fi
+		if [ "$STRAYTICKS" -ge 1 ]; then
+			echo -e "\n$STRAYTICKS stray backticks\n\nshow possible locations?\n"
+			read -p "▸ " ANS
+			[[ "$ANS" =~ ^(1|y|ya|ye|ta|ok|pl|th).* ]] && echo &&
+				grep --color=always -nPh '(`[^`]*){1}' "$ARG1"
+		elif [ "$STRAYTICKS" -eq 0 ]; then
+			echo -e "\nno stray backticks"
+		fi
+		echo -e "\nsearch for swearwords?\n"
+		read -p "▸ " ANS
+		if [[ "$ANS" =~ ^(1|y|ya|ye|ta|ok|pl|th).* ]]; then echo &&
+			MATCHES=0
+			for CURSES in ${CURSELIST}; do
+				if grep -q -i "$CURSES" "$ARG1"; then
+					grep --color=always -inh "$CURSES" "$ARG1"
+					MATCHES=1
+				fi
+			done
+			if [ $MATCHES -eq 0 ]; then
+				echo -e "no swearwords"
+			fi
+		fi
+		if [ "$ARG2" == "t" ]; then
+			if [ "$YOUSE" -gt 1 ]; then
+				echo -e "\n$YOUSE youse\n\nshow locations?\n"
+				read -p "▸ " ANS
+				[[ "$ANS" =~ ^(1|y|ya|ye|ta|ok|pl|th).* ]] && echo &&
+					grep --color=always -inh "\syou" "$ARG1"
+			elif [ "$YOUSE" -eq 0 ]; then echo -e "\nno youse"
+			fi
+			if [ "$EYES" -ge 1 ]; then
+				echo -e "\n$EYES eyes\n\nshow locations?\n"
+				read -p "▸ " ANS
+				[[ "$ANS" =~ ^(1|y|ya|ye|ta|ok|pl|th).* ]] && echo &&
+					grep --color=always -nh "\sI" "$ARG1"
+			elif [ "$EYES" -eq 0 ]; then echo -e "\nno eyes"
+			fi; cleanTextfile
+		elif [ "$ARG2" == "c" ]; then
+			if [ "$SUDOS" -ge 1 ]; then
+				echo -e "\n$SUDOS sudos\n\nshow locations?\n"
+				read -p "▸ " ANS
+				[[ "$ANS" =~ ^(1|y|ya|ye|ta|ok|pl|th).* ]] && echo &&
+					grep --color=always -inh "sudo" "$ARG1"
+			elif [ "$SUDOS" -eq 0 ]; then echo -e "\nno sudos"
+			fi
+			if [ "$UNAMES" -ge 1 ]; then
+				echo -e "$UNAMES usernames\n\nshow locations?\n"
+				[[ "$ANS" =~ ^(1|y|ya|ye|ta|ok|pl|th).* ]] && echo &&
+					grep --color=always -inh "$USER" "$ARG1"
+			elif [ "$UNAMES" -eq 0 ]; then echo -e "\nno usernames"
+			fi
+			echo -e "\nsearch for user details?\n"
+			read -p "▸ " ANS
+			if [[ "$ANS" =~ ^(1|y|ya|ye|ta|ok|pl|th).* ]]; then echo &&
+				MATCHES=0
+				for YOINKS in ${YOINKLIST}; do
+					if grep -q -i "$YOINKS" "$ARG1"; then
+						grep --color=always -inh "$YOINKS" "$ARG1"
+						MATCHES=1
+					fi
+				done
+				if [ $MATCHES -eq 0 ]; then
+					echo -e "no user details"
+				fi
+			fi; cleanScript
+		fi
+	elif [[ "$ARG3" != "w" && "$ARG2" == "t" ]]; then cleanTextfile
+	elif [[ "$ARG3" != "w" && "$ARG2" == "c" ]]; then cleanScript
+	fi
+	echo -e "\ndone and dusted"
+}
+
+compInit
+if [[ $# -ge 1 ]]; then
+	if [[ -n "$1" && -n "$2" && -n "$3" && -f "$4" ]]; then ARG1="$4"
+		if [[ "$1" =~ ^(t|-t|--text)$ &&\
+		"$2" =~ ^(w|-w|--check-words)$ && "$3" =~ ^(l|-l|--lint-code)$ ]]; then
+			ARG2="t"; ARG3="w"; ARG4="l"; sexMain
+		elif [[ "$1" =~ ^(c|-c|--code)$ &&\
+		"$2" =~ ^(w|-w|--check-words)$ && "$3" =~ ^(l|-l|--lint-code)$ ]]; then
+			ARG2="c"; ARG3="w"; ARG4="l"; sexMain
+		fi
+	elif [[ -n "$1" && -n "$2" && -f "$3" ]]; then ARG1="$3"
+		if [[ "$1" =~ ^(t|-t|--text)$ && "$2" =~ ^(w|-w|--check-words)$ ]]; then
+			ARG2="t"; ARG3="w"; sexMain
+		elif [[ "$1" =~ ^(t|-t|--text)$ && "$2" =~ ^(l|-l|--lint-code)$ ]]; then
+			ARG2="t"; ARG3="l"; sexMain
+		elif [[ "$1" =~ ^(c|-c|--code)$ && "$2" =~ ^(w|-w|--check-words)$ ]]; then
+			ARG2="c"; ARG3="w"; sexMain
+		elif [[ "$1" =~ ^(c|-c|--code)$ && "$2" =~ ^(l|-l|--lint-code)$ ]]; then
+			ARG2="c"; ARG3="l"; sexMain
+		fi
+	elif [[ -n "$1" && -f "$2" && -z "$3" ]]; then
+		ARG1="$2"
+		if [[ "$1" =~ ^(t|-t|--text)$ ]]; then ARG2="t"; checkWords
+		elif [[ "$1" =~ ^(c|-c|--code)$ ]]; then ARG2="c"; checkWords
+		fi
+	elif [[ -f "$1" && -z "$2" ]]; then ARG1="$1"
+		if [[ "$FL" =~ \.txt$ ]]; then ARG2="t"; checkWords
+		elif [[ "$FL" =~ \.(c|cpp|java|py|js|html|css|rb|sh|lua)$ ]]; then ARG2="c"; checkWords
+		elif [ -z "$ARG2" ]; then
+			echo -e "(t) text\n(c) code\n"
+			readString; echo
+			if [ "$STR" == "t" ]; then ARG2="t"; checkWords
+			elif [ "$STR" == "c" ]; then ARG2="c"; checkWords
+			fi
+		fi
+	elif [[ "$1" =~ ^(h|-h|--help)$ ]]; then showHelp
+	fi
+elif [[ $# -eq 0 && -z "$1" ]]; then readFile; ARG1="$FL"; echo
+	if [[ "$FL" =~ \.txt$ ]]; then ARG2="t"; checkWords
+	elif [[ "$FL" =~ \.(c|cpp|java|py|js|html|css|rb|sh|lua)$ ]]; then ARG2="c"; checkWords
+	elif [ -z "$ARG2" ]; then
+	echo -e "(t) text\n(c) code\n"
+	readString; echo
+		if [[ "$STR" == "t" ]]; then ARG2="t"; checkWords
+		elif [[ "$STR" == "c" ]]; then ARG2="c"; checkWords
+		fi
+	fi
+fi
+
+unset ARG1
+unset ARG2
+unset ARG3
+unset ARG4
+unset SUB

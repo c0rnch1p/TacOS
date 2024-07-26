@@ -1,0 +1,28 @@
+# THIS IS A PARSER CONFIG FILE WHICH MAY BE OVERWRITTEN
+# IF THE SOFTWARE IS REINSTALLED OR RECONFIGURED IN THE GUI
+#
+# Files:
+# - Filepath: $HOME/.config/knotesrc
+#
+# Resources:
+# - Git Repo: $BROWSER https://github.com/KDE/knotes
+# - Hacking Docs: $BROWSER https://community.kde.org/Policies/Frameworks_Coding_Style
+#
+# User Knotes Settings
+
+[Display]
+bgcolor=193,232,116
+
+[Editor]
+font=Nimbus Mono PS,9,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+richtext=true
+titlefont=Nimbus Mono PS,11,-1,5,700,0,0,0,0,0,0,0,0,0,0,1,Bold
+
+[Misc]
+SystemTrayShowNotes=true
+
+[Printing]
+Theme=/usr/share/knotes/print/themes/background-color/
+
+[WindowDisplay]
+ShowInTaskbar=true

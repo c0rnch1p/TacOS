@@ -1,0 +1,251 @@
+#!/bin/bash
+# 80x
+#                    \    |    _ _|    \     __|  __|   __|
+#                   _ \   |      |    _ \  \__ \  _|  \__ \
+#                 _/  _\ ____| ___| _/  _\ ____/ ___| ____/
+#
+#===============================================================================
+#
+# Files:
+# - Filepath: $BIN/conf_aliases
+#
+#===============================================================================
+# - [1] Dank U Wel
+#===============================================================================
+
+# Arco: (ˈɑːkəʊ') british english: adverb
+# A musical direction for instruments of the violin family, indicating that the
+# bow should be used (as opposed to plucking strings).
+alias eeuwig_dankbaar="echo 'Mr. Dubois'"
+alias en_blijf_rollen="echo 'Arco Team!'"
+
+#===============================================================================
+# - [2] Commands
+#===============================================================================
+
+alias 8ball='tc_8ball'
+alias achroot='tc_achroot'
+alias af='lynx -dump -width=500 http://localhost:80/whm-server-status'
+alias alpha='px_alpha'
+alias arch='px_arch'
+alias arco='px_arco'
+alias bonsai='px_bonsai'
+alias bupcbup="conf_bupconf 'y' && time conf_bupcopy 'b'"
+alias bupc="conf_bupconf 'y'"
+alias bupcopy="time conf_bupcopy 'c'"
+alias bupskel="cp -Rf /etc/skel $HOME/.skel-backup-$(date +%Y.%m.%d-%H.%M.%S)"
+alias bup="time conf_bupcopy 'b'"
+alias bust='tc_bust'
+alias but='bat --theme=OneHalfDark --color=always --language=sh'
+alias calc='galculator'
+alias chars='gucharmap'
+alias chkcpu='cpuid -i | grep uarch | head -n 1'
+alias chkefi='ls /sys/firmware/efi/efivars'
+alias chkvul='grep . /sys/devices/system/cpu/vulnerabilities/*'
+alias colors='export LS_COLORS=$(cat $HOME/.dircolors)'
+alias colortest='px_colortest'
+alias colortest_slim='px_colortest_slim'
+alias colorview='px_colorview'
+alias colorwheel='px_colorwheel'
+alias cp='cp -rp'
+alias crunch='px_crunch'
+alias darth_vader='px_darth_vader'
+alias dbn='deadbeef --next &'
+alias dbp='deadbeef --prev &'
+alias dbpp='deadbeef --play-pause &'
+alias dbr='deadbeef --random &'
+alias dbs='get_dead'
+alias deps='depends'
+alias df='df -h'
+alias dna='px_dna'
+alias dog='px_dog'
+alias downnow='shutdown now'
+alias du='du -sh'
+alias edit_perso_speeddial='edit_perso_speeddial'
+alias edit_system_speeddial='edit_system_speeddial'
+alias edit_user_speeddial='edit_user_speeddial'
+alias edpspd='edit_perso_speeddial'
+alias edsspd='edit_system_speeddial'
+alias eduspd='edit_user_speeddial'
+alias elfman='px_elfman'
+alias exodus='$DATA/Exodus-linux-x64/Exodus'
+alias free='free -wh'
+alias fuckoff='faillock --user $USER --reset'
+alias ged='gedit'
+alias gednew='gedit --new-window'
+alias ghosts='px_ghosts'
+alias gpgchk='gpg --keyserver-options auto-key-retrieve --verify'
+alias gpgget='gpg --keyserver-options auto-key-retrieve --receive-keys'
+alias gp='git pull'
+alias grep='grep --color=always'
+alias grh='git reset --hard'
+alias grm_cache='rm -r ~/.cache/git'
+alias guns='px_guns'
+alias hl2="highlight --syntax '$HL_HOME/lang.lua' --style '$HL_HOME/theme.lua'"
+alias hl='highlight --syntax sh --style greenlcd'
+alias hw='hwinfo --short'
+alias illumina='px_illumina'
+alias ipp='curl ifconfig.me; echo'
+alias jctler="journalctl -x -o short | grep -i 'error'"
+alias jctlex="journalctl -x -o short | grep -i 'exit code 1'"
+alias jctlfl="journalctl -x -o short | grep -i 'failed'"
+alias jctl='journalctl -p 3 -xb'
+alias k9='killall -qv -9'
+alias less='less --use-color'
+alias ll='ls -lA'
+alias ls='ls -Nh --color=always'
+alias ls_users='cut -d: -f1 /etc/passwd | sort'
+alias lvl="ls -A | tr ' ' '\n'"
+alias lv='ls -vCA'
+alias mntmgr='tc_mntmgr'
+alias mnt='mountmgr &>/dev/null'
+alias monster='px_monster'
+alias mouseface='px_mouseface'
+alias mvp='mkdir -vp'
+alias nemo='nemo .'
+alias nmactv='nmcli -p c show --active'
+alias nmdevs='nmcli -p d'
+alias nmperms='nmcli -p g perm'
+alias nmprofs='nmcli -p c'
+alias nmradio='nmcli -p r'
+alias nmwifi='nmcli -p d wifi list'
+alias nn='rnano -w'
+alias pacman_1='px_pacman_1'
+alias pacman_2='px_pacman_2'
+alias pacman='pacman --color auto'
+alias pip="$PYTHON_VENV/bin/pip"
+alias pj='ps -jA | bat -l rb --theme ansi --style=numbers,grid,header-filename'
+alias plk='pulseaudio --kill'
+alias pls='pulseaudio --start'
+alias print256='px_print256'
+alias psg='psgrep'
+alias py='python'
+alias python="$PYTHON_VENV/bin/python"
+alias qv='qview &>/dev/null'
+alias rally='px_rally'
+alias rdpspd='read_perso_speeddial'
+alias rdsspd='read_system_speeddial'
+alias rduspd='read_user_speeddial'
+alias read_perso_speeddial='read_perso_speeddial'
+alias read_system_speeddial='read_system_speeddial'
+alias read_user_speeddial='read_user_speeddial'
+alias reload='reload'
+alias reqs='depends -r'
+alias rm_knownhosts='rm $HOME/.ssh/known_hosts'
+alias rmr='rm -r'
+alias rm_steam_path='unlink $HOME/.steampath'
+alias rm_steam_pid='unlink $HOME/.steampid'
+alias sbupcbup="spupd && conf_bupconf 'y' && time conf_bupcopy 'b'"
+alias sbupcopy="spupd && time conf_bupcopy 'c'"
+alias sbupc="spupd && conf_bupconf 'y'"
+alias sbup="spupd && time conf_bupcopy 'b'"
+alias scp='scp -rp'
+alias secrets='tc_secrets'
+alias setxwall='tc_setxwall'
+alias sex='tc_sex'
+alias skullpuke='px_skullpuke'
+alias sound_server="pactl info | grep 'Server Name'"
+alias space_invaders='px_space_invaders'
+alias square='px_square'
+alias starwars='px_starwars'
+alias stoker='tc_stoker'
+alias stopx='pkill -15 -t tty$XDG_VTNR Xorg'
+alias tanks='px_tanks'
+alias thebat_2='px_thebat_2'
+alias thebat='px_thebat'
+alias tiefighter_invert='px_tiefighter_invert'
+alias tiefighter='px_tiefighter'
+alias tiefighter_straight='px_tiefighter_straight'
+alias tiefighter_straight='px_unix'
+alias umnt='unmounter &>/dev/null'
+alias up='uptime -p'
+alias urch='tc_urch'
+alias user_list='cut -d: -f1 /etc/passwd | sort'
+alias viv='vivaldi-bin'
+alias wget='wget -c'
+alias which_vga='/usr/local/bin/arcolinux-which-vga'
+alias xd='ls /usr/share/xsessions'
+alias xdw='ls /usr/share/wayland-sessions'
+alias xr='xreader'
+alias yskip='yay -S --mflags --skipinteg'
+alias yss='yay -Ss'
+fix_slowstart='09_fix_slowstart'
+permissions='05_permissions'
+run_all='01_run_all'
+setup_alpm='02_setp_alpm'
+setup_backend='07_setup_backend'
+setup_dconf='06_setup_dconf'
+setup_extras='08_setup_extras'
+setup_general='03_setup_general'
+setup_system='04_setup_system'
+
+#===============================================================================
+# - [3] Sudo Mods
+#===============================================================================
+
+alias calamares='gksudo calamares'
+alias fix_loadkeys='sudo sed -i $d /etc/vconsole.conf'
+alias fuckup='sudo $(history -p \!\!)'
+alias sblkid='sudo blkid'
+alias sbut='sudo bat --theme=OneHalfDark --color=always --language=sh'
+alias scat='sudo cat'
+alias schattr='sudo chattr'
+alias schgrp='sudo chgrp'
+alias schmod='sudo chmod'
+alias schown='sudo chown'
+alias sctl='sudo systemctl'
+alias sscuttle='sudo scuttle'
+alias sdif='sudo diff'
+alias seject='sudo eject'
+alias set_fonts='sudo fc-cache -fv'
+alias set_grub_efi='sudo grub-install --efi-directory=/boot/efi'
+alias set_keymap='sudo localectl set-x11-keymap au'
+alias set_locale='sudo localectl set-locale LANG=en_US.UTF-8'
+alias set_ntp='sudo timedatectl set-ntp true'
+alias sfc_upd='sudo fc-cache -fv'
+alias sfind='sudo find'
+alias sged='sudo gedit'
+alias sgrubmkconf='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias shtop='sudo htop'
+alias siptables='sudo iptables'
+alias sk9='sudo killall -qv -9'
+alias smandb='sudo mandb'
+alias smount='sudo mount'
+alias smv='sudo mv'
+alias smvp='sudo mkdir -vp'
+alias snn='sudo rnano -w'
+alias sopenvpn='sudo openvpn'
+alias sp_unlock='sudo rm /var/lib/pacman/db.lck'
+alias spclean='sudo pacman -Rns $(pacman -Qtdq)'
+alias spk='sudo pacman-key'
+alias splist_aur='sudo pacman -Qqem'
+alias splist_extn='sudo pacman -Qqe'
+alias splist_orig='sudo pacman -Qqet'
+alias spqo='sudo pacman -Qo'
+alias spqs='sudo pacman -Qs'
+alias spr='sudo pacman -Rn'
+alias sps='sudo pacman -S'
+alias spsi='sudo pacman -Sii'
+alias spss='sudo pacman -Ss'
+alias spupd='sudo pacman -Syyu'
+alias srflct='sudo reflector'
+alias srm='sudo rm'
+alias srm_logout_lock='sudo rm /tmp/arcologout.lock'
+alias srm_py_ext_mngd='sudo rm /usr/lib/python3.11/EXTERNALLY-MANAGED'
+alias srmirrors='srflct -a 6 -l 20 --sort score --save /etc/pacman.d/mirrorlist'
+alias srmr='sudo rm -r'
+alias stee='sudo tee'
+alias sucp='sudo cp -rp'
+alias sufw='sudo ufw'
+alias sumount='sudo umount'
+alias suspend='sudo systemctl suspend'
+alias svbm='sudo /usr/local/bin/arcolinux-vbox-share'
+alias swg_quick='sudo wg-quick'
+alias sys_failed='sudo systemctl list-units --failed'
+alias sys_failrs='sudo systemctl reset-failed'
+alias sys_list='sudo systemctl list-unit_files --all'
+alias sys_reload='sudo systemctl daemon_reload'
+alias ytavi="sudo yt-dlp -f 'bestvideo[ext=avi]+bestaudio[ext=m4a]'"
+alias ytmp3='sudo yt-dlp --extract-audio --audio-format mp3'
+alias ytmp4="sudo yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]'"
+alias ytwav='sudo yt-dlp --extract-audio --audio-format wav'

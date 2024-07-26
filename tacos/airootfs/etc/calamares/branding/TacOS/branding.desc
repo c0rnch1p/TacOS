@@ -1,0 +1,54 @@
+# SPDX-FileCopyrightText: no
+# SPDX-License-Identifier: CC0-1.0
+
+---
+
+componentName: TacOS
+
+welcomeStyleCalamares: false
+
+welcomeExpandingLogo: true
+
+windowExpanding: normal
+
+windowSize: 1200px,800px
+
+windowPlacement: center
+
+sidebar: widget
+
+navigation: widget
+
+strings:
+  productName: TacOS
+  shortProductName: TacOS
+  version: 1.4
+  shortVersion: 1.4
+  versionedName: TacOS
+  shortVersionedName: TacOS
+  bootloaderEntryName: TacOS
+#  productUrl: https://tacos.info # examples
+#  supportUrl: https://tacosforum.com
+#  knownIssuesUrl: https://tacos.info
+#  releaseNotesUrl: https://tacos.info/tacos-editions
+#  donateUrl: https://kde.org/community/donations/index.php
+
+images:
+  # productBanner: "banner.png"
+  productLogo: "squid.png"
+  productIcon: "logo.png"
+  # productWallpaper: "wallpaper.png"
+  productWelcome: "01cal.jpg"
+
+style:
+  SidebarBackground: "#353945"
+  SidebarText: "#ECEDEE"
+
+slideshow: "show.qml"
+
+slideshowAPI: 2
+
+uploadServer:
+  type: "fiche"
+  url: "http://termbin.com:9999"
+  sizeLimit: -1

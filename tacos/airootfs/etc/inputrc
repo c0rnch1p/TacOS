@@ -1,0 +1,111 @@
+#
+#                 _ \  __|    \    _ \   |    _ _|   \ |  __| 
+#                   /  _|    _ \   |  |  |      |   .  |  _|  
+#                _|_\ ___| _/  _\ ___/  ____| ___| _|\_| ___|
+#
+################################################################################
+# ~ /etc/inputrc
+# ~ ~/.inputrc || $XDG_CONFIG_HOME/readline/inputrc
+################################################################################
+# ~ man 'readline(3)' | less +/INITIALIZATION\ FILE
+################################################################################
+# 1 ~ READLINE SETTINGS
+################################################################################
+set keymap emacs
+set enable-keypad on
+set editing-mode emacs
+set keyseq-timeout 500
+set show-mode-in-prompt off
+set meta-flag on
+set input-meta on
+set output-meta on
+set convert-meta off
+set enable-meta-key on
+set mark-directories on
+set mark-modified-lines off
+set mark-symlinked-directories on
+set colored-stats on
+set visible-stats on
+set blink-matching-paren on
+set enable-bracketed-paste on
+set horizontal-scroll-mode off
+set bell-style audible
+set prefer-visible-bell off
+set comment-begin #
+set expand-tilde on
+set byte-oriented off
+set match-hidden-files on
+set enable-active-region on
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set revert-all-at-newline off
+set bind-tty-special-chars on
+set echo-control-characters on
+set completion-query-items 50
+set completion-display-width -1
+set completion-prefix-display-length 0
+set page-completions on
+set disable-completion off
+set skip-completed-text off
+set completion-map-case off
+set completion-ignore-case on
+set colored-completion-prefix on
+set menu-complete-display-prefix on
+set print-completions-horizontally off
+set history-size -1
+set history-preserve-point off
+################################################################################
+# 2 ~ SHELL BINDINGS 
+################################################################################
+"\C-z":abort
+"\C-x\C-g":abort
+"\C-m":accept-line
+"\e[":accept-line
+"\e[C":forward-char
+"\e[D":backward-char
+"\e[1;5C":forward-word
+"\e[1;5D":backward-word
+"\e[H":beginning-of-line
+"\e[F":end-of-line
+"\e[3~":delete-char
+"\C-h":backward-delete-char
+"\e[\b":backward-delete-char
+"\C-x\C-k":backward-kill-line
+"\e\\":delete-horizontal-space
+"\e[1;3D":transpose-words
+"\e\[1;4D":transpose-chars
+"\C-u":upcase-word
+"\C-l":downcase-word
+"\C-y":capitalize-word
+"\C-a":clear-screen
+"\e\C-a":clear-display
+"\C-i":complete
+"\e[\t":complete
+"\e!":complete-command
+"\e/":complete-filename
+"\e~":complete-username
+"\e@":complete-hostname
+"\e$":complete-variable
+"\e*":insert-completions
+"\e.":insert-last-argument
+"\e#":insert-comment
+"\e&":tilde-expand
+"\C-_":undo
+"\C-x\C-h":fetch-history
+"\e[B":next-history
+"\e[A":previous-history
+"\e[5~":beginning-of-history
+"\e[6~":end-of-history
+"\C-x\C-i":dynamic-complete-history
+"\C-x\C-s":tty-status
+"\C-x\C-v":display-shell-version
+"\C-x\C-r":re-read-init-file
+
+# positioned last and suffixed with \e
+#  -r, -u, '"\seq":' & '"\seq":nop'
+# seem to be deprecated for most keymaps
+
+"\C-x\C-u\e":undo
+"\C-u\e":unix-line-discard
+"\C-x\C-d\e":dump-variables
+"\C-s\e":forward-search-history

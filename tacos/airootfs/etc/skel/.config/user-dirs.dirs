@@ -1,0 +1,41 @@
+#!/bin/bash
+# 90x
+#
+#                      |  |   __|  __|  _ \    _ \  _ _|  _ \   __|
+#                      |  | \__ \  _|     /    |  |   |     / \__ \
+#                     \__/  ____/ ___| _|_\   ___/  ___| _|_\ ____/
+#
+#=========================================================================================
+#
+# Files:
+# - Filepath: $HOME/.config/user-dirs.dirs
+# - System Config: /etc/xdg/user-dirs.dirs
+#
+#=========================================================================================
+#
+# Resources:
+# - Arch Wiki: $BROWSER https://wiki.archlinux.org/title/XDG_user_directories
+# - Freedesktop.org Docs: $BROWSER https://www.freedesktop.org/wiki/Software/xdg-user-dirs
+#
+#=========================================================================================
+#
+# References:
+# - User-dirs.conf Manpage: man -P 'less +3 +/DESCRIPTION' 'user-dirs.conf(5)'
+# - User-dirs.defaults Manpage: man -P 'less +3 +/DESCRIPTION' 'user-dirs.defaults(5)'
+# - User-dirs.dirs Manpage: man -P 'less +3 +/DESCRIPTION' 'user-dirs.dirs(5)'
+# - Xdg-user-dir Manpage: man -P 'less +3 +/DESCRIPTION' 'xdg-user-dir(1)'
+# - Xdg-user-dirs-update Manpage: man -P 'less +3 +/DESCRIPTION' 'xdg-user-dirs-update(1)'
+#
+#=========================================================================================
+# - [1] User XDG Dirs
+#=========================================================================================
+
+XDG_DESKTOP_DIR="$HOME/Desktop"
+XDG_DOWNLOAD_DIR="$HOME/Downloads"
+XDG_TEMPLATES_DIR="$HOME/.local/templates"
+XDG_PUBLICSHARE_DIR="$HOME/.local/share"
+XDG_DOCUMENTS_DIR="$HOME/Documents"
+XDG_MUSIC_DIR="$HOME/.audio/files"
+XDG_PICTURES_DIR="$HOME/.visual/files/image_dump"
+XDG_VIDEOS_DIR="$HOME/.visual/files/video_dump"
+xdg-user-dirs-update &>'/dev/null'

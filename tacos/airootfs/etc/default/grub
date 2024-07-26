@@ -1,0 +1,39 @@
+#
+#                              __|  _ \  |  | _ )
+#                             (_ |    /  |  | _ \
+#                            \___| _|_\ \__/ ___/
+#
+################################################################################
+# ~ /etc/default/grub
+################################################################################
+# ~ $BROWSER https://en.wikipedia.org/wiki/Grand_Unified_Bootloader
+# ~ $BROWSER https://help.ubuntu.com/community/Grub2
+# ~ $BROWSER https://wiki.archlinux.org/title/GRUB
+# ~ $BROWSER https://wiki.archlinux.org/title/GRUB/Tips_and_tricks
+# ~ $BROWSER https://www.gnu.org/software/grub/manual/grub/grub.html
+# ~ $BROWSER https://www.supergrubdisk.org/wiki/Loopback.cfg
+################################################################################
+#GRUB_BACKGROUND='/path/to/wallpaper'
+#GRUB_CMDLINE_LINUX=''
+#GRUB_COLOR_HIGHLIGHT='light-cyan/blue'
+#GRUB_COLOR_NORMAL='light-blue/black'
+#GRUB_DISABLE_LINUX_UUID=true
+#GRUB_DISABLE_SUBMENU=y
+#GRUB_EARLY_INITRD_LINUX_CUSTOM='initramfs.img'
+#GRUB_INIT_TUNE=''
+#GRUB_INIT_TUNE='480 440 1'
+#GRUB_SAVEDEFAULT=true
+GRUB_CMDLINE_LINUX_DEFAULT='quiet loglevel=3 audit=0 nvme_load=yes'
+GRUB_DEFAULT=0
+GRUB_DISABLE_OS_PROBER=false
+GRUB_DISABLE_RECOVERY=true
+GRUB_DISTRIBUTOR='tacos'
+GRUB_ENABLE_CRYPTODISK=y
+GRUB_GFXMODE=auto
+GRUB_GFXPAYLOAD_LINUX=keep
+GRUB_PRELOAD_MODULES='part_gpt part_msdos'
+GRUB_TERMINAL=console
+GRUB_THEME='/boot/grub/themes/Vimix/theme.txt'
+GRUB_TIMEOUT=12
+GRUB_TIMEOUT_STYLE=countdown
+
