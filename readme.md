@@ -104,5 +104,5 @@ Nano has a builtin system config on TacOS, once open the find and replace option
 be triggered with `Ctrl+r` and the string `liveuser` can be changed.
 ### Repo Links
 ###### Dotfiles & Bin Scripts
-- [Skel Config](https://gitlab.com/c0rNCh1p/tacos/-/tree/master_1.5/tacos/airootfs/etc/skel/.config)
-- [Skel Bash Config](https://gitlab.com/c0rNCh1p/tacos/-/tree/master_1.5/tacos/airootfs/etc/skel/.local/bin)
+- [Skel Config](https://gitlab.com/c0rNCh1p/tacos/-/tree/master/tacos/airootfs/etc/skel/.config)
+- [Skel Bash Config](https://gitlab.com/c0rNCh1p/tacos/-/tree/master/tacos/airootfs/etc/skel/.local/bin)
