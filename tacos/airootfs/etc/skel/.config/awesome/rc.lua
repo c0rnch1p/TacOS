@@ -286,13 +286,13 @@ globalkeys=gears.table.join(
 	awful.key({mod}, 'F8', function() awful.util.spawn('deadbeef --next') end,
 	{description='| Deadbeef Next Track\n', group='02 Media'}),
 	awful.key({mod}, 'F6', function() awful.util.spawn('deadbeef --prev') end,
-	{description='| Deadbeef Previous Track\n', group='02 Media'}),
+	{description='| Deadbeef Last Track\n', group='02 Media'}),
 	awful.key({mod, alt}, 'F7', function() awful.util.spawn('mpc play') end,
 	{description='| MPC Play Media\n', group='02 Media'}),
 	awful.key({mod, alt}, 'Right', function() awful.util.spawn('mpc next') end,
 	{description='| MPC Next File\n', group='02 Media'}),
 	awful.key({mod, alt}, 'Left', function() awful.util.spawn('mpc prev') end,
-	{description='| MPC Previous File\n', group='02 Media'}),
+	{description='| MPC Last File\n', group='02 Media'}),
 	awful.key({mod, alt}, 'F5', function() awful.util.spawn('mpc stop') end,
 	{description='| MPC Stop Playback\n', group='02 Media'}),
 	awful.key({alt, shft}, 'w', function() awful.util.spawn('flameshot full') end,
@@ -309,15 +309,15 @@ globalkeys=gears.table.join(
 	{description='| Show Main Menu\n', group='03 Menus'}),
 	awful.key({mod}, 'p', function() menubar.utils.terminal=terminal menubar.show() end,
 	{description='| Show Quick Run Menu\n', group='03 Menus'}),
-	awful.key({alt, shft}, 'r', function() awful.util.spawn('rofi-theme-selector') end,
-	{description='| Launch Rofi Theme Select\n', group='03 Menus'}),
-	awful.key({alt, shft}, 'd', function() awful.util.spawn('rofi -show drun') end,
-	{description='| Launch Rofi Prompt\n', group='03 Menus'}),
+	awful.key({alt, shft}, 'r', function() awful.util.spawn('rofi -show run') end,
+	{description='| Rofi Show Run\n', group='03 Menus'}),
+	awful.key({alt, shft}, 'd', function() awful.util.spawn('rofi -show window') end,
+	{description='| Rofi Show Window\n', group='03 Menus'}),
 	awful.key({mod}, 'z', function() awful.spawn(string.format(
 		"dmenu_run -i -nb '#000000' -nf '#C6EA52' \
 		-sb '#2D454E' -sf '#C3FF00' -fn 'Nouveau IBM-11'",
 		beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus)) end,
-	{description='| Launch Dmenu Prompt\n', group='03 Menus'}),
+	{description='| Show Dmenu Prompt\n', group='03 Menus'}),
 	awful.key({mod}, 'r', function()
 		local c=client.focus
 		if c then c.minimized=true end
@@ -326,7 +326,7 @@ globalkeys=gears.table.join(
 		beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus),
 		function() if c then c.minimized=false end end)
 	end,
-	{description='| Show global Menu\n', group='03 Menus'}),
+	{description='| Show Global Rofi Menu\n', group='03 Menus'}),
 
 	-- Client
 	awful.key({mod, shft}, 'j', function() awful.client.swap.byidx(1) end,
@@ -429,7 +429,7 @@ globalkeys=gears.table.join(
 	awful.key({mod}, 'Right', awful.tag.viewnext,
 	{description='| Switch to Right Tag\n', group='06 Tags'}),
 	awful.key({mod}, 'Escape', awful.tag.history.restore,
-	{description='| Switch to Previous Tag\n', group='06 Tags'}),
+	{description='| Switch to Last Tag\n', group='06 Tags'}),
 	awful.key({mod, alt}, 'n', function() lain.util.add_tag() end,
 	{description='| Add Tag (Reload to Delete)\n', group='06 Tags'}),
 
@@ -449,7 +449,7 @@ globalkeys=gears.table.join(
 	awful.key({alt, ctl}, 'k', function() awful.tag.incnmaster(-1, nil, true) end,
 	{description='| Decrement Master Clients\n', group='07 Layout'}),
 	awful.key({alt, ctl}, 'space', function() awful.layout.inc(-1) end,
-	{description='| Select Previous Layout\n', group='07 Layout'}),
+	{description='| Select Last Layout\n', group='07 Layout'}),
 	awful.key({alt, ctl}, '-', function()
 		awful.screen.focused().systray.visible=not awful.screen.focused().systray.visible
 	end,
