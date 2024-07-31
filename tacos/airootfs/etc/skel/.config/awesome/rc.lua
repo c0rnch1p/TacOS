@@ -255,11 +255,11 @@ root.buttons(gears.table.join(
 globalkeys=gears.table.join(
 	-- General
 	awful.key({mod}, 'Return', function() awful.util.spawn(terminal) end,
-	{description='| Launch terminal\n', group='01 General'}),
+	{description='| Launch Terminal\n', group='01 General'}),
 	awful.key({mod}, 'c', function() awful.util.spawn('galculator') end,
-	{description='| Launch calculator\n', group='01 General'}),
+	{description='| Launch Calculator\n', group='01 General'}),
 	awful.key({mod}, 'F12', function() dropdown:toggle() end,
-	{description='| Launch Quake terminal\n', group='01 General'}),
+	{description='| Launch Quake Terminal\n', group='01 General'}),
 	awful.key({mod, alt}, 'r', awesome.restart,
 	{description='| Reload Awesome\n', group='01 General'}),
 	awful.key({mod, alt}, 'x', awesome.quit,
@@ -267,57 +267,57 @@ globalkeys=gears.table.join(
 	awful.key({mod, alt}, 'k', function() awful.util.spawn('knotes') end,
 	{description='| Take notes (Knotes)\n', group='01 General'}),
 	awful.key({mod, alt}, 'o', function() awful.util.spawn('obsidian') end,
-	{description='| Take notes (Obsidian)\n', group='01 General'}),
+	{description='| Take Notes (Obsidian)\n', group='01 General'}),
 	awful.key({mod, alt}, 'e', function() awful.util.spawn('gedit --new-window') end,
-	{description='| Take notes (Gedit)\n', group='01 General'}),
+	{description='| Take Notes (Gedit)\n', group='01 General'}),
 	awful.key({mod}, 'x', function()
-		awful.prompt.run{prompt='Lua code: ',
+		awful.prompt.run{prompt='Lua Code: ',
 		textbox=awful.screen.focused().promptbox.widget,
 		exe_callback=awful.util.eval,
 		history_path=awful.util.get_cache_dir() .. '/history_eval'}
 	end,
-	{description='| Launch Lua code prompt\n', group='01 General'}),
+	{description='| Launch Lua Code Prompt\n', group='01 General'}),
 
 	-- Media
 	awful.key({mod}, 'F5', function() awful.util.spawn('deadbeef --random') end,
-	{description='| Deadbeef shuffle tracks\n', group='02 Media'}),
+	{description='| Deadbeef Shuffle Tracks\n', group='02 Media'}),
 	awful.key({mod}, 'F7', function() awful.util.spawn('deadbeef --play-pause') end,
-	{description='| Deadbeef toggle playback\n', group='02 Media'}),
+	{description='| Deadbeef Toggle Playback\n', group='02 Media'}),
 	awful.key({mod}, 'F8', function() awful.util.spawn('deadbeef --next') end,
-	{description='| Deadbeef next track\n', group='02 Media'}),
+	{description='| Deadbeef Next Track\n', group='02 Media'}),
 	awful.key({mod}, 'F6', function() awful.util.spawn('deadbeef --prev') end,
-	{description='| Deadbeef previous track\n', group='02 Media'}),
+	{description='| Deadbeef Previous Track\n', group='02 Media'}),
 	awful.key({mod, alt}, 'F7', function() awful.util.spawn('mpc play') end,
-	{description='| MPC play media\n', group='02 Media'}),
+	{description='| MPC Play Media\n', group='02 Media'}),
 	awful.key({mod, alt}, 'Right', function() awful.util.spawn('mpc next') end,
-	{description='| MPC next file\n', group='02 Media'}),
+	{description='| MPC Next File\n', group='02 Media'}),
 	awful.key({mod, alt}, 'Left', function() awful.util.spawn('mpc prev') end,
-	{description='| MPC previous file\n', group='02 Media'}),
+	{description='| MPC Previous File\n', group='02 Media'}),
 	awful.key({mod, alt}, 'F5', function() awful.util.spawn('mpc stop') end,
-	{description='| MPC stop playback\n', group='02 Media'}),
+	{description='| MPC Stop Playback\n', group='02 Media'}),
 	awful.key({alt, shft}, 'w', function() awful.util.spawn('flameshot full') end,
-	{description='| Flameshot whole area\n', group='02 Media'}),
+	{description='| Flameshot Whole Area\n', group='02 Media'}),
 	awful.key({alt, shft}, 'o', function() awful.util.spawn('obs') end,
-	{description='| OBS screen record\n', group='02 Media'}),
+	{description='| OBS Screen Record\n', group='02 Media'}),
 	awful.key({alt, shft}, 'p', function() awful.util.spawn('flameshot gui') end,
-	{description='| Flameshot area select         \n', group='02 Media'}),
+	{description='| Flameshot Area Select         \n', group='02 Media'}),
 
 	-- Menus
 	awful.key({mod}, 's', hotkeys_popup.show_help,
-	{description='| Show shortcuts menu\n', group='03 Menus'}),
+	{description='| Show Shortcuts Menu\n', group='03 Menus'}),
 	awful.key({mod}, 'w', function() main_menu:show() end,
-	{description='| Show main menu\n', group='03 Menus'}),
+	{description='| Show Main Menu\n', group='03 Menus'}),
 	awful.key({mod}, 'p', function() menubar.utils.terminal=terminal menubar.show() end,
-	{description='| Show quick run menu\n', group='03 Menus'}),
+	{description='| Show Quick Run Menu\n', group='03 Menus'}),
 	awful.key({alt, shft}, 'r', function() awful.util.spawn('rofi-theme-selector') end,
-	{description='| Launch Rofi theme select\n', group='03 Menus'}),
+	{description='| Launch Rofi Theme Select\n', group='03 Menus'}),
 	awful.key({alt, shft}, 'd', function() awful.util.spawn('rofi -show drun') end,
-	{description='| Launch Rofi prompt\n', group='03 Menus'}),
+	{description='| Launch Rofi Prompt\n', group='03 Menus'}),
 	awful.key({mod}, 'z', function() awful.spawn(string.format(
 		"dmenu_run -i -nb '#000000' -nf '#C6EA52' \
 		-sb '#2D454E' -sf '#C3FF00' -fn 'Nouveau IBM-11'",
 		beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus)) end,
-	{description='| Launch Dmenu prompt\n', group='03 Menus'}),
+	{description='| Launch Dmenu Prompt\n', group='03 Menus'}),
 	awful.key({mod}, 'r', function()
 		local c=client.focus
 		if c then c.minimized=true end
@@ -326,88 +326,88 @@ globalkeys=gears.table.join(
 		beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus),
 		function() if c then c.minimized=false end end)
 	end,
-	{description='| Show global menu\n', group='03 Menus'}),
+	{description='| Show global Menu\n', group='03 Menus'}),
 
 	-- Client
 	awful.key({mod, shft}, 'j', function() awful.client.swap.byidx(1) end,
-	{description='| Swap tiled window left\n', group='04 Client'}),
+	{description='| Swap Tiled Window Left\n', group='04 Client'}),
 	awful.key({mod, shft}, 'k', function() awful.client.swap.byidx(-1) end,
-	{description='| Swap tiled window right\n', group='04 Client'}),
+	{description='| Swap Tiled Window Right\n', group='04 Client'}),
 	awful.key({mod, shft}, 'h', function() awful.screen.focus_relative(1) end,
-	{description='| Focus next tiled window\n', group='04 Client'}),
+	{description='| Focus Next Tiled Window\n', group='04 Client'}),
 	awful.key({mod, shft}, 'l', function() awful.screen.focus_relative(-1) end,
-	{description='| Focus last tiled window\n', group='04 Client'}),
+	{description='| Focus Last Tiled Window\n', group='04 Client'}),
 	awful.key({alt, shft}, 'j', function() awful.tag.incmwfact(-0.05) end,
-	{description='| Decrease tile width\n', group='04 Client'}),
+	{description='| Decrease Tile Width\n', group='04 Client'}),
 	awful.key({alt, shft}, 'k', function() awful.tag.incmwfact(0.05) end,
-	{description='| Increase tile width\n', group='04 Client'}),
+	{description='| Increase Tile Width\n', group='04 Client'}),
 	awful.key({mod}, 'Tab', function()
 		awful.client.focus.history.previous()
 		if client.focus then client.focus:raise() end
 	end,
-	{description='| Cycle focus clients\n\n\n', group='04 Client'}),
+	{description='| Cycle Focus Clients\n\n\n', group='04 Client'}),
 	awful.key({mod}, 'j', function()
 		awful.client.focus.global_bydirection('down')
 		if client.focus then client.focus:raise() end
 	end,
-	{description='| Focus clients from bottom\n', group='04 Client'}),
+	{description='| Focus Clients from Bottom\n', group='04 Client'}),
 	awful.key({mod}, 'k', function()
 		awful.client.focus.global_bydirection('up')
 		if client.focus then client.focus:raise() end
 	end,
-	{description='| Focus clients from top\n', group='04 Client'}),
+	{description='| Focus Clients from Top\n', group='04 Client'}),
 	awful.key({mod}, 'h', function()
 		awful.client.focus.global_bydirection('left')
 		if client.focus then client.focus:raise() end
 	end,
-	{description='| Focus clients from left\n', group='04 Client'}),
+	{description='| Focus Clients from Left\n', group='04 Client'}),
 	awful.key({mod}, 'l', function()
 		awful.client.focus.global_bydirection('right')
 		if client.focus then client.focus:raise() end
 	end,
-	{description='| Focus clients from right\n', group='04 Client'}),
+	{description='| Focus Clients from Right\n', group='04 Client'}),
 	awful.key({mod, shft}, 'n', function()
 		local c=awful.client.restore() if c then client.focus=c c:raise() end
 	end,
-	{description='| Restore minimized clients         \n', group='04 Client'}),
+	{description='| Restore Minimized Clients         \n', group='04 Client'}),
 
 	-- Launchers
 	awful.key({mod}, 't', function() awful.util.spawn('vivaldi-bin') end,
-	{description='| Launch browser (Vivaldi)\n', group='05 Launchers'}),
+	{description='| Launch Browser (Vivaldi)\n', group='05 Launchers'}),
 	awful.key({mod}, 'i', function() awful.util.spawn('inkscape') end,
-	{description='| Launch vector editor\n', group='05 Launchers'}),
+	{description='| Launch Vector Editor\n', group='05 Launchers'}),
 	awful.key({mod}, 'b', function() awful.util.spawn(browser) end,
-	{description='| Launch browser (Firefox)\n', group='05 Launchers'}),
+	{description='| Launch Browser (Firefox)\n', group='05 Launchers'}),
 	awful.key({mod}, 'e', function() awful.util.spawn('geany --new-instance') end,
 	{description='| Launch IDE (Geany)\n', group='05 Launchers'}),
 	awful.key({mod}, 'v', function() awful.util.spawn('kdenlive') end,
-	{description='| Launch video editor\n\n\n\n\n\n\n\n', group='05 Launchers'}),
+	{description='| Launch Video Editor\n\n\n\n\n\n\n\n', group='05 Launchers'}),
 	awful.key({mod}, 'f', function() awful.util.spawn(filemanager) end,
-	{description='| Launch file manager\n', group='05 Launchers'}),
+	{description='| Launch File Manager\n', group='05 Launchers'}),
 	awful.key({mod}, 'F2', function() awful.util.spawn('pavucontrol-qt') end,
-	{description='| Launch volume control\n', group='05 Launchers'}),
+	{description='| Launch Volume Control\n', group='05 Launchers'}),
 	awful.key({mod}, 'F3', function() awful.util.spawn('cadence') end,
-	{description='| Launch audio connections\n', group='05 Launchers'}),
+	{description='| Launch Audio Connections\n', group='05 Launchers'}),
 	awful.key({mod}, 'F4', function() awful.util.spawn('nm-connection-editor') end,
-	{description='| Launch network connections\n', group='05 Launchers'}),
+	{description='| Launch Network Connections\n', group='05 Launchers'}),
 	awful.key({mod}, 'F9', function() awful.util.spawn(mailclient) end,
-	{description='| Launch mail client\n', group='05 Launchers'}),
+	{description='| Launch Mail Client\n', group='05 Launchers'}),
 	awful.key({mod}, 'F10', function() awful.util.spawn('lxappearance') end,
-	{description='| Launch theme client\n', group='05 Launchers'}),
+	{description='| Launch Theme Client\n', group='05 Launchers'}),
 	awful.key({mod}, 'F11', function() awful.util.spawn('arandr') end,
-	{description='| Launch display manager\n', group='05 Launchers'}),
+	{description='| Launch Display Manager\n', group='05 Launchers'}),
 	awful.key({mod}, 'F1', function() awful.util.spawn('deadbeef') end,
-	{description='| Launch music client\n', group='05 Launchers'}),
+	{description='| Launch Music Client\n', group='05 Launchers'}),
 	awful.key({mod}, 'g', function() awful.util.spawn('gimp') end,
-	{description='| Launch image editor\n', group='05 Launchers'}),
+	{description='| Launch Image Editor\n', group='05 Launchers'}),
 	awful.key({mod}, 'o', function() awful.util.spawn('loffice') end,
-	{description='| Launch office client\n', group='05 Launchers'}),
+	{description='| Launch Office Client\n', group='05 Launchers'}),
 	awful.key({mod}, 'a', function() awful.spawn.with_shell('ardour8 -n') end,
 	{description='| Launch DAW (Ardour)\n', group='05 Launchers'}),
 	awful.key({mod}, 'd', function() awful.util.spawn('Discord') end,
-	{description='| Launch video chat\n', group='05 Launchers'}),
+	{description='| Launch Video Chat\n', group='05 Launchers'}),
 	awful.key({mod, shft}, 'v', function() awful.util.spawn('virtualbox') end,
-	{description='| Launch virtual machine\n', group='05 Launchers'}),
+	{description='| Launch Virtual Machine\n', group='05 Launchers'}),
 	awful.key({mod, shft}, 'w', function() awful.util.spawn('bluefish') end,
 	{description='| Launch IDE (Bluefish)\n', group='05 Launchers'}),
 	awful.key({mod, shft}, 'i', function() awful.util.spawn('kdevelop') end,
@@ -417,86 +417,86 @@ globalkeys=gears.table.join(
 	awful.key({mod, shft}, 'r', function() awful.util.spawn('reaper -nosplash') end,
 	{description='| Launch DAW (REAPER)\n', group='05 Launchers'}),
 	awful.key({mod, shft}, 'p', function() awful.util.spawn(securemsg) end,
-	{description='| Launch private messager         \n', group='05 Launchers'}),
+	{description='| Launch Private Messager         \n', group='05 Launchers'}),
 	awful.key({mod, shft}, 's', function() awful.util.spawn('steam-native') end,
-	{description='| Launch game client\n', group='05 Launchers'}),
+	{description='| Launch Game Client\n', group='05 Launchers'}),
 	awful.key({mod, shft}, 'b', function() awful.util.spawn('blender') end,
-	{description='| Launch 3D editor\n', group='05 Launchers'}),
+	{description='| Launch 3D Editor\n', group='05 Launchers'}),
 
 	-- Tags
 	awful.key({mod}, 'Left', awful.tag.viewprev,
-	{description='| Switch to left tag\n', group='06 Tags'}),
+	{description='| Switch to Left Tag\n', group='06 Tags'}),
 	awful.key({mod}, 'Right', awful.tag.viewnext,
-	{description='| Switch to right tag\n', group='06 Tags'}),
+	{description='| Switch to Right Tag\n', group='06 Tags'}),
 	awful.key({mod}, 'Escape', awful.tag.history.restore,
-	{description='| Switch to previous tag\n', group='06 Tags'}),
+	{description='| Switch to Previous Tag\n', group='06 Tags'}),
 	awful.key({mod, alt}, 'n', function() lain.util.add_tag() end,
-	{description='| Add tag (reload to delete)\n', group='06 Tags'}),
+	{description='| Add Tag (Reload to Delete)\n', group='06 Tags'}),
 
 	-- Layout
 	awful.key({mod}, 'space', function() awful.layout.inc(1) end,
-	{description='| Select next layout\n', group='07 Layout'}),
+	{description='| Select Next Layout\n', group='07 Layout'}),
 	awful.key({alt, ctl}, 'Up', function() adjustBrightness(1) end,
-	{description='| Increase brightness\n', group='07 Layout'}),
+	{description='| Increase Brightness\n', group='07 Layout'}),
 	awful.key({alt, ctl}, 'Down', function() adjustBrightness(-1) end,
-	{description='| Decrease brightness\n', group='07 Layout'}),
+	{description='| Decrease Brightness\n', group='07 Layout'}),
 	awful.key({alt, ctl}, 'h', function() lain.util.useless_gaps_resize(7) end,
-	{description='| Increment useless gaps\n', group='07 Layout'}),
+	{description='| Increment Useless Gaps\n', group='07 Layout'}),
 	awful.key({alt, ctl}, 'l', function() lain.util.useless_gaps_resize(-7) end,
-	{description='| Decrement useless gaps\n', group='07 Layout'}),
+	{description='| Decrement Useless Gaps\n', group='07 Layout'}),
 	awful.key({alt, ctl}, 'j', function() awful.tag.incnmaster(1, nil, true) end,
-	{description='| Increment master clients\n', group='07 Layout'}),
+	{description='| Increment Master Clients\n', group='07 Layout'}),
 	awful.key({alt, ctl}, 'k', function() awful.tag.incnmaster(-1, nil, true) end,
-	{description='| Decrement master clients\n', group='07 Layout'}),
+	{description='| Decrement Master Clients\n', group='07 Layout'}),
 	awful.key({alt, ctl}, 'space', function() awful.layout.inc(-1) end,
-	{description='| Select previous layout\n', group='07 Layout'}),
+	{description='| Select Previous Layout\n', group='07 Layout'}),
 	awful.key({alt, ctl}, '-', function()
 		awful.screen.focused().systray.visible=not awful.screen.focused().systray.visible
 	end,
-	{description='| Toggle systray visibility\n', group='07 Layout'}),
+	{description='| Toggle Systray Visibility\n', group='07 Layout'}),
 	awful.key({alt, ctl}, '=', function()
 		for s in screen do
 			s.wibox.visible=not s.wibox.visible
 			if s.bottomwibox then s.bottomwibox.visible=not s.bottomwibox.visible end
 		end end,
-	{description='| Toggle wibox visibility\n', group='07 Layout'}),
+	{description='| Toggle Wibox Visibility\n', group='07 Layout'}),
 
 	-- Scripts
 	awful.key({alt, shft}, 'F2', function()
 		awful.spawn.with_shell('tog_pulse.sh')
 	end,
-	{description='| Toggle reload Pulse\n', group='08 Scripts'}),
+	{description='| Toggle Reload Pulse\n', group='08 Scripts'}),
 	awful.key({alt, shft}, 'F1', function()
 		awful.spawn.with_shell('tog_picom.sh')
 	end,
-	{description='| Toggle reload Picom\n', group='08 Scripts'})
+	{description='| Toggle Reload Picom\n', group='08 Scripts'})
 )
 
 -- External Client Keys
 clientkeys=gears.table.join(
 	awful.key({mod}, 'n', function(c) c.minimized=true end,
-	{description='| Minimize window\n', group='04 Client'}),
+	{description='| Minimize Window\n', group='04 Client'}),
 	awful.key({mod}, 'm', function(c) c.maximized=not c.maximized c:raise() end,
-	{description='| Maximize window\n', group='04 Client'}),
+	{description='| Maximize Window\n', group='04 Client'}),
 	awful.key({mod}, 'q', function(c) c:kill() end,
-	{description='| Kill windows\n', group='04 Client'}),
+	{description='| Kill Windows\n', group='04 Client'}),
 	awful.key({mod, shft}, 'm', lain.util.magnify_client,
-	{description='| Magnify focused window\n', group='04 Client'}),
+	{description='| Magnify Focused Window\n', group='04 Client'}),
 	awful.key({alt, shft}, 'space', awful.client.floating.toggle,
-	{description='| Toggle floating state\n', group='04 Client'}),
+	{description='| Toggle Floating State\n', group='04 Client'}),
 	awful.key({alt, shft}, 't', function(c) c.ontop=not c.ontop end,
-	{description='| Toggle sticky state\n', group='04 Client'}),
+	{description='| Toggle Sticky State\n', group='04 Client'}),
 	awful.key({alt, shft}, 'm', function(c) c.fullscreen=not c.fullscreen c:raise() end,
-	{description='| Toggle fullscreen state\n', group='04 Client'})
+	{description='| Toggle Fullscreen State\n', group='04 Client'})
 )
 
 -- Tag Selection
 for i=1, 9 do local descr_view, descr_toggle, descr_move, descr_toggle_focus
 	if i == 1 or i == 9 then
-		descr_view={description='| Switch to tag ##\n', group='06 Tags'}
-		descr_toggle={description='| Focus main client on tag\n', group='06 Tags'}
-		descr_move={description='| Throw client to tag\n', group='06 Tags'}
-		descr_toggle_focus={description='| Follow client to tag\n', group='06 Tags'}
+		descr_view={description='| Switch to Tag ##\n', group='06 Tags'}
+		descr_toggle={description='| Focus Main Client on Tag\n', group='06 Tags'}
+		descr_move={description='| Throw Client to Tag\n', group='06 Tags'}
+		descr_toggle_focus={description='| Follow Client to Tag\n', group='06 Tags'}
 	end
 	globalkeys=gears.table.join(globalkeys,
 		awful.key({mod}, '#' .. i+9, function()
