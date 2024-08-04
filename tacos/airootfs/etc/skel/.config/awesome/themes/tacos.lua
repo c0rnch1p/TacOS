@@ -285,7 +285,7 @@ local mpd=lain.widget.mpd({
 			os.getenv('HOME') .. '/.local/state/mpd/mpd.state', 'r')
 		local browser_info='-'
 		if status_file then local line=status_file:read("*all") status_file:close()
-			if line and line ~= '-' then browser_info=line end -- Parse from scripts/mpd_current.txt
+			if line and line ~= '-' then browser_info=line end
 		end	local artist='N/A' local title='N/A'
 		if mpd_now.state == 'play' then
 			artist=mpd_now.artist or 'Unknown Artist'

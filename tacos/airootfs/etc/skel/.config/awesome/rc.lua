@@ -463,11 +463,11 @@ globalkeys=gears.table.join(
 
 	-- Scripts
 	awful.key({alt, shft}, 'F2', function()
-		awful.spawn.with_shell('tog_pulse.sh')
+		awful.spawn.with_shell('tog_pulse')
 	end,
 	{description='| Toggle Reload Pulse\n', group='08 Scripts'}),
 	awful.key({alt, shft}, 'F1', function()
-		awful.spawn.with_shell('tog_picom.sh')
+		awful.spawn.with_shell('tog_picom')
 	end,
 	{description='| Toggle Reload Picom\n', group='08 Scripts'})
 )
@@ -666,7 +666,7 @@ local function run(c, check_cmd)
 end
 
 -- Startup List & Final
-run('tog_pulse.sh')
+run('tog_pulse')
 run('/usr/share/cadence/src/cadence.py --minimized', 'cadence')
 run('mpd --no-daemon')
 run('knotes --skip-note')

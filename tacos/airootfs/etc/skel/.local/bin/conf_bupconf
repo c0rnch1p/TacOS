@@ -92,3 +92,7 @@ for FILE in "${SCRIPT_FILES[@]}"; do
 	copy_file "$FILE" "$SCRIPT_DIR"
 done
 echo -e '\nFiles copied successfully'
+
+echo -e '\nSynchronizing user and root config'
+sudo rsync -avhP "$HOME/.config" '/root'
+sudo find '/root/.config' -exec chown root:root {} \;

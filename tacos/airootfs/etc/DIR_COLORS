@@ -1,16 +1,24 @@
-#
-#            _ \  _ _|  _ \     __|   _ \   |      _ \   _ \   __| 
-#            |  |   |     /    (     (   |  |     (   |    / \__ \ 
+#80x
+#            _ \  _ _|  _ \     __|   _ \   |      _ \   _ \   __|
+#            |  |   |     /    (     (   |  |     (   |    / \__ \
 #           ___/  ___| _|_\   \___| \___/  ____| \___/  _|_\ ____/
 #
-################################################################################
-# ~ $HOME/.dir_colors
-# ~ /etc/DIR_COLORS
-################################################################################
-# ~ man 'dir_colors(5)' | less +/DESCRIPTION
-################################################################################
-# 1 ~ TERMINAL LIST
-################################################################################
+#===============================================================================
+#
+# Resources:
+# - Filepath: /etc/DIR_COLORS
+# - User Config: $HOME/.dir_colors
+# - User Config (2): $HOME/.config/dir_colors
+#
+#===============================================================================
+#
+# References:
+# - Dir_colors Manpage: man -P 'less +3 +/DESCRIPTION' 'dir_colors(5)'
+#
+#===============================================================================
+# - [1] Terminal List
+#===============================================================================
+
 TERM ansi
 TERM color-xterm
 TERM con132x25
@@ -78,158 +86,147 @@ TERM xterm-88color
 TERM xterm-color
 TERM xterm-debian
 TERM xterm-termite
-################################################################################
-# 2 ~ SYSTEM FILE COLORS (RGB FORMAT)
-################################################################################
-#
-# background (system)
-#
+
+#===============================================================================
+# - [2] Filetype Colors
+#===============================================================================
+
+# Background (system)
 NORMAL 00
-#
-# LS_COLORS="rs=0:"
-# (system)
-#
+
+# LS_COLORS='rs=0:' (system)
 RESET 0
-#
-# LS_COLORS="mh=00:"
-# (system)
-#
-MULTIHARDLINK 00	
-#
-# LS_COLORS="fi;00:"fi=38;2;179;255;63;2:"
-# (yellowy green)
-# 
-FILE 38;2;179;255;63;2 
-#
-# LS_COLORS="di=38;2;255;255;101;1:"
-# (bold light yellow)
-#
+
+# LS_COLORS='mh=00:' (system)
+MULTIHARDLINK 00
+
+# Standard Files (yellowy green)
+# LS_COLORS='fi;00:'fi=38;2;179;255;63;2:'
+FILE 38;2;179;255;63;2
+
+# Standard Folders (bold light yellow)
+# LS_COLORS='di=38;2;255;255;101;1:'
 DIR 38;2;255;255;101;1
-#
-# LS_COLORS="ex=38;2;255;88;88;2:"
-# (light red)
-#
+
+# Executable Files (light red)
+# LS_COLORS='ex=38;2;255;88;88;2:'
 EXEC 38;2;255;88;88;2
-#
-# LS_COLORS="ln=38;2;129;255;197;2:"
-# (turqoise)
-#
+
+# Symlinks (turqoise)
+# LS_COLORS='ln=38;2;129;255;197;2:'
 LINK 38;2;129;255;197;2
-#
-# LS_COLORS="mi=38;2;129;255;197;2:" 
-# (turqoise)
-#
+
+# Missing Symlinks (turqoise)
+# LS_COLORS='mi=38;2;129;255;197;2:'
 MISSING 38;2;129;255;197;2
-#
-# LS_COLORS="or=38;2;129;255;197;2:" 
-# orphaned links (turqoise)
-#
-ORPHAN 38;2;129;255;197;2  
-#
-# LS_COLORS="do=38;2;255;88;88;1:"
-# (bold light red)
-#
+
+# Orphaned Symlinks (turqoise)
+# LS_COLORS='or=38;2;129;255;197;2:'
+ORPHAN 38;2;129;255;197;2
+
+# BBS and Gateway Files (bold light red)
+# LS_COLORS='do=38;2;255;88;88;1:'
 DOOR 38;2;255;88;88;1
-#
-# LS_COLORS="so=38;2;255;88;88;1:" 
-# sockets (bold light red)
-#
-SOCK 38;2;255;88;88;1 
-#
-# LS_COLORS="pi=38;2;255;129;159;1:" 
-# pipes (bold magenta)
-#
-FIFO 38;2;255;129;159;1	 
-#
-# LS_COLORS="bd=38;2;176;129;255;1:" 
-# block device driver (bold purple)
-#
+
+# Sockets (bold light red)
+# LS_COLORS='so=38;2;255;88;88;1:'
+SOCK 38;2;255;88;88;1
+
+# Pipes (bold magenta)
+# LS_COLORS='pi=38;2;255;129;159;1:'
+FIFO 38;2;255;129;159;1
+
+# Block Device Driver (bold purple)
+# LS_COLORS='bd=38;2;176;129;255;1:'
 BLK 38;2;176;129;255;1
-#
-# LS_COLORS="cd=38;2;129;151;255;1:" 
-# character device driver (bold blue)
-#
+
+# Character Device Driver (bold blue)
+# LS_COLORS='cd=38;2;129;151;255;1:'
 CHR 38;2;129;151;255;1
-#
-# LS_COLORS="ca=38;2;129;193;255;2:" 
-# file with capability (light blue)
-#
+
+# File With Capability (light blue)
+# LS_COLORS='ca=38;2;129;193;255;2:'
 CAPABILITY 38;2;129;193;255;2
-#
-# LS_COLORS="su=38;5;121;2:" 
-# file that is setuid (reddish grey)
-#
+
+# File that is Setuid (reddish grey)
+# LS_COLORS='su=38;5;121;2:'
 SETUID 38;2;183;172;172;2
-#
-# LS_COLORS="sg=38;5;121;2:" 
-# file that is setgid (pinkish grey)
-# 
-SETGID 38;2;183;172;183;2 
-#
-# LS_COLORS="tw=38;5;196;2:" 
-# other writable sticky dir (blueish grey)
-#
-STICKY_OTHER_WRITABLE 38;2;152;161;183;2 
-#
-# LS_COLORS="ow=38;5;196;2:" 
-# non sticky other writable dir (greenish grey)
-#
+
+# File that is Setgid (pinkish grey)
+# LS_COLORS='sg=38;5;121;2:'
+SETGID 38;2;183;172;183;2
+
+# Other Writable Sticky Dir (blueish grey)
+# LS_COLORS='tw=38;5;196;2:'
+STICKY_OTHER_WRITABLE 38;2;152;161;183;2
+
+# Non-Sticky Other Writable Dir (greenish grey)
+# LS_COLORS='ow=38;5;196;2:'
 OTHER_WRITABLE 38;2;152;183;153;2
-#
-# LS_COLORS="st=38;5;196;2:" 
-# non other writable sticky dir (yellowish grey)
-# 
+
+# Non-Other Writable Sticky Dir (yellowish grey)
+# LS_COLORS='st=38;5;196;2:'
 STICKY 38;2;183;182;152;2
-################################################################################
-# 3 ~ FILETYPE COLORS 
-################################################################################
-#
+
+#===============================================================================
+# - [3] Filetype Colors
+#===============================================================================
+
+# Web Media Files AKA Mime Types (bold yellowy green)
 # eg. LS_COLORS="*.axv=38;5;166;2:"
-#
-# web media files aka mime types (bold yellowy green)
-#
-.axv 38;2;179;255;63;1
 .anx 38;2;179;255;63;1
+.axv 38;2;179;255;63;1
 .ogv 38;2;179;255;63;1
 .ogx 38;2;179;255;63;1
-#
-# code files (purple)
-#
-.cnf 38;2;173;125;255;2
-.conf 38;2;173;125;255;2
+
+# Program Files (purple)
 .c 38;2;173;125;255;2
 .cgi 38;2;173;125;255;2
+.cnf 38;2;173;125;255;2
+.conf 38;2;173;125;255;2
+.css 38;2;173;125;255;2
+.diff 38;2;122;255;212;2
+.dirs 38;2;173;125;255;2
 .go 38;2;173;125;255;2
 .h 38;2;173;125;255;2
 .htm 38;2;173;125;255;2
 .html 38;2;173;125;255;2
+.ini 38;2;173;125;255;2
 .js 38;2;173;125;255;2
+.json 38;2;173;125;255;2
+.list 38;2;173;125;255;2
+.locale 38;2;173;125;255;2
+.log 38;2;122;255;212;2
 .lua 38;2;173;125;255;2
+.patch 38;2;122;255;212;2
 .pl 38;2;173;125;255;2
 .pm 38;2;173;125;255;2
 .pod 38;2;173;125;255;2
+.ppd 38;2;173;125;255;2
+.preset 38;2;173;125;255;2
 .py 38;2;173;125;255;2
 .rasi 38;2;173;125;255;2
 .rb 38;2;173;125;255;2
 .rby 38;2;173;125;255;2
+*rc 38;2;173;125;255;2
+.rc 38;2;173;125;255;2
 .sh 38;2;173;125;255;2
 .so 38;2;173;125;255;2
 .t 38;2;173;125;255;2
-#
-# doc files (light blue)
-#
-.diff 38;2;122;255;212;2
+.theme 38;2;173;125;255;2
+.types 38;2;173;125;255;2
+.xml 38;2;173;125;255;2
+
+# Doc Files (light blue)
 .doc 38;2;122;255;212;2
-.log 38;2;122;255;212;2
-.patch 38;2;122;255;212;2
-.pdf 38;2;122;255;212;2
+.md 38;2;122;255;212;2
+.ods 38;2;122;255;212;2
+.odt 38;2;122;255;212;2
 .ps 38;2;122;255;212;2
 .tex 38;2;122;255;212;2
 .txt 38;2;122;255;212;2
-.txt 38;2;122;255;212;2
-#
-# audio files (light green)
-#
+
+# Audio Files (light green)
 .aac 38;2;100;255;240;2
 .au 38;2;100;255;240;2
 .axa 38;2;100;255;240;2
@@ -246,16 +243,17 @@ STICKY 38;2;183;182;152;2
 .spx 38;2;100;255;240;2
 .wav 38;2;100;255;240;2
 .xspf 38;2;100;255;240;2
-#
-# image files (deep blue)
-#
+
+# Image Files (deep blue)
 .bmp 38;2;112;141;255;2
+.gfy 38;2;112;141;255;2
 .gif 38;2;112;141;255;2
 .jpeg 38;2;112;141;255;2
 .jpg 38;2;112;141;255;2
 .mng 38;2;112;141;255;2
 .pbm 38;2;112;141;255;2
 .pcx 38;2;112;141;255;2
+.pdf 38;2;112;141;255;2
 .pgm 38;2;112;141;255;2
 .png 38;2;112;141;255;2
 .ppm 38;2;112;141;255;2
@@ -265,12 +263,10 @@ STICKY 38;2;183;182;152;2
 .tif 38;2;112;141;255;2
 .tiff 38;2;112;141;255;2
 .xbm 38;2;112;141;255;2
-.xpm 38;2;112;141;255;2
-.gfy 38;2;112;141;255;2
 .xcf 38;2;112;141;255;2
-#
-# video files (purple)
-#
+.xpm 38;2;112;141;255;2
+
+# Video Files (purple)
 .asf 38;2;188;129;255;2
 .avi 38;2;188;129;255;2
 .cgm 38;2;188;129;255;2
@@ -298,9 +294,8 @@ STICKY 38;2;183;182;152;2
 .wmv 38;2;188;129;255;2
 .xwd 38;2;188;129;255;2
 .yuv 38;2;188;129;255;2
-#
-# archive files (bold light orange)
-#
+
+# Archive Files (bold light orange)
 .7z 38;2;255;146;50;1
 .ace 38;2;255;146;50;1
 .alz 38;2;255;146;50;1
@@ -313,6 +308,7 @@ STICKY 38;2;183;182;152;2
 .deb 38;2;255;146;50;1
 .dz 38;2;255;146;50;1
 .ear 38;2;255;146;50;1
+.gpg 38;2;255;146;50;1
 .gz 38;2;255;146;50;1
 .jar 38;2;255;146;50;1
 .lha 38;2;255;146;50;1
@@ -342,9 +338,8 @@ STICKY 38;2;183;182;152;2
 .Z 38;2;255;146;50;1
 .zip 38;2;255;146;50;1
 .zoo 38;2;255;146;50;1
-#
-# backup files (browny orange)
-#
+
+# Backup Files (browny orange)
 .bak 38;2;255;177;82;2
 .dpkg-dist 38;2;255;177;82;2
 .dpkg-old 38;2;255;177;82;2
