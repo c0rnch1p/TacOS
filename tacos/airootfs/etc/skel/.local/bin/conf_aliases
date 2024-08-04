@@ -64,7 +64,6 @@ alias du='du -sh'
 alias edit_perso_speeddial='edit_perso_speeddial'
 alias edit_system_speeddial='edit_system_speeddial'
 alias edit_user_speeddial='edit_user_speeddial'
-
 alias edpspd='edit_perso_speeddial'
 alias edsspd='edit_system_speeddial'
 alias eduspd='edit_user_speeddial'

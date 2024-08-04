@@ -7,7 +7,7 @@
 #===============================================================================
 #
 # Files:
-# - Filepath: $BIN/variables
+# - Filepath: $BIN/conf_variables
 #
 #===============================================================================
 #
@@ -67,8 +67,8 @@ shopt -s hostcomplete
 shopt -s huponexit
 shopt -s interactive_comments
 shopt -s lithist
-shopt -s no_empty_cmd_completion
 shopt -s nocaseglob
+shopt -s no_empty_cmd_completion
 shopt -s progcomp
 shopt -s progcomp_alias
 shopt -s sourcepath
@@ -157,8 +157,7 @@ export OPENAI_HOME="$PYTHON_LIB/openai"
 export PAVU_HOME="$CONFIG/pavucontrol-qt"
 export PICOM_HOME="$CONFIG/picom"
 export PIX_HOME="$CONFIG/pix"
-export PKI_DATA="$DATA/pki"
-export PULSE_HOME="$HOME/.pulse"
+export PULSE_CONFIG="$CONFIG/pulse"
 export PYTHON_LIB="$LIB/python3.12/site-packages"
 export PYTHON_VENV="$DATA/python"
 export QJACKCTL_HOME="$CONFIG/rncbc.org"
@@ -180,6 +179,7 @@ export TRANSMISSION_HOME="$CONFIG/transmission"
 export VIVALDI_HOME="$CONFIG/vivaldi"
 export VOLUMEICON_HOME="$CONFIG/volumeicon"
 export W3M_DATA="$DATA/w3m"
+export W3M_DIR="$CONFIG/w3m"
 export WINEPREFIX="$DATA/wine"
 export X11_HOME="$CONFIG/x11"
 export XORG_DATA="$DATA/xorg"
@@ -219,6 +219,7 @@ export SCREENRC="$CONFIG/screenrc"
 export SECUREMSG='/bin/telegram-desktop'
 export SUDO_ASKPASS='/usr/lib/ssh/x11-ssh-askpass'
 export TERMINAL='/bin/terminator'
+export WWW_HOME='/var/www'
 export XMODIFIERS='@im=dbus'
 
 #===============================================================================

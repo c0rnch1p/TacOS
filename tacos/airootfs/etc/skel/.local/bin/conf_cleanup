@@ -29,10 +29,10 @@
 [ -f "$HOME/.sqlite_history" ] && rm "$HOME/.sqlite_history"
 [ -f "$HOME/.wget-hsts" ] && rm "$HOME/.wget-hsts"
 [ -f "$HOME/.Xresources" ] && rm "$HOME/.Xresources"
-[ -f "$HOME/.xsession" ] && rm "$HOME/.xsession"
-[ -f "$HOME/.xsession-errors" ] && rm "$HOME/.xsession-errors"
 [ -f "$HOME/.xsession-errors.old" ] && rm "$HOME/.xsession-errors.old"
+[ -f "$HOME/.xsession-errors" ] && rm "$HOME/.xsession-errors"
 [ -f "$HOME/.xsessionrc" ] && rm "$HOME/.xsessionrc"
+[ -f "$HOME/.xsession" ] && rm "$HOME/.xsession"
 [ -f "$HOME/.yarnrc" ] && rm "$HOME/.yarnrc"
 [ -f "$HOME/.zshrc" ] && rm "$HOME/.zshrc"
 [ -f "$HOME/.zynaddsubfx-bank-cache.xml" ] && rm "$HOME/.zynaddsubfx-bank-cache.xml"
@@ -57,15 +57,15 @@
 #=======================================================================================================================
 
 [ -d "$CONFIG/auostart" ] && rmr "$CONFIG/autostart"
-[ -d "$HOME/.shared-ringdb" ] && rmr "$HOME/.shared-ringdb"
-[ -d "$HOME/.tor" ] && rmr "$HOME/.tor"
-[ -d "$HOME/.vital" ] && rmr "$HOME/.vital"
 [ -d "$HOME/go" ] && rmr "$HOME/go"
 [ -d "$HOME/Music" ] && rmr "$HOME/Music"
 [ -d "$HOME/Pictures" ] && rmr "$HOME/Pictures"
 [ -d "$HOME/Public" ] && rmr "$HOME/Public"
+[ -d "$HOME/.shared-ringdb" ] && rmr "$HOME/.shared-ringdb"
 [ -d "$HOME/Templates" ] && rmr "$HOME/Templates"
+[ -d "$HOME/.tor" ] && rmr "$HOME/.tor"
 [ -d "$HOME/Videos" ] && rmr "$HOME/Videos"
+[ -d "$HOME/.vital" ] && rmr "$HOME/.vital"
 [ -d "$MONERO_HOME/.bitmonero/lmdb" ] && rmr "$MONERO_HOME/.bitmonero/lmdb"
 
 #=======================================================================================================================
@@ -93,16 +93,19 @@
 [ ! -d "$SQL_HOME" ] && mvp "$SQL_HOME" &>'/dev/null'
 [ ! -d "$SSH_HOME" ] && mvp "$SSH_HOME" &>'/dev/null'
 [ ! -d "$VISUAL" ] && mvp "$VISUAL" &>'/dev/null'
+[ ! -d "$WWW_HOME" ] && smvp "$WWW_HOME" &>'/dev/null'
+[ ! -d "$XDG_DATA_HOME" ] && mvp "$XDG_STATE_HOME" &>'/dev/null'
 [ ! -d "$XDG_DESKTOP_DIR" ] && mvp "$XDG_DESKTOP_DIR" &>'/dev/null'
 [ ! -d "$XDG_DOCUMENTS_DIR" ] && mvp "$XDG_DOCUMENTS_DIR" &>'/dev/null'
 [ ! -d "$XDG_DOWNLOAD_DIR" ] && mvp "$XDG_DOWNLOAD_DIR" &>'/dev/null'
 [ ! -d "$XDG_STATE_HOME" ] && mvp "$XDG_STATE_HOME" &>'/dev/null'
-[ ! -d "$XDG_DATA_HOME" ] && mvp "$XDG_STATE_HOME" &>'/dev/null'
 [ -d "$HOME/.bin" ] && mv "$HOME/.bin" "$LOCAL/bin" &>'/dev/null'
 [ -d "$HOME/.cargo" ] && mv "$HOME/.cargo" "$CARGO_HOME" &>'/dev/null'
 [ -d "$HOME/.ccache" ] && mv "$HOME/.ccache" "$CCACHE_DIR" &>'/dev/null'
 [ -d "$HOME/Monero" ] && mv "$HOME/Monero" "$CONFIG/monero-project" &>'/dev/null'
-[ -d "$HOME/.pki" ] && mv "$HOME/.pki" "$PKI_HOME" &>'/dev/null'
+[ -d "$HOME/.newsboat" ] && mv "$HOME/.newsboat" "$CONFIG/newsboat" &>'/dev/null'
+[ -d "$HOME/.pulse" ] && mv "$HOME/.pulse" "$PULSE_CONFIG" &>'/dev/null'
+[ -d "$HOME/.w3m" ] && mv "$HOME/.w3m" "$W3M_DIR" &>'/dev/null'
 [ -d "$HOME/.wine" ] && mv "$HOME/.wine" "$WINEPREFIX" &>'/dev/null'
 
 #=======================================================================================================================
@@ -151,9 +154,9 @@
 #=======================================================================================================================
 
 [ ! -f "$LOCAL/share/xorg/Xorg.0.log" ] && touch "$LOCAL/share/xorg/Xorg.0.log" &>'/dev/null'
-[ ! -f "$XDG_STATE_HOME/mpd/mpd.state" ] && touch "$XDG_STATE_HOME/mpd/mpd.state" &>'/dev/null'
 [ ! -f "$MPD_HOME/mpd.db" ] && touch "$MPD_HOME/mpd.db" &>'/dev/null'
 [ ! -f "$MPD_HOME/mpd.pid" ] && touch "$MPD_HOME/mpd.pid" &>'/dev/null'
+[ ! -f "$XDG_STATE_HOME/mpd/mpd.state" ] && touch "$XDG_STATE_HOME/mpd/mpd.state" &>'/dev/null'
 [ -f "$HOME/.asoundrc" ] && mv "$HOME/.asoundrc" "$ALSA_HOME/asoundrc" &>'/dev/null'
 [ -f "$HOME/.bash_history" ] && mv "$HOME/.bash_history" "$XDG_STATE_HOME/bash/history" &>'/dev/null'
 [ -f "$HOME/.gtkrc-2.0" ] && mv "$HOME/.gtkrc-2.0" "$GTK2_RC_FILES/gtkrc" &>'/dev/null'
