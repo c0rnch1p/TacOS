@@ -279,14 +279,16 @@ local weather=lain.widget.weather({
 
 -- MPD Widget
 local mpd=lain.widget.mpd({
-	timeout=5, -- Refresh interval
+	timeout=3, -- Refresh interval
 	settings=function()
+		awful.spawn.with_shell('upd_mpd') -- Fetch browser info using the script
 		local status_file=io.open(
 			os.getenv('HOME') .. '/.local/state/mpd/mpd.state', 'r')
 		local browser_info='-'
 		if status_file then local line=status_file:read("*all") status_file:close()
 			if line and line ~= '-' then browser_info=line end
-		end	local artist='N/A' local title='N/A'
+		end
+		local artist='N/A' local title='N/A'
 		if mpd_now.state == 'play' then
 			artist=mpd_now.artist or 'Unknown Artist'
 			title=mpd_now.title or 'Unknown Title'

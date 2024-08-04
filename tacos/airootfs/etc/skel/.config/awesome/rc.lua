@@ -8,6 +8,8 @@
  Files:
  - Contributions: $HOME/.config/awesome/contrib
  - Filepath: $HOME/.config/awesome/rc.lua
+
+
  - Licence: $HOME/.config/awesome/licence
 
 ====================================================================================================

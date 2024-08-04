@@ -1,0 +1,13 @@
+#!/bin/bash
+
+LOGFL="$HOME/.local/state/mpd/browser.log"
+BROWSER_INFO=$(playerctl metadata --player=firefox --format "{{title}}" 2>>"$LOGFL")
+
+[ ${#BROWSER_INFO} -gt 45 ] && BROWSER_INFO="${BROWSER_INFO:0:42}..."
+echo "Fetched browser info: $BROWSER_INFO" >>"$LOGFL"
+if [ -n "$BROWSER_INFO" ]; then
+	echo "$BROWSER_INFO" >"$HOME/.local/state/mpd/mpd.state"
+	echo "Updated mpd.state with browser info" >>"$LOGFL"
+else echo '-' >"$HOME/.local/state/mpd/mpd.state"
+	echo "No browser info found" >>"$LOGFL"
+fi
