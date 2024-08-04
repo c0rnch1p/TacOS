@@ -391,6 +391,7 @@ mlt
 movit
 mpc
 mpd
+mpdscribble
 mpg123
 mpv
 mypaint
