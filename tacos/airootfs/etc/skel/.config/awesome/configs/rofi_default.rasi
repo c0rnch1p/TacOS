@@ -159,7 +159,6 @@ button0{
 	font: "Nimbus Mono PS Bold 10";
 	padding: 6px;
 	border: 1px;
-	//border-radius: 4px 0px 0px 4px;
 	background-color: #554444cc;
 	border-color: @fg;
 	color: @fg;
