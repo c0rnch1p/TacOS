@@ -16,7 +16,6 @@ handling temperamental systems like Pulse.
 - **awesome-freedesktop-git (AUR)**: Freedesktop.org desktop entries and menu for AwesomeWM
 - **cadence (AUR)**: JACK toolbox for audio production
 - **deadbeef**: Modular GTK audio player for GNU/Linux
-- **dmenu**: Generic menu for X
 - **knotes**: Popup notes
 - **lain-git** (AUR): Layouts, asynchronous widgets and utilities for AwesomeWM
 - **mpc**: Minimalist command line interface to MPD
@@ -24,6 +23,7 @@ handling temperamental systems like Pulse.
 - **nm-connection-editor**: NetworkManager GUI connection editor and widgets
 - **pamac-aur (AUR)**: Package Manager based on libalpm with AUR and Appstream support
 - **picom**: Lightweight compositor for X11
+- **playerctl**: MPRIS media player controller and library
 - **pulseaudio**: Featureful, general-purpose sound server
 - **rofi**: Window switcher, application launcher and dmenu replacement
 - **systemd**: System and service manager
