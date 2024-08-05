@@ -94,7 +94,6 @@ autorandr
 awesome
 btop
 discord
-dmenu
 exodus
 fabric
 firefox
@@ -391,7 +390,6 @@ mlt
 movit
 mpc
 mpd
-mpdscribble
 mpg123
 mpv
 mypaint

@@ -311,24 +311,33 @@ globalkeys=gears.table.join(
 	{description='| Show Main Menu\n', group='03 Menus'}),
 	awful.key({mod}, 'p', function() menubar.utils.terminal=terminal menubar.show() end,
 	{description='| Show Quick Run Menu\n', group='03 Menus'}),
-	awful.key({alt, shft}, 'r', function() awful.util.spawn('rofi -show run') end,
-	{description='| Rofi Show Run\n', group='03 Menus'}),
-	awful.key({alt, shft}, 'd', function() awful.util.spawn('rofi -show window') end,
-	{description='| Rofi Show Window\n', group='03 Menus'}),
-	awful.key({mod}, 'z', function() awful.spawn(string.format(
-		"dmenu_run -i -nb '#000000' -nf '#C6EA52' \
-		-sb '#2D454E' -sf '#C3FF00' -fn 'Nouveau IBM-11'",
-		beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus)) end,
-	{description='| Show Dmenu Prompt\n', group='03 Menus'}),
+	awful.key({alt, shft}, 'r', function()
+		awful.util.spawn('rofi -no-config -no-lazy-grab -show run -modi run \
+		-theme ~/.config/awesome/configs/rofi_default.rasi',
+		beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus)
+	end,
+	{description='| Show Executables\n', group='03 Menus'}),
+	awful.key({alt, shft}, 'd', function()
+		awful.util.spawn('rofi -no-config -no-lazy-grab -show window -modi window \
+		-theme ~/.config/awesome/configs/rofi_default.rasi',
+		beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus)
+	end,
+	{description='| Show Open Windows\n', group='03 Menus'}),
+	awful.key({mod}, 'z', function()
+		awful.util.spawn('rofi -no-config -no-lazy-grab -show run -modi run \
+		-theme ~/.config/awesome/configs/cmd_prompt.rasi',
+		beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus)
+	end,
+	{description='| Show Command Prompt\n', group='03 Menus'}),
 	awful.key({mod}, 'r', function()
 		local c=client.focus
 		if c then c.minimized=true end
 		awful.spawn.easy_async(string.format('rofi -no-config -no-lazy-grab -show drun -modi drun \
-		-theme ~/.config/awesome/configs/rofi.rasi',
+		-theme ~/.config/awesome/configs/gbl_menu.rasi',
 		beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus),
 		function() if c then c.minimized=false end end)
 	end,
-	{description='| Show Global Rofi Menu\n', group='03 Menus'}),
+	{description='| Show Global Menu\n', group='03 Menus'}),
 
 	-- Client
 	awful.key({mod, shft}, 'j', function() awful.client.swap.byidx(1) end,

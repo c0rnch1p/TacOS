@@ -94,7 +94,6 @@ autorandr
 awesome
 btop
 discord
-dmenu
 exodus
 firefox
 flameshot
@@ -387,7 +386,6 @@ mlt
 movit
 mpc
 mpd
-mpdscribble
 mpg123
 mpv
 mypaint

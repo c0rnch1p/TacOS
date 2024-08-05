@@ -1,12 +1,12 @@
  /* 100x
-                                        _ \   _ \   __| _ _|
-                                          /  (   |  _|    |
-                                       _|_\ \___/  _|   ___|
+                           _ \   _ \   __| _ _|     \  |  __|   \ |  |  |
+                             /  (   |  _|    |     |\/ |  _|   .  |  |  |
+                          _|_\ \___/  _|   ___|   _|  _| ___| _|\_| \__/
 
 ====================================================================================================
 
  Files:
- - Filepath: $HOME/.config/awesome/rofi.rasi
+ - Filepath: $HOME/.config/awesome/configs/gbl_menu.rasi
  - Licence: $HOME/.config/awesome/licence
  - System Config: /etc/rofi.rasi
  - User Config: $HOME/.config/rofi.rasi
@@ -46,16 +46,18 @@ configuration{
 }
 
 *{
-	ac: #83770A;
-	al: #00000000;
-	ba: #FFB30033;
-	bg: #1F1F1FFF;
-	fg: #FFFFFFFF;
-	fd: #919D7B;
-	hl: #C3FF00; /*Highlight text color*/
-	tc: #5D7B87; /*Faded text color*/
-	tr: #000000A9;
-	tx: #C6EA52; /*Search text color*/
+	ac: #83770A; /* Dark Yellow */
+	al: #00000000; /* Transparent */
+	ba: #FFB30033; /* Light Orange */
+	bg: #1F1F1FFF; /* Dark Gray */
+	ea: #87ceeb; /* Sky Blue */
+	er: #cd5c5c; /* Indian Red */
+	fg: #FFFFFFFF; /* White */
+	fd: #919D7B; /* Sage Green */
+	hl: #C3FF00; /* Neon Yellow - Highlight Text Color */
+	tc: #5D7B87; /* Slate Gray - Faded Text Color*/
+	tr: #000000A9; /* Semi-Transparent Black */
+	tx: #C6EA52; /* Lime Green - Search Text Color */
 	background-color: @al;
 	text-color: @tc;
 }

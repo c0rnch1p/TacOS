@@ -1,0 +1,82 @@
+/* 100x
+                     _ \   _ \   __| _ _|    _ \  _ \   _ \    \  |  _ \ __ __|
+                       /  (   |  _|    |     __/    /  (   |  |\/ |  __/    |
+                    _|_\ \___/  _|   ___|   _|   _|_\ \___/  _|  _| _|     _|
+
+====================================================================================================
+
+ Files:
+ - Filepath: $HOME/.config/awesome/configs/cmd_prompt.rasi
+ - Licence: $HOME/.config/awesome/licence
+ - System Config: /etc/rofi.rasi
+ - User Config: $HOME/.config/rofi.rasi
+
+====================================================================================================
+
+ Resources:
+ - Arch Wiki: https://wiki.archlinux.org/title/Rofi
+ - Git Repo: https://github.com/davatorium/rofi
+
+====================================================================================================
+
+ References:
+ - Rofi Manpage: man -P 'less +9 +/DESCRIPTION' 'rofi(1)'
+ - Rofi-debugging Manpage: man -P 'less +3 +/NAME' 'rofi-debugging(5)'
+ - Rofi-dmenu Manpage: man -P 'less +3 +/DESCRIPTION' 'rofi-dmenu(5)'
+ - Rofi-keys Manpage: man -P 'less +3 +/DESCRIPTION' 'rofi-keys(5)'
+ - Rofi-script Manpage: man -P 'less +3 +/DESCRIPTION' 'rofi-script(5)'
+ - Rofi-sensible-terminal Manpage: man -P 'less +9 +/DESCRIPTION' 'rofi-sensible-terminal(1)'
+ - Rofi-theme Manpage: man -P 'less +9 +/DESCRIPTION' 'rofi-theme(5)'
+ - Rofi-theme-selector Manpage: man -P 'less +3 +/DESCRIPTION' 'rofi-theme-selector(1)'
+
+//================================================================================================*/
+// [1] Settings
+//==================================================================================================
+
+*{
+	background-color: #000000;
+	border-color: White;
+	text-color: #C6EA52;
+	font: "Nouveau IBM 10";
+}
+
+window{
+	anchor: north;
+	location: north;
+	width: 100%;
+	padding: 1px;
+	children: [horibox];
+}
+
+horibox{
+	orientation: horizontal;
+	children: [entry, listview];
+}
+
+listview{
+	layout: horizontal;
+	spacing: 10px;
+	lines: 100;
+}
+
+entry{
+	expand: false;
+	width: 10em;
+	placeholder: "run...   ";
+	padding: 1px 5px;
+	tc: #5D7B87;
+}
+
+element{
+	padding: 1px;
+}
+
+element selected{
+	background-color: #2D454E;
+	text-color: #C3FF00;
+}
+
+element-text, element-icon{
+	background-color: inherit;
+	text-color: inherit;
+}
