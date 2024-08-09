@@ -80,7 +80,6 @@ python-iwlib
 #=================================================
 # - [4] Frontend Software
 #=================================================
-#gnome-disk-utility
 #gnome-screenshot
 #micro
 #open-vm-tools
@@ -99,6 +98,7 @@ firefox
 flameshot
 galculator
 gamescope
+gnome-disk-utility
 gucharmap
 hardcode-fixer-git
 hardinfo-gtk3
@@ -119,8 +119,8 @@ pacman-mirrorlist
 pamac-aur
 pavucontrol-qt
 picom
-qt5-xmlpatterns
 qt5ct
+qt5-xmlpatterns
 rate-mirrors-bin
 reflector
 rofi
