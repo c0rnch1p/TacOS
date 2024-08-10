@@ -92,7 +92,7 @@ After installing TacOS, please note that the autologin will no longer match the 
 account because it wont exist. This means the shell is manually logged into at startup
 and should be reloaded before running `startx` to launch the graphical environment or
 before continuing with server configuration. This is done using the `bash` command or the
-builtin `reload` alias.
+builtin `reload` alias (fix for startup errors with desktop, fonts and wallpapers etc).
 ###### Sudoers File
 Like any fresh install the first thing a new user would do is add their username into the
 `/etc/sudoers` file and reboot. This isnt necessarilly done with `visudo`, its just as
@@ -104,5 +104,5 @@ Nano has a builtin system config on TacOS, once open the find and replace option
 be triggered with `Ctrl+r` and the string `liveuser` can be changed.
 ### Repo Links
 ###### Dotfiles & Bin Scripts
-- [Skel Config](https://gitlab.com/c0rNCh1p/tacos/-/tree/master/tacos/airootfs/etc/skel/.config)
-- [Skel Bash Config](https://gitlab.com/c0rNCh1p/tacos/-/tree/master/tacos/airootfs/etc/skel/.local/bin)
+- [User Config](https://gitlab.com/c0rNCh1p/tacos/-/tree/master/tacos/airootfs/etc/skel/.config)
+- [Bash Config](https://gitlab.com/c0rNCh1p/tacos/-/tree/master/tacos/airootfs/etc/skel/.local/bin)
