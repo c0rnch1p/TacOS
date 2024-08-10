@@ -147,6 +147,7 @@
 [ ! -d "$VISUAL/files/image_dump" ] && mvp "$VISUAL/files/image_dump" &>'/dev/null'
 [ ! -d "$VISUAL/files" ] && mvp "$VISUAL/files" &>'/dev/null'
 [ ! -d "$VISUAL/files/video_dump" ] && mvp "$VISUAL/files/video_dump" &>'/dev/null'
+[ ! -d "$XDG_STATE_HOME/bash" ] && mvp "$XDG_STATE_HOME/bash" &>'/dev/null'
 [ ! -d "$XDG_STATE_HOME/mpd" ] && mvp "$XDG_STATE_HOME/mpd" &>'/dev/null'
 
 #=======================================================================================================================
