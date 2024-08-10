@@ -92,8 +92,8 @@ After installing TacOS, please note that the autologin will no longer match the 
 account because it wont exist. This means the shell is manually logged into at startup
 and should be reloaded before running `startx` to launch the graphical environment or
 before continuing with server configuration. This is done using the `bash` command or the
-builtin `reload` alias. Startup errors such as fonts and wallpapers not loading can be
-mitigated using this method of starting the desktop.
+builtin `reload` alias. Startup errors such as fonts and wallpapers not loading properly
+can be mitigated using this method of starting the desktop.
 ###### Sudoers File
 Like any fresh install the first thing a new user would do is add their username into the
 `/etc/sudoers` file and reboot. This isnt necessarilly done with `visudo`, its just as
