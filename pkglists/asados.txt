@@ -335,7 +335,6 @@ fluidsynth
 font-manager
 fontconfig
 fontforge
-freetype2
 frei0r-plugins
 gamemode
 gamescope
