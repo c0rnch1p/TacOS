@@ -283,6 +283,7 @@ upower
 usb_modeswitch
 usbmuxd
 usbutils
+usleep
 vulkan-radeon
 wayland
 wd719x-firmware

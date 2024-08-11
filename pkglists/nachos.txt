@@ -291,6 +291,7 @@ upower
 usb_modeswitch
 usbmuxd
 usbutils
+usleep
 wayland
 wd719x-firmware
 wmctrl

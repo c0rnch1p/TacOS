@@ -284,6 +284,7 @@ upower
 usb_modeswitch
 usbmuxd
 usbutils
+usleep
 vulkan-intel
 wayland
 wd719x-firmware
