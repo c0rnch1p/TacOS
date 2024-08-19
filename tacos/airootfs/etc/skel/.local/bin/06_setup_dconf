@@ -54,11 +54,11 @@ dconf_func(){
 	gsettings set org.gtk.settings.color-chooser selected-color '(true, 1.0, 1.0, 1.0, 1.0)'
 	gsettings set org.nemo.extensions.nemo-terminal audible-bell false
 	gsettings set org.nemo.extensions.nemo-terminal default-follow-mode 'Nemo and Terminal Synchronized'
-	gsettings set org.nemo.extensions.nemo-terminal default-visible true
+	gsettings set org.nemo.extensions.nemo-terminal default-visible false
 	gsettings set org.nemo.extensions.nemo-terminal terminal-position 'bottom'
 	gsettings set org.nemo.icon-view default-zoom-level 'large'
 	gsettings set org.nemo.list-view default-zoom-level 'small'
-	gsettings set org.nemo.preferences bulk-rename-tool b'bulky'
+	gsettings set org.nemo.preferences bulk-rename-tool b'bulky' # deprecated, set manually
 	gsettings set org.nemo.preferences close-device-view-on-device-eject true
 	gsettings set org.nemo.preferences date-format 'iso'
 	gsettings set org.nemo.preferences default-folder-viewer 'list-view'
