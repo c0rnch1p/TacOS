@@ -325,8 +325,7 @@ globalkeys=gears.table.join(
 	{description='| Show Open Windows\n', group='03 Menus'}),
 	awful.key({mod}, 'z', function()
 		awful.util.spawn('rofi -no-config -no-lazy-grab -show run -modi run \
-		-theme ~/.config/awesome/configs/cmd_prompt.rasi',
-		beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus)
+		-theme ~/.config/awesome/configs/cmd_prompt.rasi')
 	end,
 	{description='| Show Command Prompt\n', group='03 Menus'}),
 	awful.key({mod}, 'r', function()
