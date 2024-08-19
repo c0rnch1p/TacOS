@@ -455,6 +455,7 @@ sdl_net
 sdl_sound
 sdl_ttf
 sndio
+steam-linux-integration
 steam-native-runtime
 svt-av1
 svt-hevc
