@@ -333,6 +333,7 @@ npm
 python-pip
 python-pipx
 python-pyparted
+python-tabview
 python39
 shellcheck
 shfmt
