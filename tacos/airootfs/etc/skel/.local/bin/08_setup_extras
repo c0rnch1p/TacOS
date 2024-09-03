@@ -45,6 +45,7 @@ install_aur_pkgs(){
 		'epson-inkjet-printer-escpr'
 		'epson-inkjet-printer-escpr2'
 		'gedit-open-uri-context-menu-git'
+		'knotes-git'
 		'material-black-colors-theme'
 		'metagedit-git'
 		'nemo-compare'

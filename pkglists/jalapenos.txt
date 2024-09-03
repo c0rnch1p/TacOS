@@ -103,7 +103,6 @@ gucharmap
 hardcode-fixer-git
 hardinfo-gtk3
 htop
-knotes
 kvantum
 kwidgetsaddons5
 lutris
