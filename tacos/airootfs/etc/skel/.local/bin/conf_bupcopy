@@ -15,19 +15,21 @@
 
 ANS="$1"
 LOGFL="$LOG/bupcopy.log"
-BIGD=
-MINID=
+# Hard drive
+BIGD=""
+# USB
+MINID=""
 
 #===============================================================================
 # - [2] Backup Directories
 #===============================================================================
 
-# ["/source/path"]="/destination/path"
+# Format as ["/source/path"]="/destination/path"
 declare -A DIRBUPS=(
 	[""]=""
 )
 
-# ["/source/path"]="/destination/path"
+# Format as ["/source/path"]="/destination/path"
 declare -A SRCDIRS=(
 	[""]=""
 )
@@ -36,17 +38,23 @@ declare -A SRCDIRS=(
 # - [3] Functions
 #===============================================================================
 
+# Remove dot prefixes before backing up
 rmdot(){
 	local DIR="$1"
 	basename "${DIR}" | sed 's/^\.//'
 }
 
 bupshit(){
-	local SRC="$1"
-	local DEST="$2"
-	if [[ "$SRC" == "$HOME/.audio" || "$SRC" == "$HOME/.visual" ]]; then
-		NEW_DEST="$DEST/$(rmdot "$(basename "$SRC")")"
-		rsync -avhP "$SRC/" "$NEW_DEST/"
+	local SRC="$1"; local DEST="$2"
+	# Rsync example for larger folders to be synced to an external drive, rmdot
+	# function also used here to remove any dot prefixes where necessary, the
+	# $HOME/.audio and $HOME/.visual folders can be replaced or kept and other
+	# folders added to the condition as preffered, those two folders specifically
+	# tend to get quite large
+	#if [[ "$SRC" == "$HOME/.audio" || "$SRC" == "$HOME/.visual" ]]; then
+		#NEW_DEST="$DEST/$(rmdot "$(basename "$SRC")")"
+		#rsync -avhP "$SRC/" "$NEW_DEST/"
+	#fi
 	else mkdir -p "$DEST"
 		local RCHVPTH="$DEST/$(rmdot "$(basename "$SRC")").tar"
 		sudo tar -cvf "$RCHVPTH" -C "$(dirname "$SRC")" "$(basename "$SRC")"
@@ -55,23 +63,32 @@ bupshit(){
 }
 
 copyshit(){
-	local SRC="$1"
-	local DEST="$2"
-	if [[ "$SRC" == "$BIGD/audio" || "$SRC" == "$BIGD/visual" ]]; then
-		rsync -avhP "$SRC/" "$DEST/"
+	local SRC="$1"; local DEST="$2"
+	# Theres no function to reimplement the dot prefix when Rsync is used for
+	# restoration, if a folder was backed up with Rsync its best to also restore
+	# it with Rsync, to handle this issue format the SRC and DEST in SRCDIRS as
+	# ["$BIGD/audio"]="$HOME/.audio" for example, where its manually added back
+	# to the path after being synced and reformatted on an external drive, this
+	# is not necessary in the bupshit function where the format for the same
+	# folder would be ["$HOME/.audio"]="$BIGD"
+	#if [[ "$SRC" == "$BIGD/audio" || "$SRC" == "$BIGD/visual" ]]; then
+		#rsync -avhP "$SRC/" "$DEST/"
+	#fi
 	else mkdir -p "$DEST"
 		sudo tar -xvf "$SRC" -C "$DEST" | sudo tee -a "$LOGFL"
 		sudo find "$DEST" -exec chown "$USER":"$USER" {} \;
 	fi
 }
 
+# Process backup
 procbup(){
 	for SRC in "${!DIRBUPS[@]}"; do
 		bupshit "$SRC" "${DIRBUPS[$SRC]}"
 	done
-	rsync -avhP "$MINID/C0RNCH1P/" "$BIGD/C0RNCH1P/"
+	#rsync -avhP "$MINID/..." "$BIGD/..."
 }
 
+# Process restoration
 procrest(){
 	for SRC in "${!SRCDIRS[@]}"; do
 		copyshit "$SRC" "${SRCDIRS[$SRC]}"
@@ -85,23 +102,20 @@ procrest(){
 [ ! -e "$LOGFL" ] && touch "$LOGFL"
 exec > >(tee -a "$LOGFL") 2>&1
 
-if test -z "$ANS"; then
-	echo -e '\nChoose Operation'
+if test -z "$ANS"; then echo -e '\nChoose Operation'
 	echo -e '- [B] Bupshit\n- [C] Copyshit\n'
 	read -rp '- ' ANS
 fi
 
-if [[ "$ANS" =~ ^[bB]$ ]]; then
-	BUPSHIT=1
-	COPYSHIT=0
-	echo -e '\nBacking shit up\n'
-elif [[ "$ANS" =~ ^[cC]$ ]]; then
-	BUPSHIT=0
-	COPYSHIT=1
-	echo -e '\nCopying shit over\n'
+# This script will also take an argument to bypass the operation selection
+# to run either the backup or restoration modes
+if [[ "$ANS" =~ ^(b|-b|--bupshit|--backup)$ ]]; then
+	BP=1; CP=0; echo -e '\nBacking shit up\n'
+elif [[ "$ANS" =~ ^(c|-c|--copyshit|--restore)$ ]]; then
+	BP=0; CP=1; echo -e '\nCopying shit over\n'
 else echo -e '\nInvalid choice\n'
 	exit 1
 fi
 
-[ $BUPSHIT -eq 1 ] && sleep 2 && procbup
-[ $COPYSHIT -eq 1 ] && sleep 2 && procrest
+[ $BP -eq 1 ] && sleep 2 && procbup
+[ $cP -eq 1 ] && sleep 2 && procrest
