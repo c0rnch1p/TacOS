@@ -26,12 +26,14 @@ MINID=""
 
 # Format as ["/source/path"]="/destination/path"
 declare -A DIRBUPS=(
-	[""]=""
+	["$HOME/.audio"]="$BIGD"
+	["$HOME/.visual"]="$BIGD"
 )
 
 # Format as ["/source/path"]="/destination/path"
 declare -A SRCDIRS=(
-	[""]=""
+	["$BIGD/audio"]="$HOME/.audio"
+	["$BIGD/visual"]="$HOME/.visual"
 )
 
 #===============================================================================
@@ -46,16 +48,18 @@ rmdot(){
 
 bupshit(){
 	local SRC="$1"; local DEST="$2"
-	# Rsync example for larger folders to be synced to an external drive, rmdot
+	# Rsync example for larger folders to be synced to external drive, rmdot
 	# function also used here to remove any dot prefixes where necessary, the
 	# $HOME/.audio and $HOME/.visual folders can be replaced or kept and other
 	# folders added to the condition as preffered, those two folders specifically
-	# tend to get quite large
+	# tend to get large
 	#if [[ "$SRC" == "$HOME/.audio" || "$SRC" == "$HOME/.visual" ]]; then
 		#NEW_DEST="$DEST/$(rmdot "$(basename "$SRC")")"
 		#rsync -avhP "$SRC/" "$NEW_DEST/"
 	#fi
-	else mkdir -p "$DEST"
+	# Any Rsynced folders need to be excluded in this condition
+	if [[ ! "$SRC" == "$HOME/.audio" || ! "$SRC" == "$HOME/.visual" ]]; then
+		mkdir -p "$DEST"
 		local RCHVPTH="$DEST/$(rmdot "$(basename "$SRC")").tar"
 		sudo tar -cvf "$RCHVPTH" -C "$(dirname "$SRC")" "$(basename "$SRC")"
 		sudo find "$RCHVPTH" -exec chown "$USER":"$USER" {} \;
@@ -74,7 +78,9 @@ copyshit(){
 	#if [[ "$SRC" == "$BIGD/audio" || "$SRC" == "$BIGD/visual" ]]; then
 		#rsync -avhP "$SRC/" "$DEST/"
 	#fi
-	else mkdir -p "$DEST"
+	# Any Rsynced folders need to be excluded in this condition also
+	if [[ ! "$SRC" == "$HOME/.audio" || ! "$SRC" == "$HOME/.visual" ]]; then
+		mkdir -p "$DEST"
 		sudo tar -xvf "$SRC" -C "$DEST" | sudo tee -a "$LOGFL"
 		sudo find "$DEST" -exec chown "$USER":"$USER" {} \;
 	fi
