@@ -20,24 +20,20 @@ BIGD=""
 # USB
 MINID=""
 
-#===============================================================================
-# - [2] Backup Directories
-#===============================================================================
-
-# Format as ["/source/path"]="/destination/path"
+# Backup folders, format as ["/src"]="/dest"
 declare -A DIRBUPS=(
 	["$HOME/.audio"]="$BIGD"
 	["$HOME/.visual"]="$BIGD"
 )
 
-# Format as ["/source/path"]="/destination/path"
+# Restore folders, format as ["/src"]="/dest"
 declare -A SRCDIRS=(
 	["$BIGD/audio"]="$HOME/.audio"
 	["$BIGD/visual"]="$HOME/.visual"
 )
 
 #===============================================================================
-# - [3] Functions
+# - [2] Functions
 #===============================================================================
 
 # Remove dot prefixes before backing up
@@ -48,16 +44,14 @@ rmdot(){
 
 bupshit(){
 	local SRC="$1"; local DEST="$2"
-	# Rsync example for larger folders to be synced to external drive, rmdot
-	# function also used here to remove any dot prefixes where necessary, the
+	# Rsync example for larger folders to be synced to external drive, the
 	# $HOME/.audio and $HOME/.visual folders can be replaced or kept and other
-	# folders added to the condition as preffered, those two folders specifically
-	# tend to get large
+	# folders added to the condition as preffered
 	#if [[ "$SRC" == "$HOME/.audio" || "$SRC" == "$HOME/.visual" ]]; then
 		#NEW_DEST="$DEST/$(rmdot "$(basename "$SRC")")"
 		#rsync -avhP "$SRC/" "$NEW_DEST/"
 	#fi
-	# Any Rsynced folders need to be excluded in this condition
+	# Folders backed up with Rsync are then excluded in this tarball condition
 	if [[ ! "$SRC" == "$HOME/.audio" || ! "$SRC" == "$HOME/.visual" ]]; then
 		mkdir -p "$DEST"
 		local RCHVPTH="$DEST/$(rmdot "$(basename "$SRC")").tar"
@@ -69,17 +63,14 @@ bupshit(){
 copyshit(){
 	local SRC="$1"; local DEST="$2"
 	# Theres no function to reimplement the dot prefix when Rsync is used for
-	# restoration, if a folder was backed up with Rsync its best to also restore
-	# it with Rsync, to handle the dot issue format the SRC and DEST in SRCDIRS
-	# as ["$BIGD/audio"]="$HOME/.audio" for example, where its manually added
-	# back to the path after being synced and reformatted on an external drive,
-	# this is not necessary in the bupshit function where the format for the
-	# same folder would be ["$HOME/.audio"]="$BIGD"
+	# restoration, to handle this format the SRC and DEST in SRCDIRS as
+	# ["$BIGD/audio"]="$HOME/.audio" for example, this isnt necessary in the
+	# bupshit function where the dot removal is managed by the rmdot function
 	#if [[ "$SRC" == "$BIGD/audio" || "$SRC" == "$BIGD/visual" ]]; then
 		#rsync -avhP "$SRC/" "$DEST/"
 	#fi
-	# Any Rsynced folders need to be excluded in this condition also
-	if [[ ! "$SRC" == "$HOME/audio" || ! "$SRC" == "$HOME/visual" ]]; then
+	# Folders restored with Rsync are then excluded in this tarball condition
+	if [[ ! "$SRC" == "$HOME/.audio" || ! "$SRC" == "$HOME/.visual" ]]; then
 		mkdir -p "$DEST"
 		sudo tar -xvf "$SRC" -C "$DEST" | sudo tee -a "$LOGFL"
 		sudo find "$DEST" -exec chown "$USER":"$USER" {} \;
@@ -91,6 +82,7 @@ procbup(){
 	for SRC in "${!DIRBUPS[@]}"; do
 		bupshit "$SRC" "${DIRBUPS[$SRC]}"
 	done
+	# Sync contents of USB to hard drive
 	#rsync -avhP "$MINID/..." "$BIGD/..."
 }
 
@@ -102,7 +94,7 @@ procrest(){
 }
 
 #===============================================================================
-# - [4] Main
+# - [3] Main
 #===============================================================================
 
 [ ! -e "$LOGFL" ] && touch "$LOGFL"
@@ -119,8 +111,7 @@ if [[ "$ANS" =~ ^(b|-b|--bupshit|--backup)$ ]]; then
 	BP=1; CP=0; echo -e '\nBacking shit up\n'
 elif [[ "$ANS" =~ ^(c|-c|--copyshit|--restore)$ ]]; then
 	BP=0; CP=1; echo -e '\nCopying shit over\n'
-else echo -e '\nInvalid choice\n'
-	exit 1
+else echo -e '\nInvalid choice\n'; exit 1
 fi
 
 [ $BP -eq 1 ] && sleep 2 && procbup
