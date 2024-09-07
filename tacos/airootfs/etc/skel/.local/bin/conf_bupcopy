@@ -52,7 +52,7 @@ bupshit(){
 		#rsync -avhP "$SRC/" "$NEW_DEST/"
 	#fi
 	# Folders backed up with Rsync are then excluded in this tarball condition
-	if [[ ! "$SRC" == "$HOME/.audio" || ! "$SRC" == "$HOME/.visual" ]]; then
+	if [[ ! "$SRC" == "$HOME/.audio" && ! "$SRC" == "$HOME/.visual" ]]; then
 		mkdir -p "$DEST"
 		local RCHVPTH="$DEST/$(rmdot "$(basename "$SRC")").tar"
 		sudo tar -cvf "$RCHVPTH" -C "$(dirname "$SRC")" "$(basename "$SRC")"
@@ -70,7 +70,7 @@ copyshit(){
 		#rsync -avhP "$SRC/" "$DEST/"
 	#fi
 	# Folders restored with Rsync are then excluded in this tarball condition
-	if [[ ! "$SRC" == "$HOME/.audio" || ! "$SRC" == "$HOME/.visual" ]]; then
+	if [[ ! "$SRC" == "$HOME/.audio" && ! "$SRC" == "$HOME/.visual" ]]; then
 		mkdir -p "$DEST"
 		sudo tar -xvf "$SRC" -C "$DEST" | sudo tee -a "$LOGFL"
 		sudo find "$DEST" -exec chown "$USER":"$USER" {} \;
