@@ -37,7 +37,6 @@ git
 less
 mc
 meld
-mlocate
 most
 nano
 nano-syntax-highlighting
@@ -49,6 +48,7 @@ nemo-python
 nemo-terminal
 p7zip
 pkgfile
+plocate
 ripgrep
 tree
 unace

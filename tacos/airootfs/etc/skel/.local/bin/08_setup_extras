@@ -36,7 +36,6 @@ install_aur_pkgs(){
 	local AURPKGS PKG
 	AURPKGS=(
 		#'awesome-freedesktop-git'
-		#'lain-git'
 		'awesome-themes-git'
 		'cadence'
 		'deadbeef-plugin-statusnotifier-git'
@@ -45,7 +44,8 @@ install_aur_pkgs(){
 		'epson-inkjet-printer-escpr'
 		'epson-inkjet-printer-escpr2'
 		'gedit-open-uri-context-menu-git'
-		'knotes-git'
+		#'knotes-git'
+		#'lain-git'
 		'material-black-colors-theme'
 		'metagedit-git'
 		'nemo-compare'

@@ -24,13 +24,13 @@ clonezilla
 git
 less
 mc
-mlocate
 most
 nano
 nano-syntax-highlighting
 nemo
 p7zip
 pkgfile
+plocate
 ripgrep
 tree
 unace

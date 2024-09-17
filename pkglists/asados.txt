@@ -37,7 +37,6 @@ git
 less
 mc
 meld
-mlocate
 most
 nano
 nano-syntax-highlighting
@@ -50,6 +49,7 @@ nemo-terminal
 p7zip
 pdf2png
 pkgfile
+plocate
 ripgrep
 tree
 unace
