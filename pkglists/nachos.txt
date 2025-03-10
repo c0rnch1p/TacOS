@@ -90,7 +90,6 @@ autorandr
 awesome
 btop
 discord
-exodus
 fabric
 firefox
 flameshot

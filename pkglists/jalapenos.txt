@@ -91,7 +91,6 @@ autorandr
 awesome
 btop
 discord
-exodus
 firefox
 flameshot
 galculator
