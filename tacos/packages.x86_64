@@ -1,7 +1,7 @@
 # 50x
-#        \ | \ \   / _ _|  _ \  _ _|    \
-#          |  \ \ /    |   |  |   |    _ \
-#      _|\_|   \_/   ___| ___/  ___| _/  _\
+#           _ _|   \ |__ __| __|  |
+#             |      |   |   _|   |
+#           ___| _|\_|  _|  ___| ____|
 #
 #=================================================
 #
@@ -47,6 +47,7 @@ nemo-image-converter
 nemo-preview
 nemo-python
 nemo-terminal
+pdf2png
 pkgfile
 plocate
 ripgrep
@@ -56,7 +57,7 @@ unrar
 unzip
 vi
 #=================================================
-# - [3] Libraries (NVIDIA Specific)
+# - [3] Libraries (Intel Specific)
 #=================================================
 aalib
 alsa-lib
@@ -64,8 +65,8 @@ boost-libs
 laptop-detect
 lib32-gamemode
 lib32-mangohud
-lib32-nvidia-utils
 lib32-obs-vkcapture
+lib32-vulkan-intel
 libdvdcss
 libfido2
 libgsf
@@ -90,8 +91,6 @@ autorandr
 awesome
 btop
 discord
-exodus
-fabric
 firefox
 flameshot
 galculator
@@ -144,17 +143,13 @@ wget
 xcolor
 xmrig
 xterm
-xwallpaper
 yay-git
 yt-dlp
 #=================================================
-# - [5] Backend Software (NVIDIA Specific)
+# - [5] Backend Software (Intel Specific)
 #=================================================
-#cuda
-#cuda-tools
 #fcitx
-#opencl-nvidia-390xx
-#xf86-video-nouveau
+#xf86-video-intel
 #xf86-video-vmware
 accountsservice
 acpi
@@ -212,6 +207,8 @@ hwinfo
 hw-probe
 hyperv
 ibus
+intel-compute-runtime
+intel-media-driver
 intel-ucode
 intltool
 inxi
@@ -222,7 +219,7 @@ ki18n5
 kpmcore
 kservice5
 lib32-mesa
-libva-nvidia-driver
+libva-intel-driver-g45-h264
 linux
 linux-atm
 linux-firmware
@@ -251,11 +248,7 @@ mtpfs
 nilfs-utils
 ntfs-3g
 numlockx
-nvidia-dkms
-nvidia-settings
-nvidia-utils
 nvme-cli
-opencl-nvidia-470xx
 open-vm-tools
 os-prober
 partclone
@@ -286,6 +279,7 @@ usb_modeswitch
 usbmuxd
 usbutils
 usleep
+vulkan-intel
 wayland
 wd719x-firmware
 wmctrl
@@ -305,6 +299,7 @@ xorg-font-util
 xorg-server
 xorg-server-devel
 xorg-xinit
+xwallpaper
 zenity
 #=================================================
 # - [6] Multimedia Software
@@ -320,6 +315,7 @@ bigsh0t
 blender
 bottles
 carla
+deadbeef
 dgedit
 docbook-xml
 docbook-xsl
@@ -411,6 +407,8 @@ playerctl
 poppler
 poppler-data
 poppler-glib
+poppler-glib
+poppler-qt5
 poppler-qt5
 popsift
 portmidi

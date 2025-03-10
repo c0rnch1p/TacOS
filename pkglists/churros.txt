@@ -105,7 +105,6 @@ dosfstools
 downgrade
 duf
 e2fsprogs
-edid-decode-git
 edk2-shell
 efibootmgr
 exfatprogs
