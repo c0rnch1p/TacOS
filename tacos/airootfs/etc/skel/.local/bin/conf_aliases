@@ -42,6 +42,7 @@ alias chars='gucharmap'
 alias chkcpu='cpuid -i | grep uarch | head -n 1'
 alias chkefi='ls /sys/firmware/efi/efivars'
 alias chkvul='grep . /sys/devices/system/cpu/vulnerabilities/*'
+alias xx='clear'
 alias colors='export LS_COLORS=$(cat $HOME/.dircolors)'
 alias colortest='px_colortest'
 alias colortest_slim='px_colortest_slim'
@@ -135,8 +136,7 @@ alias reload='reload'
 alias reqs='depends -r'
 alias rm_knownhosts='rm $HOME/.ssh/known_hosts'
 alias rmr='rm -r'
-alias rm_steam_path='unlink $HOME/.steampath'
-alias rm_steam_pid='unlink $HOME/.steampid'
+alias rm_steam_paths='unlink $HOME/.steampath && unlink $HOME/.steampid'
 alias run_all='01_run_all'
 alias sbupcbup="spupd && conf_bupconf 'y' && time conf_bupcopy 'b'"
 alias sbupcopy="spupd && time conf_bupcopy 'c'"
@@ -251,4 +251,3 @@ alias sys_reload='sudo systemctl daemon_reload'
 alias ytavi="sudo yt-dlp -f 'bestvideo[ext=avi]+bestaudio[ext=m4a]'"
 alias ytmp3='sudo yt-dlp --extract-audio --audio-format mp3'
 alias ytmp4="sudo yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]'"
-alias ytwav='sudo yt-dlp --extract-audio --audio-format wav'
