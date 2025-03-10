@@ -19,6 +19,7 @@ ruby
 #=================================================
 # - [2] Asset Managers
 #=================================================
+7zip
 bat
 clonezilla
 git
@@ -28,7 +29,6 @@ most
 nano
 nano-syntax-highlighting
 nemo
-p7zip
 pkgfile
 plocate
 ripgrep
@@ -85,8 +85,8 @@ acpi
 acpid
 aic94xx-firmware
 alsa-firmware
-arch-install-scripts
 archinstall
+arch-install-scripts
 archiso
 archlinux-keyring
 base
@@ -128,8 +128,8 @@ gvfs-mtp
 gvfs-nfs
 gvfs-smb
 hdparm
-hw-probe
 hwinfo
+hw-probe
 hyperv
 ibus
 intel-compute-runtime
@@ -279,8 +279,8 @@ nmap
 nss-mdns
 ntp
 onionshare
-open-iscsi
 openconnect
+open-iscsi
 openresolv
 openssh
 openssl
@@ -325,16 +325,16 @@ jdk
 jq
 jsoncpp
 llvm
-lua-socket
 luacheck
 luarocks
+lua-socket
 meson
 npm
+python39
 python-pip
 python-pipx
 python-pyparted
 python-tabview
-python39
 shellcheck
 shfmt
 stylua

@@ -23,6 +23,7 @@ ruby
 #=================================================
 # - [2] Asset Managers
 #=================================================
+7zip
 bat
 bluefish
 bulky
@@ -46,7 +47,6 @@ nemo-image-converter
 nemo-preview
 nemo-python
 nemo-terminal
-p7zip
 pdf2png
 pkgfile
 plocate
@@ -159,8 +159,8 @@ acpi
 acpid
 aic94xx-firmware
 alsa-firmware
-arch-install-scripts
 archinstall
+arch-install-scripts
 archiso
 archlinux-keyring
 base
@@ -170,7 +170,6 @@ ckbcomp
 cpuid
 cronie
 cryptsetup
-d-spy
 dconf-editor
 ddrescue
 dex
@@ -179,6 +178,7 @@ dmraid
 docker-compose
 dosfstools
 downgrade
+d-spy
 duf
 e2fsprogs
 edid-decode-git
@@ -206,8 +206,8 @@ gvfs-mtp
 gvfs-nfs
 gvfs-smb
 hdparm
-hw-probe
 hwinfo
+hw-probe
 hyperv
 ibus
 intel-compute-runtime
@@ -221,7 +221,7 @@ kcoreaddons5
 ki18n5
 kpmcore
 kservice5
-lib32-mesa-vdpau
+lib32-mesa
 libva-intel-driver-g45-h264
 linux
 linux-atm
@@ -240,7 +240,6 @@ memtest86+
 memtest86+-efi
 mesa
 mesa-utils
-mesa-vdpau
 mintstick-git
 mkinitcpio
 mkinitcpio-archiso
@@ -298,9 +297,9 @@ xfsprogs
 xkeyboard-config
 xorg-apps
 xorg-docs
-xorg-font-util
 xorg-fonts-100dpi
 xorg-fonts-75dpi
+xorg-font-util
 xorg-server
 xorg-server-devel
 xorg-xinit
@@ -334,9 +333,9 @@ fcgi
 ffmpeg
 ffmpegthumbnailer
 fluidsynth
-font-manager
 fontconfig
 fontforge
+font-manager
 frei0r-plugins
 gamemode
 gamescope
@@ -368,14 +367,14 @@ hunspell
 hunspell-en_au
 imagemagick
 inkscape
-jack-example-tools
 jack2
 jack2-dbus
+jack-example-tools
 kdenlive
-l-smash
 ladspa
 lame
 libreoffice-fresh
+l-smash
 lv2
 mangohud
 mediainfo
@@ -460,16 +459,16 @@ swh-plugins
 sws
 timidity++
 twolame
-v4l-utils
 v4l2loopback-dkms
 v4l2loopback-utils
+v4l-utils
 vital-synth
 vkd3d
 vlc
 wavpack
 wildmidi
-wine-staging
 wineasio
+wine-staging
 winetricks
 x264
 x265
@@ -508,8 +507,8 @@ modemmanager
 nbd
 ndisc6
 net-tools
-network-manager-applet
 networkmanager
+network-manager-applet
 networkmanager-openconnect
 networkmanager-openvpn
 networkmanager-pptp
@@ -520,8 +519,8 @@ nmap
 nss-mdns
 ntp
 onionshare
-open-iscsi
 openconnect
+open-iscsi
 openresolv
 openssh
 openssl
@@ -568,16 +567,16 @@ jq
 jsoncpp
 kdevelop
 llvm
-lua-socket
 luacheck
 luarocks
+lua-socket
 meson
 npm
+python39
 python-pip
 python-pipx
 python-pyparted
 python-tabview
-python39
 qtcreator
 shellcheck
 shfmt
