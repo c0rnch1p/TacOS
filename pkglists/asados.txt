@@ -13,7 +13,6 @@
 #=================================================
 # - [1] Install Priority
 #=================================================
-#=================================================
 freetype2
 lib32-krb5
 lib32-libglvnd
@@ -21,8 +20,8 @@ libcamera
 libglvnd
 qt6-multimedia
 ruby
+#=================================================
 # - [2] Asset Managers
-
 #=================================================
 7zip
 bat
@@ -68,8 +67,6 @@ lib32-gamemode
 lib32-mangohud
 lib32-obs-vkcapture
 lib32-vulkan-radeon
-lib32-x264
-lib32-x265
 libdvdcss
 libfido2
 libgsf
@@ -262,7 +259,6 @@ polkit
 polkit-gnome
 pv
 refind
-reiserfsprogs
 rtl8821cu-morrownr-dkms-git
 sdparm
 sg3_utils
@@ -396,7 +392,6 @@ obs-vaapi
 obs-vkcapture
 ocl-icd
 openal
-opencollada
 opencolorio
 openshadinglanguage
 opensubdiv
@@ -447,7 +442,6 @@ sdl_net
 sdl_sound
 sdl_ttf
 sndio
-steam-linux-integration
 steam-native-runtime
 svt-av1
 svt-hevc
@@ -613,7 +607,6 @@ ttf-ubuntu-font-family
 # - [10] Distro Packaged Software
 #=================================================
 arco-calamares
-arcolinux-app-git
 arcolinux-bootloader-grub-git
 arcolinux-cron-git
 arcolinux-desktop-trasher-git

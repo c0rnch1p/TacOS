@@ -179,7 +179,6 @@ polkit
 polkit-gnome
 pv
 refind
-reiserfsprogs
 rtl8821cu-morrownr-dkms-git
 sdparm
 sg3_utils
